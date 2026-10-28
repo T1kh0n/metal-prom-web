@@ -1,9 +1,10 @@
 /**
  * Client-side CAD parser caller.
  * Runs parsing in an isolated, auto-terminating Web Worker to keep main thread free of CPU load.
+ * Falls back to synchronous parsing if Web Workers are unavailable in the runtime environment.
  */
 
-import type { CadDimensions } from './cad-parser.worker';
+import { parseCadBuffer, type CadDimensions } from '../calculator/cad-parser-core';
 
 export type { CadDimensions };
 
@@ -52,10 +53,17 @@ export async function parseCadFile(file: File): Promise<CadDimensions> {
 				worker.postMessage({ fileBuffer: buffer, fileName: file.name }, [buffer]);
 			} catch (err) {
 				cleanup();
-				reject(err);
+				// Fallback to in-thread parsing if worker instantiation fails (e.g. CSP restrictions)
+				try {
+					const result = parseCadBuffer(buffer, file.name);
+					resolve(result);
+				} catch (fallbackErr) {
+					reject(fallbackErr);
+				}
 			}
 		});
 	}
 
-	throw new Error('Web Worker is not supported in the current environment.');
+	// Direct execution fallback for non-worker environments (e.g. tests or server)
+	return parseCadBuffer(buffer, file.name);
 }

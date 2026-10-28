@@ -263,7 +263,7 @@ Every route features a human-readable clean URL, Breadcrumbs, single `<h1>`, sem
   - SvelteKit + TypeScript + Tailwind CSS + adapter-static setup, `.env` dynamic injection, `site.ts`, `schema.ts`, living documentation init.
 - **Stage 2: Empirical Pricing Engine & CNC Cost Calculator Core** `[COMPLETED]`
   - Empirical Kaliningrad rates (`pricing-config.ts`), $O(1)$ pricing engine (`engine.ts`), Web Worker CAD parser (`cad-parser.worker.ts`), Svelte 5 component (`CostCalculator.svelte`), unit & E2E tests.
-- **Stage 2.1: Lightweight Client-Side STL Streaming Parser & Bounding Box Enhancement** `[PENDING]`
+- **Stage 2.1: Lightweight Client-Side STL Streaming Parser & Bounding Box Enhancement** `[COMPLETED]`
   - Ultra-lightweight $O(N)$ binary/ASCII STL streaming parser using typed arrays, robust mobile parsing, and manual dimension override synchronization.
 - **Stage 3: Core B2B Pages & Hallmark Technical Articles (`/stati`)** `[PENDING]`
   - Header, Footer, Breadcrumbs, 9 core B2B service pages, and technical articles (`/stati`), designed strictly according to Hallmark rules (no AI gradients, high data density, technical typography).
