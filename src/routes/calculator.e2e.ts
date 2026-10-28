@@ -71,19 +71,20 @@ test.describe('CNC Cost Calculator Interactive Component', () => {
 	});
 
 	test('renders calculator with default turning operation and inputs', async ({ page }) => {
-		await expect(page.locator('#calculator-section')).toBeVisible();
+		const calcSection = page.locator('#calculator-section');
+		await expect(calcSection).toBeVisible();
 		await expect(
-			page.getByText('Инженерный калькулятор механической обработки с ЧПУ')
+			calcSection.getByText('Инженерный калькулятор механической обработки с ЧПУ')
 		).toBeVisible();
 
-		// Check operations are rendered
-		await expect(page.getByText('Токарная ЧПУ')).toBeVisible();
-		await expect(page.getByText('Фрезерная 3-оси')).toBeVisible();
-		await expect(page.getByText('Фрезерная 4-оси / 3D')).toBeVisible();
+		// Check operations are rendered inside calculator section
+		await expect(calcSection.getByText('Токарная ЧПУ')).toBeVisible();
+		await expect(calcSection.getByText('Фрезерная 3-оси')).toBeVisible();
+		await expect(calcSection.getByText('Фрезерная 4-оси / 3D')).toBeVisible();
 	});
 
 	test('shows Minimum Order Value warning when batch size is small', async ({ page }) => {
-		const qtyInput = page.locator('input[type="number"][min="1"][max="5000"]');
+		const qtyInput = page.locator('#calculator-section input[type="number"][min="1"][max="5000"]');
 		await qtyInput.fill('1');
 
 		// The 5,000 RUB MOV alert card should be rendered
@@ -94,7 +95,7 @@ test.describe('CNC Cost Calculator Interactive Component', () => {
 
 	test('updates calculation when toggling own material', async ({ page }) => {
 		// Set batch quantity to 20 to avoid MOV clamp
-		const qtyInput = page.locator('input[type="number"][min="1"][max="5000"]');
+		const qtyInput = page.locator('#calculator-section input[type="number"][min="1"][max="5000"]');
 		await qtyInput.fill('20');
 
 		const ownMatCheckbox = page.getByRole('checkbox', {

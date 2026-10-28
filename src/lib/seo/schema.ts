@@ -223,3 +223,12 @@ export function serializeJsonLd(
 ): string {
 	return JSON.stringify(schema, null, 2);
 }
+
+/**
+ * Serializes schema object wrapped directly in a script tag for Svelte head injection.
+ */
+export function serializeSchema(
+	schema: Record<string, unknown> | Array<Record<string, unknown>>
+): string {
+	return `<script type="application/ld+json">${JSON.stringify(schema, null, 2)}<\/script>`;
+}

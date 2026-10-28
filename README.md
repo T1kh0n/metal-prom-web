@@ -265,7 +265,7 @@ Every route features a human-readable clean URL, Breadcrumbs, single `<h1>`, sem
   - Empirical Kaliningrad rates (`pricing-config.ts`), $O(1)$ pricing engine (`engine.ts`), Web Worker CAD parser (`cad-parser.worker.ts`), Svelte 5 component (`CostCalculator.svelte`), unit & E2E tests.
 - **Stage 2.1: Lightweight Client-Side STL Streaming Parser & Bounding Box Enhancement** `[COMPLETED]`
   - Ultra-lightweight $O(N)$ binary/ASCII STL streaming parser using typed arrays, robust mobile parsing, and manual dimension override synchronization.
-- **Stage 3: Core B2B Pages & Hallmark Technical Articles (`/stati`)** `[PENDING]`
+- **Stage 3: Core B2B Pages & Hallmark Technical Articles (`/stati`)** `[COMPLETED]`
   - Header, Footer, Breadcrumbs, 9 core B2B service pages, and technical articles (`/stati`), designed strictly according to Hallmark rules (no AI gradients, high data density, technical typography).
 - **Stage 4: Anonymous Demand Validation (Yandex Forms), Privacy Policy & 152-FZ Compliance** `[PENDING]`
   - Embedded anonymous Yandex Form (7 technical fields), Privacy Policy route (`/politika-konfidentsialnosti`), Cookie Consent Banner, deferred Yandex Metrika with IP masking, and SEO file generator (`robots.txt`, `sitemap.xml`, `llms.txt`).
