@@ -193,9 +193,10 @@
 	{#if showTitle}
 		<div class="mb-8 border-b border-zinc-800 pb-6">
 			<div
-				class="inline-flex items-center gap-2 rounded border border-amber-500/30 bg-amber-500/10 px-3 py-1 font-mono text-xs font-semibold tracking-wider text-amber-400 uppercase"
+				class="inline-flex items-center rounded-md border border-zinc-800 bg-zinc-900/80 px-3 py-1 font-mono text-xs font-medium text-zinc-300"
 			>
-				<span>⚡</span> Расчет стоимости онлайн
+				<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
+				Расчет стоимости онлайн
 			</div>
 			<h2 class="mt-3 text-2xl font-bold tracking-tight text-white md:text-3xl">
 				Инженерный калькулятор механической обработки с ЧПУ
@@ -224,7 +225,7 @@
 							type="button"
 							class="flex flex-col rounded-lg border p-3.5 text-left transition-all {operationId ===
 							op.id
-								? 'border-amber-500 bg-amber-500/10 text-white ring-1 ring-amber-500'
+								? 'border-zinc-300 bg-zinc-800/90 text-white shadow-xs'
 								: 'border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'}"
 							onclick={() => {
 								operationId = op.id;
@@ -234,7 +235,7 @@
 							}}
 						>
 							<span class="text-sm font-semibold text-zinc-100">{op.shortNameRu}</span>
-							<span class="mt-1 font-mono text-xs text-amber-400"
+							<span class="mt-1 font-mono text-xs text-zinc-300"
 								>{op.ratePerHour.toLocaleString('ru-RU')} ₽ / нормо-час</span
 							>
 						</button>
@@ -261,7 +262,7 @@
 							min="1"
 							max="5000"
 							bind:value={batchQuantity}
-							class="w-20 rounded border border-zinc-700 bg-zinc-900 px-2.5 py-1 text-right font-mono text-sm font-bold text-white focus:border-amber-500 focus:outline-none"
+							class="w-20 rounded border border-zinc-700 bg-zinc-900 px-2.5 py-1 text-right font-mono text-sm font-bold text-white focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
 						/>
 					</div>
 				</div>
@@ -271,7 +272,7 @@
 					min="1"
 					max="200"
 					bind:value={batchQuantity}
-					class="h-2 w-full cursor-pointer appearance-none rounded-lg bg-zinc-800 accent-amber-500"
+					class="h-2 w-full cursor-pointer appearance-none rounded-lg bg-zinc-800 accent-zinc-100"
 				/>
 				<div class="mt-1 flex justify-between font-mono text-[11px] text-zinc-500">
 					<span>1 шт (0%)</span>
@@ -292,12 +293,12 @@
 						<button
 							type="button"
 							class="rounded-lg border p-3 text-left transition-all {complexityId === comp.id
-								? 'border-amber-500 bg-amber-500/10 text-white ring-1 ring-amber-500'
+								? 'border-zinc-300 bg-zinc-800/90 text-white shadow-xs'
 								: 'border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'}"
 							onclick={() => (complexityId = comp.id)}
 						>
 							<div class="text-xs font-semibold text-zinc-200">{comp.nameRu}</div>
-							<div class="mt-1 font-mono text-xs text-amber-400">
+							<div class="mt-1 font-mono text-xs text-zinc-300">
 								+{comp.fee.toLocaleString('ru-RU')} ₽
 							</div>
 							<div class="mt-1 line-clamp-2 text-[11px] text-zinc-500">{comp.descriptionRu}</div>
@@ -316,7 +317,7 @@
 						<input
 							type="checkbox"
 							bind:checked={isCustomerMaterial}
-							class="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-amber-500 focus:ring-amber-500"
+							class="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-zinc-100 focus:ring-zinc-400 accent-zinc-100"
 						/>
 						<span>Материал заказчика (давальческий)</span>
 					</label>
@@ -324,7 +325,7 @@
 				<select
 					id="material-select"
 					bind:value={materialId}
-					class="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3.5 py-2.5 text-sm font-medium text-zinc-100 focus:border-amber-500 focus:outline-none"
+					class="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3.5 py-2.5 text-sm font-medium text-zinc-100 focus:border-zinc-400 focus:outline-none"
 				>
 					{#each MATERIALS_LIST as mat}
 						<option value={mat.id}>
@@ -340,9 +341,8 @@
 					<span class="text-sm font-semibold text-zinc-300"> 5. Размеры заготовки (мм): </span>
 					<!-- CAD Upload button -->
 					<label
-						class="inline-flex cursor-pointer items-center gap-1.5 rounded border border-zinc-700 bg-zinc-800 px-2.5 py-1 text-xs font-medium text-zinc-200 transition-colors hover:border-amber-500 hover:text-white"
+						class="inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-zinc-700 bg-zinc-800/90 px-3 py-1.5 text-xs font-medium text-zinc-200 transition-colors hover:border-zinc-500 hover:text-white"
 					>
-						<span>📂</span>
 						<span>{isParsingCad ? 'Анализ CAD...' : 'Загрузить STL / STEP'}</span>
 						<input
 							type="file"
@@ -368,12 +368,12 @@
 				{#if parsedCadInfo}
 					<div
 						data-testid="cad-info-card"
-						class="mb-3 rounded border border-amber-500/30 bg-zinc-900/90 p-3 text-xs"
+						class="mb-3 rounded-lg border border-zinc-700 bg-zinc-900/90 p-3.5 text-xs"
 					>
 						<div class="flex items-center justify-between border-b border-zinc-800 pb-2">
 							<div class="flex items-center gap-2">
 								<span
-									class="rounded bg-amber-500/20 px-1.5 py-0.5 font-mono text-[10px] font-bold text-amber-400"
+									class="rounded border border-zinc-700 bg-zinc-800 px-1.5 py-0.5 font-mono text-[10px] font-bold text-zinc-200"
 								>
 									{parsedCadInfo.fileType.replace('_', ' ').toUpperCase()}
 								</span>
@@ -412,9 +412,9 @@
 							</div>
 						</div>
 						{#if parsedCadInfo.isRotationalSymmetric}
-							<div class="mt-2 border-t border-zinc-800/60 pt-2 text-amber-400">
-								<span>🔄 Распознано тело вращения: </span>
-								<strong class="font-mono"
+							<div class="mt-2 border-t border-zinc-800/60 pt-2 text-zinc-300">
+								<span class="text-zinc-400">Распознано тело вращения: </span>
+								<strong class="font-mono text-zinc-100"
 									>⌀{parsedCadInfo.suggestedDiameterMm} × L{parsedCadInfo.suggestedLengthMm} мм</strong
 								>
 							</div>
@@ -433,7 +433,7 @@
 							min="5"
 							max="3000"
 							bind:value={blankLengthMm}
-							class="mt-1 w-full rounded border border-zinc-700 bg-zinc-950 px-2.5 py-1.5 font-mono text-sm font-bold text-white focus:border-amber-500 focus:outline-none"
+							class="mt-1 w-full rounded border border-zinc-700 bg-zinc-950 px-2.5 py-1.5 font-mono text-sm font-bold text-white focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
 						/>
 					</div>
 					<div>
@@ -446,7 +446,7 @@
 							min="5"
 							max="1000"
 							bind:value={blankWidthMm}
-							class="mt-1 w-full rounded border border-zinc-700 bg-zinc-950 px-2.5 py-1.5 font-mono text-sm font-bold text-white focus:border-amber-500 focus:outline-none"
+							class="mt-1 w-full rounded border border-zinc-700 bg-zinc-950 px-2.5 py-1.5 font-mono text-sm font-bold text-white focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
 						/>
 					</div>
 					<div>
@@ -460,7 +460,7 @@
 							max="1000"
 							bind:value={blankHeightMm}
 							disabled={isLathe}
-							class="mt-1 w-full rounded border border-zinc-700 bg-zinc-950 px-2.5 py-1.5 font-mono text-sm font-bold text-white focus:border-amber-500 focus:outline-none disabled:opacity-50"
+							class="mt-1 w-full rounded border border-zinc-700 bg-zinc-950 px-2.5 py-1.5 font-mono text-sm font-bold text-white focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 disabled:opacity-50"
 						/>
 					</div>
 				</div>
@@ -486,15 +486,15 @@
 						<button
 							type="button"
 							class="rounded-lg border p-3 text-left transition-all {toleranceId === tol.id
-								? 'border-amber-500 bg-amber-500/10 text-white ring-1 ring-amber-500'
+								? 'border-zinc-300 bg-zinc-800/90 text-white shadow-xs'
 								: 'border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'}"
 							onclick={() => (toleranceId = tol.id)}
 						>
 							<div class="text-xs font-semibold text-zinc-200">{tol.nameRu}</div>
-							<div class="mt-1 font-mono text-xs text-amber-400">{tol.roughnessRa}</div>
+							<div class="mt-1 font-mono text-xs text-zinc-300">{tol.roughnessRa}</div>
 							{#if tol.includesGrinding}
 								<div
-									class="mt-1 inline-block rounded bg-amber-500/20 px-1.5 py-0.5 font-mono text-[10px] font-bold text-amber-300"
+									class="mt-1 inline-block rounded border border-zinc-700 bg-zinc-800 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-zinc-200"
 								>
 									+Шлифовка
 								</div>
@@ -518,12 +518,12 @@
 								type="checkbox"
 								checked={cooperativeOpIds.includes(coop.id)}
 								onchange={() => toggleCooperativeOp(coop.id)}
-								class="mt-1 h-4 w-4 rounded border-zinc-700 bg-zinc-950 text-amber-500 focus:ring-amber-500"
+								class="mt-1 h-4 w-4 rounded border-zinc-700 bg-zinc-950 text-zinc-100 focus:ring-zinc-400 accent-zinc-100"
 							/>
 							<div class="flex-1">
 								<div class="flex items-center justify-between">
 									<span class="text-xs font-semibold text-zinc-200">{coop.nameRu}</span>
-									<span class="font-mono text-xs text-amber-400">+{coop.pricePerPiece} ₽/шт</span>
+									<span class="font-mono text-xs text-zinc-300">+{coop.pricePerPiece} ₽/шт</span>
 								</div>
 								<p class="mt-0.5 text-[11px] text-zinc-500">{coop.descriptionRu}</p>
 							</div>
@@ -542,12 +542,12 @@
 						<button
 							type="button"
 							class="rounded-lg border p-3 text-left transition-all {urgencyId === urg.id
-								? 'border-amber-500 bg-amber-500/10 text-white ring-1 ring-amber-500'
+								? 'border-zinc-300 bg-zinc-800/90 text-white shadow-xs'
 								: 'border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'}"
 							onclick={() => (urgencyId = urg.id)}
 						>
 							<div class="text-xs font-semibold text-zinc-200">{urg.nameRu}</div>
-							<div class="mt-1 font-mono text-xs text-amber-400">{urg.leadTimeRu}</div>
+							<div class="mt-1 font-mono text-xs text-zinc-300">{urg.leadTimeRu}</div>
 						</button>
 					{/each}
 				</div>
@@ -562,7 +562,7 @@
 						Итоговая оценка партии
 					</span>
 					<span
-						class="rounded border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-xs font-semibold text-emerald-400"
+						class="rounded border border-zinc-700 bg-zinc-800/80 px-2.5 py-0.5 font-mono text-xs font-semibold text-zinc-300"
 					>
 						Ориентировочная смета
 					</span>
@@ -574,12 +574,12 @@
 						<span class="text-xs font-medium text-zinc-400">Общая сумма:</span>
 						<div class="font-mono text-3xl font-extrabold tracking-tight text-white md:text-4xl">
 							{quote.finalTotal.toLocaleString('ru-RU')}
-							<span class="text-2xl text-amber-500">₽</span>
+							<span class="text-2xl font-normal text-zinc-400">₽</span>
 						</div>
 					</div>
 					<div class="mt-1 flex items-baseline justify-between text-sm">
 						<span class="text-zinc-400">Цена за деталь:</span>
-						<span class="font-mono font-bold text-amber-400">
+						<span class="font-mono font-bold text-zinc-100">
 							{quote.finalUnitPrice.toLocaleString('ru-RU')} ₽ / шт
 						</span>
 					</div>
@@ -589,18 +589,19 @@
 				{#if quote.isMinimumOrderApplied}
 					<div
 						data-testid="mov-alert"
-						class="mb-5 rounded-lg border border-amber-500/40 bg-amber-500/10 p-3.5 text-xs text-amber-300"
+						class="mb-5 rounded-lg border border-zinc-700 bg-zinc-900/90 p-3.5 text-xs text-zinc-300"
 					>
-						<div class="flex items-center gap-1.5 font-bold text-amber-200">
-							<span>⚠️</span> Минимальный заказ для юрлиц — 5 000 ₽
+						<div class="flex items-center font-semibold text-zinc-100">
+							<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
+							Минимальный заказ для юрлиц — 5 000 ₽
 						</div>
-						<p class="mt-1 text-zinc-300">
+						<p class="mt-1 text-zinc-400">
 							Включает переналадку станка ЧПУ, написание управляющей программы и инструментальный
 							контроль ОТК.
 						</p>
 						{#if quote.recommendedBatchForMov > quote.totalBatchQuantity}
-							<div class="mt-2.5 rounded bg-zinc-950/70 p-2 text-zinc-300">
-								<span>💡 Рекомендуем увеличить партию до </span>
+							<div class="mt-2.5 rounded-md border border-zinc-800 bg-zinc-950 p-2.5 text-zinc-300">
+								<span>Рекомендуем увеличить партию до </span>
 								<strong class="font-mono text-white">{quote.recommendedBatchForMov} шт.</strong>,
 								<span> чтобы снизить себестоимость до </span>
 								<strong class="font-mono text-emerald-400"
@@ -608,7 +609,7 @@
 								>.
 								<button
 									type="button"
-									class="mt-1.5 block w-full rounded border border-amber-500 bg-amber-500 px-2 py-1 text-center font-bold text-zinc-950 transition-colors hover:bg-amber-400"
+									class="mt-2 block w-full rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-center text-xs font-medium text-zinc-200 transition-colors hover:bg-zinc-800"
 									onclick={applyRecommendedBatch}
 								>
 									Пересчитать на {quote.recommendedBatchForMov} шт.
@@ -654,7 +655,7 @@
 					{#if quote.urgencySurcharge > 0}
 						<div class="flex justify-between text-zinc-400">
 							<span>Надбавка за срочность (48-72ч):</span>
-							<span class="font-mono text-amber-400"
+							<span class="font-mono text-zinc-300"
 								>+{quote.urgencySurcharge.toLocaleString('ru-RU')} ₽</span
 							>
 						</div>
@@ -665,17 +666,15 @@
 				<div class="mt-6 space-y-2.5">
 					<a
 						href="#order-form"
-						class="flex w-full items-center justify-center gap-2 rounded-lg border border-amber-500 bg-amber-500 px-4 py-3 text-center text-sm font-bold text-zinc-950 transition-colors hover:bg-amber-400"
+						class="flex w-full items-center justify-center rounded-md bg-zinc-100 px-4 py-2.5 text-center text-sm font-medium text-zinc-950 shadow-sm transition-colors hover:bg-white"
 					>
-						<span>📋</span>
 						<span>Отправить чертеж на точный расчет</span>
 					</a>
 					<button
 						type="button"
-						class="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800/80 px-4 py-2.5 text-xs font-semibold text-zinc-200 transition-colors hover:border-zinc-600 hover:bg-zinc-800"
+						class="flex w-full items-center justify-center rounded-md border border-zinc-700 bg-zinc-900/60 px-4 py-2.5 text-center text-xs font-medium text-zinc-200 transition-colors hover:bg-zinc-800"
 						onclick={downloadQuoteEstimate}
 					>
-						<span>💾</span>
 						<span>Скачать смету (JSON)</span>
 					</button>
 				</div>

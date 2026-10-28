@@ -7,41 +7,36 @@
 	const articles = [
 		{
 			slug: 'vybor-stali-dlya-chpu-obrabotki',
-			title:
-				'Выбор сталей и сплавов для ЧПУ обработки: сравнительный анализ Ст45, 40Х, 12Х18Н10Т и Д16Т',
+			title: 'Выбор конструкционных и нержавеющих сталей для ЧПУ обработки: Ст45, 40Х, 09Г2С, AISI 304',
+			category: 'Материаловедение',
+			readTime: '6 мин чтения',
 			excerpt:
-				'Инженерное руководство по подбору конструкционных материалов. Анализ коэффициента обрабатываемости Kmat, температурных деформаций, склонности к налипанию и режимов термообработки.',
-			date: '2026-10-25',
-			readTime: '7 мин',
-			category: 'Материаловедение'
+				'Сравнительный технологический анализ обрабатываемости ключевых марок сталей. Коэффициенты обрабатываемости Кv, влияние легирования на износ инструмента и себестоимость нормо-часа.'
 		},
 		{
 			slug: 'kvalitety-tochnosti-i-sherohovatost-gost',
-			title: 'Квалитеты точности (IT6–IT12) и шероховатость поверхности (Ra) по ГОСТ 25346-2015',
+			title: 'Квалитеты точности IT6–IT12 и шероховатость поверхности Ra по ГОСТ в контрактном производстве',
+			category: 'Метрология и стандарты',
+			readTime: '8 мин чтения',
 			excerpt:
-				'Как выбор допуска влияет на себестоимость механообработки. Экспоненциальный рост трудоемкости при переходе от токарного IT8 к шлифовальному IT6 и нормативы финишной доводки.',
-			date: '2026-10-26',
-			readTime: '9 мин',
-			category: 'Метрология и стандарты'
+				'Инженерное руководство по назначению допусков и шероховатости на чертежах. Почему необоснованное завышение требований до IT6 удорожает партию в 2–3 раза и когда требуется круглое шлифование.'
 		},
 		{
 			slug: 'optimizaciya-stoimosti-detaley-chpu',
-			title:
-				'DFM-оптимизация: 7 правил проектирования деталей для снижения себестоимости ЧПУ на 25–40%',
+			title: 'DFM-оптимизация: как снизить себестоимость фрезерованных и токарных деталей на 20–40%',
+			category: 'Экономика производства',
+			readTime: '7 мин чтения',
 			excerpt:
-				'Практические рекомендации конструкторам: радиусы сопряжений под стандартные фрезы, глубина карманов, технологичность резьбовых отверстий и оптимальный размер партии.',
-			date: '2026-10-27',
-			readTime: '8 мин',
-			category: 'DFM и проектирование'
+				'Практические рекомендации конструкторам (Design for Manufacturability): радиусы внутренних углов, глубина резьб, толщина стенок и технологические базы, позволяющие избежать брака и снизить машинное время.'
 		}
 	];
 </script>
 
 <svelte:head>
-	<title>Инженерная база знаний и статьи по металлообработке | {siteConfig.brandName}</title>
+	<title>Инженерная база знаний и статьи по металлообработке с ЧПУ | {siteConfig.brandName}</title>
 	<meta
 		name="description"
-		content="Технические статьи и руководства по ЧПУ металлообработке: выбор сталей, квалитеты IT6-IT12, шероховатость Ra, DFM-проектирование для снижения себестоимости деталей."
+		content="Технические статьи и руководства по выбору сталей, допускам IT6-IT12 по ГОСТ и DFM-оптимизации стоимости деталей для конструкторов и технологов от цеха MetalProm39."
 	/>
 </svelte:head>
 
@@ -51,9 +46,10 @@
 
 		<header class="max-w-4xl border-b border-zinc-800 pb-8">
 			<div
-				class="inline-flex items-center gap-2 rounded border border-amber-500/30 bg-amber-500/10 px-3 py-1 font-mono text-xs font-semibold text-amber-400 uppercase"
+				class="inline-flex items-center rounded-md border border-zinc-800 bg-zinc-900/80 px-3 py-1 font-mono text-xs font-medium text-zinc-300"
 			>
-				<span>📚</span> Инженерная база знаний
+				<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
+				Инженерная база знаний
 			</div>
 			<h1 class="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
 				Техническая база знаний по механической обработке с ЧПУ
@@ -73,10 +69,12 @@
 				>
 					<div>
 						<div class="flex items-center justify-between font-mono text-xs text-zinc-500">
-							<span class="rounded bg-zinc-900 px-2 py-0.5 text-amber-400">{article.category}</span>
+							<span class="rounded border border-zinc-800 bg-zinc-900 px-2 py-0.5 text-zinc-300">
+								{article.category}
+							</span>
 							<span>{article.readTime}</span>
 						</div>
-						<h2 class="mt-4 text-lg leading-snug font-bold text-white hover:text-amber-400">
+						<h2 class="mt-4 text-lg leading-snug font-bold text-white hover:text-zinc-300">
 							<a href="/stati/{article.slug}/">{article.title}</a>
 						</h2>
 						<p class="mt-3 text-xs leading-relaxed text-zinc-400">{article.excerpt}</p>
@@ -85,7 +83,7 @@
 					<div class="mt-6 border-t border-zinc-900 pt-4">
 						<a
 							href="/stati/{article.slug}/"
-							class="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-amber-400 hover:text-amber-300"
+							class="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-300 hover:text-white"
 						>
 							<span>Читать инженерный разбор</span>
 							<span>→</span>

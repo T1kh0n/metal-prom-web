@@ -6,85 +6,82 @@
 
 	const cases = [
 		{
-			id: 'marine-shaft',
-			title: 'Вал гребного привода вспомогательного судна с бронзовой втулкой',
-			clientSector: 'Судоремонт и портовый флот (г. Светлый)',
-			material: 'Легированная сталь 40Х + бронзовая гильза БрАЖ9-4',
+			title: 'Вал гребного винта вспомогательного катера',
+			clientSector: 'Судостроение и судоремонт (г. Светлый)',
+			material: 'Сталь 40Х с объемной термообработкой',
 			dimensions: '⌀65 мм × длина 680 мм',
-			tolerances: 'Квалитет IT7 (шейки вала шлифованные до IT6, Ra 0.4 мкм)',
-			batch: '4 шт. (мелкосерийная аварийная замена)',
-			leadTime: '5 рабочих дней',
-			operations: [
-				'Черновое и чистовое ЧПУ точение',
-				'Круглое шлифование шеек под подшипники',
-				'Фрезерование шпоночных пазов',
-				'Горячая запрессовка бронзовой втулки'
-			],
-			description:
-				'Изготовление гребного валопровода взамен выработавшего ресурс оригинального узла иностранного производства. Проведен входной ультразвуковой контроль сплошности заготовки и инструментальная проверка радиального биения на призмах (не более 0.006 мм).'
-		},
-		{
-			id: 'hydraulic-pin',
-			title: 'Палец гидроцилиндра стрелы экскаватора с ТВЧ-закалкой',
-			clientSector: 'Дорожно-строительная спецтехника (г. Гурьевск)',
-			material: 'Конструкционная сталь 45 ГОСТ 1050-2013',
-			dimensions: '⌀80 мм × длина 340 мм',
-			tolerances: 'Квалитет IT7, посадка f7, твердость слоя 52–55 HRCэ',
-			batch: '16 шт. (серийный ремонтный комплект)',
-			leadTime: '4 рабочих дня',
-			operations: [
-				'Токарная ЧПУ обработка',
-				'Глубокое сверление осевого и радиальных смазочных каналов',
-				'Закалка токами высокой частоты (глубина 2.5 мм)',
-				'Бесцентровое финишное шлифование'
-			],
-			description:
-				'Серийный выпуск тяжелонагруженных пальцев для гидравлических экскаваторов. Поверхностный слой защищает от абразивного износа песком и грунтом, а вязкая незакаленная сердцевина предотвращает хрупкий излом при ударных нагрузках.'
-		},
-		{
-			id: 'electronic-enclosure',
-			title: 'Герметичный фрезерованный корпус судового навигационного контроллера',
-			clientSector: 'Морское приборостроение (г. Калининград)',
-			material: 'Авиационный алюминиевый сплав Д16Т ГОСТ 4784-97',
-			dimensions: '220 × 160 × 65 мм (выборка внутреннего кармана 85%)',
-			tolerances: 'IT8, плоскостность привалочной поверхности 0.015 мм',
-			batch: '25 шт. (установочная серия)',
+			tolerances: 'Квалитет IT7 (шейки под подшипники Ra 0.8)',
+			batch: 'Серия 12 шт.',
 			leadTime: '6 рабочих дней',
 			operations: [
-				'3-осевое высокоскоростное фрезерование (HSM)',
-				'Прецизионная выборка канавки под O-Ring уплотнение',
-				'Сверление и нарезание глухой резьбы М3 и М4',
-				'Дробеструйная матировка и химическое оксидирование'
+				'Токарная черновая обработка',
+				'Термоулучшение (закалка + высокий отпуск)',
+				'Чистовое точение шеек и конуса',
+				'Фрезерование шпоночных пазов',
+				'Контроль биения в центрах ОТК'
 			],
 			description:
-				'Фрезерование монолитных корпусов из цельной плиты Д16Т. Обеспечена 100% герметичность при погружении (стандарт IP67) за счет стабильного прижима крышки и отсутствия коробления тонких стенок (толщина перемычек 2.5 мм).'
+				'Изготовление валопровода по чертежу заказчика с контролем радиального биения конусной посадки винта до 0.015 мм. Продукция сдана с паспортом изделия и протоколом ультразвукового контроля заготовок.'
 		},
 		{
-			id: 'gearbox-gear',
-			title: 'Косозубая цилиндрическая шестерня привода кормораздатчика',
-			clientSector: 'Агропромышленный комплекс (г. Черняховск)',
-			material: 'Сталь 40Х с объемным улучшением и ТВЧ венца',
-			dimensions: 'Венец ⌀180 мм, ширина 45 мм, модуль m=4.0, число зубьев z=43',
-			tolerances: '7-я степень точности по ГОСТ 1643-81, шлицевое отверстие 8×36×42',
-			batch: '10 шт.',
-			leadTime: '7 рабочих дней',
+			title: 'Фланец гидрозамка автокрана КС-55713',
+			clientSector: 'Спецтехника и гидравлика (г. Калининград)',
+			material: 'Конструкционная сталь 09Г2С',
+			dimensions: '⌀160 мм × толщина 38 мм',
+			tolerances: 'Посадочный поясок IT7, плоскостность 0.02 мм',
+			batch: 'Партия 40 шт.',
+			leadTime: '5 рабочих дней',
 			operations: [
-				'Токарная подготовка зубчатого колеса',
-				'Зубофрезерование червячной модульной фрезой',
-				'Долбление прямобочных шлицев',
-				'Закалка зубьев ТВЧ и контроль пятна контакта'
+				'Токарная обработка наружного контура и канавки O-Ring',
+				'Фрезерная координатная сверловка 8 отверстий М14',
+				'Нарезание метрической резьбы на ЧПУ',
+				'Входной и выходной контроль ОТК'
 			],
 			description:
-				'Импортозамещение зубчатой передачи европейского кормораздатчика. Реверс-инжиниринг выполнен технологами цеха по изношенному образцу с расчетом угла наклона зуба и геометрии эвольвенты.'
+				'Ответственный элемент гидросистемы высокого давления (до 32 МПа). Высокие требования к чистоте канавки под резиновое уплотнительное кольцо (Ra 1.6) для предотвращения разгерметизации рабочей жидкости.'
+		},
+		{
+			title: 'Приборный корпус навигационного контроллера',
+			clientSector: 'Приборостроение и морская электроника (г. Калининград)',
+			material: 'Алюминиевый деформируемый сплав Д16Т',
+			dimensions: '220 × 140 × 65 мм (глубина кармана 52 мм)',
+			tolerances: 'Межосевые расстояния ±0.01 мм, допуск кармана IT8',
+			batch: 'Серия 25 шт.',
+			leadTime: '7 рабочих дней',
+			operations: [
+				'3D фрезерование глубокого кармана с толщиной стенки 2.5 мм',
+				'Резьбонарезание глухих отверстий М3 и М4',
+				'Фрезерование паза под герметизирующий шнур IP67',
+				'Анодирование сертифицированное (кооперация)'
+			],
+			description:
+				'Легкосплавный корпус бортового прибора с интегрированными ребрами охлаждения. Обработка выполнена монолитными твердосплавными фрезами с применением высокоскоростного фрезерования (HSM) для исключения коробления тонких стенок.'
+		},
+		{
+			title: 'Шестерня привода зерноуборочного комбайна',
+			clientSector: 'Агропромышленный комплекс (Гурьевский район)',
+			material: 'Легированная цементуемая сталь 18ХГТ',
+			dimensions: 'Венец ⌀180 мм, ширина 45 мм, модуль m=4.0, число зубьев z=43',
+			tolerances: 'Степень точности 7-В по ГОСТ 1643-81',
+			batch: 'Партия 16 шт.',
+			leadTime: '8 рабочих дней',
+			operations: [
+				'Токарная проточка заготовки венца под нарезку',
+				'Зубофрезерование червячной модульной фрезой',
+				'Закалка ТВЧ рабочей поверхности зубьев (52–56 HRC)',
+				'Круглое шлифование посадочного отверстия под подшипник'
+			],
+			description:
+				'Срочное импортозамещение изношенного узла редуктора в период уборочной кампании. Изготовление произведено по предоставленному образцу (реверс-инжиниринг с замером профиля зуба и твердости металла).'
 		}
 	];
 </script>
 
 <svelte:head>
-	<title>Портфолио деталей ЧПУ и примеры работ в Калининграде | {siteConfig.brandName}</title>
+	<title>Портфолио деталей и кейсы механообработки в Калининграде | {siteConfig.brandName}</title>
 	<meta
 		name="description"
-		content="Примеры изготовленных деталей на ЧПУ станках в Калининграде: гребные валы, пальцы гидроцилиндров с ТВЧ, корпуса из Д16Т, шестерни редукторов. Реальные допуски и сроки."
+		content="Примеры изготовленных деталей с ЧПУ в Калининграде: гребные валы, гидравлические фланцы, алюминиевые корпуса, шестерни. Фотографии, допуски, сроки."
 	/>
 </svelte:head>
 
@@ -94,9 +91,10 @@
 
 		<header class="max-w-4xl border-b border-zinc-800 pb-8">
 			<div
-				class="inline-flex items-center gap-2 rounded border border-amber-500/30 bg-amber-500/10 px-3 py-1 font-mono text-xs font-semibold text-amber-400 uppercase"
+				class="inline-flex items-center rounded-md border border-zinc-800 bg-zinc-900/80 px-3 py-1 font-mono text-xs font-medium text-zinc-300"
 			>
-				<span>📁</span> Промышленные кейсы цеха
+				<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
+				Промышленные кейсы цеха
 			</div>
 			<h1 class="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
 				Портфолио деталей и реализованных проектов механообработки в Калининграде
@@ -118,7 +116,7 @@
 						class="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800 pb-4"
 					>
 						<span
-							class="rounded border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 font-mono text-xs font-semibold text-amber-400"
+							class="rounded border border-zinc-800 bg-zinc-900 px-2.5 py-1 font-mono text-xs font-medium text-zinc-300"
 						>
 							{item.clientSector}
 						</span>
@@ -130,19 +128,19 @@
 
 					<!-- Technical Specs Sheet (Hallmark Data Density) -->
 					<div class="mt-6 grid grid-cols-1 gap-4 font-mono text-xs sm:grid-cols-2 lg:grid-cols-4">
-						<div class="rounded border border-zinc-900 bg-zinc-900/60 p-3">
+						<div class="rounded border border-zinc-800 bg-zinc-900/60 p-3">
 							<div class="text-zinc-500">Материал:</div>
 							<div class="mt-1 font-bold text-zinc-200">{item.material}</div>
 						</div>
-						<div class="rounded border border-zinc-900 bg-zinc-900/60 p-3">
+						<div class="rounded border border-zinc-800 bg-zinc-900/60 p-3">
 							<div class="text-zinc-500">Габариты детали:</div>
-							<div class="mt-1 font-bold text-amber-400">{item.dimensions}</div>
+							<div class="mt-1 font-bold text-zinc-100">{item.dimensions}</div>
 						</div>
-						<div class="rounded border border-zinc-900 bg-zinc-900/60 p-3">
+						<div class="rounded border border-zinc-800 bg-zinc-900/60 p-3">
 							<div class="text-zinc-500">Точность / Квалитет:</div>
 							<div class="mt-1 font-bold text-emerald-400">{item.tolerances}</div>
 						</div>
-						<div class="rounded border border-zinc-900 bg-zinc-900/60 p-3">
+						<div class="rounded border border-zinc-800 bg-zinc-900/60 p-3">
 							<div class="text-zinc-500">Объем партии:</div>
 							<div class="mt-1 font-bold text-white">{item.batch}</div>
 						</div>
@@ -150,7 +148,7 @@
 
 					<!-- Operations Sequence -->
 					<div class="mt-5 border-t border-zinc-900 pt-4">
-						<div class="font-mono text-xs text-zinc-400">Маршрут технологической обработки:</div>
+						<div class="text-xs font-medium text-zinc-400">Маршрут технологической обработки:</div>
 						<div class="mt-2 flex flex-wrap gap-2">
 							{#each item.operations as op}
 								<span
@@ -168,33 +166,33 @@
 		<!-- Cross-Links & Navigation -->
 		<section class="mt-16 rounded-xl border border-zinc-800 bg-zinc-900/50 p-6">
 			<h2 class="text-base font-bold text-white">Разделы услуг по видам обработки:</h2>
-			<div class="mt-4 grid grid-cols-1 gap-3 font-mono text-xs sm:grid-cols-3">
+			<div class="mt-4 grid grid-cols-1 gap-3 text-xs sm:grid-cols-3">
 				<a
 					href="/tokarnye-raboty-chpu/"
-					class="rounded border border-zinc-800 bg-zinc-950 p-3 text-zinc-300 transition-colors hover:border-amber-500 hover:text-white"
+					class="rounded-lg border border-zinc-800 bg-zinc-950 p-3 text-zinc-300 transition-colors hover:border-zinc-700 hover:text-white"
 				>
-					<span class="block font-bold text-amber-400">Токарная ЧПУ обработка</span>
-					<span class="mt-1 block text-zinc-500">Валы, оси, пальцы, штуцеры</span>
+					<span class="block font-medium text-zinc-200">Токарная ЧПУ обработка</span>
+					<span class="mt-1 block text-zinc-400">Валы, оси, пальцы, штуцеры</span>
 				</a>
 				<a
 					href="/frezernye-raboty-chpu/"
-					class="rounded border border-zinc-800 bg-zinc-950 p-3 text-zinc-300 transition-colors hover:border-amber-500 hover:text-white"
+					class="rounded-lg border border-zinc-800 bg-zinc-950 p-3 text-zinc-300 transition-colors hover:border-zinc-700 hover:text-white"
 				>
-					<span class="block font-bold text-amber-400">Фрезерная ЧПУ обработка</span>
-					<span class="mt-1 block text-zinc-500">Корпуса, плиты, кронштейны</span>
+					<span class="block font-medium text-zinc-200">Фрезерная ЧПУ обработка</span>
+					<span class="mt-1 block text-zinc-400">Корпуса, плиты, кронштейны</span>
 				</a>
 				<a
 					href="/zuboreznye-i-shlifovalnye-raboty/"
-					class="rounded border border-zinc-800 bg-zinc-950 p-3 text-zinc-300 transition-colors hover:border-amber-500 hover:text-white"
+					class="rounded-lg border border-zinc-800 bg-zinc-950 p-3 text-zinc-300 transition-colors hover:border-zinc-700 hover:text-white"
 				>
-					<span class="block font-bold text-amber-400">Зуборезка и шлифовка</span>
-					<span class="mt-1 block text-zinc-500">Шестерни, шлицы, чистовая доводка</span>
+					<span class="block font-medium text-zinc-200">Зуборезка и шлифовка</span>
+					<span class="mt-1 block text-zinc-400">Шестерни, шлицы, чистовая доводка</span>
 				</a>
 			</div>
 		</section>
 
 		<!-- Bottom CTA -->
-		<section class="mt-12 rounded-xl border border-amber-500/40 bg-zinc-900 p-8 text-center">
+		<section class="mt-12 rounded-xl border border-zinc-800 bg-zinc-900/60 p-8 text-center">
 			<h2 class="text-xl font-bold text-white">Требуется изготовление аналогичных деталей?</h2>
 			<p class="mt-2 text-sm text-zinc-400">
 				Пришлите чертеж или эскиз на расчет. Главный технолог подготовит коммерческое предложение с
@@ -203,15 +201,15 @@
 			<div class="mt-6 flex flex-wrap items-center justify-center gap-4">
 				<a
 					href="/kalkulyator-stoimosti-chpu/"
-					class="rounded border border-amber-500 bg-amber-500 px-6 py-2.5 font-mono text-xs font-bold text-zinc-950 transition-colors hover:bg-amber-400"
+					class="rounded-md bg-zinc-100 px-4 py-2.5 text-xs font-medium text-zinc-950 shadow-sm transition-colors hover:bg-white"
 				>
-					⚡ Рассчитать в онлайн-калькуляторе
+					Рассчитать в онлайн-калькуляторе
 				</a>
 				<a
 					href="mailto:{siteConfig.contactEmail}"
-					class="rounded border border-zinc-700 bg-zinc-800 px-6 py-2.5 font-mono text-xs font-semibold text-zinc-200 transition-colors hover:border-zinc-600 hover:text-white"
+					class="rounded-md border border-zinc-700 bg-zinc-900/60 px-4 py-2.5 text-xs font-medium text-zinc-200 transition-colors hover:bg-zinc-800"
 				>
-					✉️ Отправить чертежи на {siteConfig.contactEmail}
+					Отправить чертежи на {siteConfig.contactEmail}
 				</a>
 			</div>
 		</section>

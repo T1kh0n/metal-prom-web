@@ -2,16 +2,14 @@
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
 
-	const breadcrumbs = [
-		{ name: 'Политика конфиденциальности', path: '/politika-konfidentsialnosti/' }
-	];
+	const breadcrumbs = [{ name: 'Политика конфиденциальности', path: '/politika-konfidentsialnosti/' }];
 </script>
 
 <svelte:head>
-	<title>Политика конфиденциальности и 152-ФЗ | {siteConfig.brandName}</title>
+	<title>Политика конфиденциальности и правовой статус 152-ФЗ | {siteConfig.brandName}</title>
 	<meta
 		name="description"
-		content="Политика обработки данных цеха MetalProm39. Полное соблюдение 152-ФЗ: сайт не собирает и не обрабатывает персональные данные физических лиц. Анонимные технические расчеты."
+		content="Официальная правовая позиция цеха MetalProm39 по 152-ФЗ: работа исключительно в формате B2B, отсутствие сбора персональных данных, регламент защиты КД заказчиков."
 	/>
 </svelte:head>
 
@@ -22,9 +20,10 @@
 		<article>
 			<header class="border-b border-zinc-800 pb-8">
 				<div
-					class="inline-flex items-center gap-2 rounded border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-mono text-xs font-semibold text-emerald-400 uppercase"
+					class="inline-flex items-center rounded-md border border-zinc-800 bg-zinc-900/80 px-3 py-1 font-mono text-xs font-medium text-zinc-300"
 				>
-					<span>🛡️</span> Правовой статус: 152-ФЗ и 149-ФЗ
+					<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
+					Правовой статус: 152-ФЗ и 149-ФЗ
 				</div>
 				<h1 class="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
 					Политика конфиденциальности и правовые стандарты взаимодействия
@@ -36,12 +35,12 @@
 
 			<!-- 152-FZ Non-Operator Posture Declaration -->
 			<div
-				class="my-8 rounded-xl border border-emerald-500/30 bg-zinc-950 p-6 font-mono text-xs leading-relaxed text-zinc-300"
+				class="my-8 rounded-xl border border-zinc-800 bg-zinc-950 p-6 text-xs leading-relaxed text-zinc-300"
 			>
-				<div class="font-bold tracking-wide text-emerald-400 uppercase">
+				<div class="font-semibold text-emerald-400">
 					Декларация о статусе не-оператора персональных данных:
 				</div>
-				<p class="mt-2 font-sans text-xs leading-relaxed text-zinc-300">
+				<p class="mt-2 text-xs leading-relaxed text-zinc-300">
 					Информационный ресурс <strong class="text-white">{siteConfig.siteDomain}</strong> не ведет сбор,
 					систематизацию, накопление, хранение, уточнение, использование или передачу персональных данных
 					физических лиц в понимании Федерального закона Российской Федерации от 27 июля 2006 года № 152-ФЗ
@@ -99,7 +98,7 @@
 					4.1. Связь с производственным цехом и направление конструкторской документации (чертежей
 					по ГОСТ, 3D-моделей в форматах STEP / IGES) инициируется заказчиком добровольно
 					посредством отправки писем на корпоративный почтовый ящик <strong
-						class="font-mono text-amber-400">{siteConfig.contactEmail}</strong
+						class="font-mono text-zinc-100">{siteConfig.contactEmail}</strong
 					>
 					или по прямому телефонному номеру диспетчерской цеха.
 				</p>
@@ -118,7 +117,9 @@
 					<div>
 						{siteConfig.addressRegion}, {siteConfig.addressLocality}, {siteConfig.addressStreet}
 					</div>
-					<div>Электронная почта для юридических запросов: {siteConfig.contactEmail}</div>
+					<div>
+						Электронная почта для официальной корреспонденции: {siteConfig.contactEmail}
+					</div>
 				</div>
 			</div>
 		</article>

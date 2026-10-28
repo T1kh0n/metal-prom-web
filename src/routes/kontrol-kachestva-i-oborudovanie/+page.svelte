@@ -3,87 +3,93 @@
 	import { siteConfig } from '#lib/config/site';
 
 	const breadcrumbs = [
-		{ name: 'ОТК и станочный парк', path: '/kontrol-kachestva-i-oborudovanie/' }
-	];
-
-	const machines = [
-		{
-			category: 'Токарная группа',
-			model: 'Токарно-револьверный обрабатывающий центр ЧПУ',
-			specs: 'Патрон ⌀210 мм, макс. диаметр точения 320 мм, длина до 750 мм, шпиндель 4 500 об/мин',
-			precision: 'Позиционирование ±0.005 мм, квалитет IT7–IT8',
-			features: '12-позиционная револьверная головка с жесткой фиксацией инструмента VDI/BMT'
-		},
-		{
-			category: 'Фрезерная группа (3 оси)',
-			model: 'Вертикальный обрабатывающий центр с ЧПУ',
-			specs:
-				'Рабочий стол 900 × 500 мм, перемещения 800 × 500 × 500 мм, шпиндель BT40 10 000 об/мин',
-			precision: 'Позиционирование ±0.005 мм, повторяемость ±0.003 мм',
-			features: 'Оптическая измерительная система Renishaw OMP40-2 для контроля деталей в станке'
-		},
-		{
-			category: 'Фрезерная группа (4-я ось)',
-			model: 'Прецизионный поворотный ЧПУ делительный стол',
-			specs: 'Диаметр планшайбы ⌀200 мм, дискретность угла 0.001°',
-			precision: 'Угловая погрешность не более 15 угловых секунд',
-			features: 'Синхронная 4-осевая интерполяция для винтовых канавок и многогранных деталей'
-		},
-		{
-			category: 'Шлифовальная группа',
-			model: 'Круглошлифовальный станок высокой точности',
-			specs: 'Диаметр шлифования до 200 мм, длина в центрах до 800 мм',
-			precision: 'Достижимый квалитет IT6, шероховатость Ra 0.4 мкм',
-			features: 'Прецизионный гидродинамический шпиндель для зеркальной доводки шеек валов'
-		},
-		{
-			category: 'Плоскошлифовальная группа',
-			model: 'Плоскошлифовальный станок с крестовым столом',
-			specs: 'Зеркало электромагнитной плиты 800 × 320 мм, макс. нагрузка 350 кг',
-			precision: 'Непараллельность поверхностей до 0.005 мм на 500 мм длины',
-			features: 'Чистовое шлифование направляющих, плит кондукторов, промышленных ножей'
-		},
-		{
-			category: 'Зуборезная группа',
-			model: 'Зубофрезерный станок для цилиндрических колес',
-			specs: 'Максимальный диаметр нарезаемого колеса 500 мм, модуль m1.0 – m8.0',
-			precision: '7-я и 8-я степень точности по ГОСТ 1643-81',
-			features: 'Нарезание прямозубых, косозубых колес и приводных цепных звездочек'
-		},
-		{
-			category: 'Заготовительный участок',
-			model: 'Полуавтоматический двухколонный ленточнопильный станок',
-			specs: 'Гидравлический рез круглого проката до ⌀320 мм и профильных труб',
-			precision: 'Перпендикулярность торца ±0.2 мм',
-			features: 'Интенсивная подача СОЖ, минимальный припуск под последующую торцовку'
-		}
+		{ name: 'ОТК и оборудование', path: '/kontrol-kachestva-i-oborudovanie/' }
 	];
 
 	const metrology = [
 		{
-			name: 'Микрометры гладкие цифровые Mitutoyo (Япония)',
+			name: 'Микрометры цифровые гладкие Mitutoyo QuantuMike (IP65)',
 			range: '0–25 мм, 25–50 мм, 50–75 мм, 75–100 мм',
-			accuracy: 'Дискретность 0.001 мм, абсолютный энкодер Digimatic'
+			accuracy: 'Погрешность ±0.001 мм, дискретность 0.001 мм'
 		},
 		{
-			name: 'Нутромеры индикаторные и 3-точечные Mitutoyo',
-			range: '10–18 мм, 18–50 мм, 50–100 мм',
-			accuracy: 'Погрешность не более ±0.002 мм при контроле посадок подшипников'
+			name: 'Штангенциркули прецизионные Mitutoyo Digimatic',
+			range: '0–150 мм, 0–300 мм, 0–600 мм',
+			accuracy: 'Погрешность ±0.02 мм, защита IP67 от СОЖ'
 		},
 		{
-			name: 'Профилометр контактный Mitutoyo Surftest SJ-210',
-			range: 'Измерение параметров шероховатости Ra, Rz, Rq, Rt',
-			accuracy: 'Разрешение 0.001 мкм, распечатка графиков профиля поверхности'
+			name: 'Нутрометры индикаторные и микрометрические',
+			range: 'Диаметр отверстий от 18 до 160 мм',
+			accuracy: 'Цена деления 0.002 мм, поверка колец по ГОСТ'
 		},
 		{
-			name: 'Твердомер динамический портативный ТКМ-459С',
-			range: 'Шкалы Роквелла (HRC), Бринелля (HB), Виккерса (HV)',
-			accuracy: 'Контроль твердости термообработанных слоев после закалки ТВЧ'
+			name: 'Профилометр портативный Mitutoyo Surftest SJ-210',
+			range: 'Шероховатость Ra 0.05 – 16.0 мкм, Rz 0.1 – 100 мкм',
+			accuracy: 'Алмазная игла 2 мкм, протокол измерений с графиком'
 		},
 		{
-			name: 'Гранитная поверочная плита I класса точности',
-			range: 'Габариты 1000 × 630 × 150 мм',
-			accuracy: 'Отклонение от плоскостности не более 4 мкм по ГОСТ 10905-86'
+			name: 'Набор концевых мер длины (КМД) класс 1 (ГОСТ 9038)',
+			range: '83 меры из легированной стали',
+			accuracy: 'Эталон для калибровки цеховых микрометров'
+		}
+	];
+
+	const machines = [
+		{
+			model: 'Токарный обрабатывающий центр с ЧПУ (Fanuc 0i-TF)',
+			category: 'Токарная группа',
+			specs: 'Патрон ⌀210 мм, макс. диаметр точения 320 мм, длина до 750 мм, шпиндель 4 500 об/мин',
+			precision: 'Позиционирование ±0.005 мм, револьверная головка на 12 позиций (BMT45)',
+			features: 'Жесткая чугунная наклонная станина (45°), автоматический стружкоуборочный конвейер'
+		},
+		{
+			model: 'Токарно-винторезный станок повышенной точности (ЧПУ Балт-Систем)',
+			category: 'Токарная группа',
+			specs: 'Диаметр обработки над станиной 400 мм, длина заготовки в центрах до 1000 мм',
+			precision: 'Квалитет точности IT7, нарезание любых типов резьб (метрическая, дюймовая, трапеция)',
+			features: 'Оснащен механизированным люнетом для точения длинных гребных валов без биения'
+		},
+		{
+			model: 'Вертикальный фрезерный обрабатывающий центр (Siemens 828D)',
+			category: 'Фрезерная группа',
+			specs: 'Рабочий стол 900 × 500 мм, перемещения по осям X/Y/Z: 800 × 500 × 500 мм',
+			precision: 'Оптические линейки с дискретностью 0.001 мм, точность позиционирования ±0.005 мм',
+			features: 'Шпиндель 10 000 об/мин (BT40) с прямой подачей СОЖ под давлением 20 бар через инструмент'
+		},
+		{
+			model: 'Координатно-поворотный стол (4-я ось ЧПУ)',
+			category: 'Фрезерная группа',
+			specs: 'Диаметр планшайбы ⌀200 мм, дискретность угла 0.001°',
+			precision: 'Интегрирован в ЧПУ стойку для непрерывной 4D фрезерной обработки',
+			features: 'Обработка радиальных пазов, шпонок, шлицев и многогранных корпусов за один установ'
+		},
+		{
+			model: 'Зубофрезерный станок для цилиндрических колес',
+			category: 'Зуборезная группа',
+			specs: 'Максимальный диаметр нарезаемого колеса 500 мм, модули зубьев от m1.0 до m8.0',
+			precision: '7-я и 8-я степень точности зубчатых передач по ГОСТ 1643-81',
+			features: 'Нарезание прямозубых, косозубых шестерен и венцов червячных передач'
+		},
+		{
+			model: 'Круглошлифовальный полуавтомат высокой точности',
+			category: 'Шлифовальная группа',
+			specs: 'Максимальный диаметр шлифования 200 мм, длина заготовки до 800 мм',
+			precision: 'Квалитет IT6, шероховатость поверхности шейки вала до Ra 0.2–0.4 мкм',
+			features: 'Оснащен прибором активного контроля для автоматического выдерживания допуска'
+		},
+		{
+			model: 'Плоскошлифовальный станок с прямоугольным столом',
+			category: 'Шлифовальная группа',
+			specs: 'Размер электромагнитной плиты 800 × 320 мм, высота шлифования до 400 мм',
+			precision: 'Плоскостность и параллельность поверхностей не более 0.005 мм на длине 500 мм',
+			features: 'Финишная доводка ножей гильотин, направляющих планок и сопрягаемых плит штампов'
+		},
+		{
+			model: 'Автоматический двухколонный ленточнопильный станок',
+			category: 'Заготовительный участок',
+			specs: 'Гидравлический рез круглого проката до ⌀320 мм и профильных труб',
+			precision: 'Перпендикулярность реза ±0.2 мм, минимальная ширина пропила 1.1 мм',
+			features: 'Экономия расхода дорогостоящих легированных и нержавеющих сталей'
 		}
 	];
 </script>
@@ -102,9 +108,10 @@
 
 		<header class="max-w-4xl border-b border-zinc-800 pb-8">
 			<div
-				class="inline-flex items-center gap-2 rounded border border-amber-500/30 bg-amber-500/10 px-3 py-1 font-mono text-xs font-semibold text-amber-400 uppercase"
+				class="inline-flex items-center rounded-md border border-zinc-800 bg-zinc-900/80 px-3 py-1 font-mono text-xs font-medium text-zinc-300"
 			>
-				<span>🛡️</span> Стандарты метрологии и ОТК
+				<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
+				Стандарты метрологии и ОТК
 			</div>
 			<h1 class="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
 				Контроль качества (ОТК), метрология и станочный парк ЧПУ в Калининграде
@@ -124,11 +131,11 @@
 			<div class="mt-6 grid grid-cols-1 gap-6 text-xs leading-relaxed md:grid-cols-3">
 				<div class="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
 					<div
-						class="inline-flex h-7 w-7 items-center justify-center rounded border border-amber-500/30 bg-amber-500/10 font-mono text-sm font-bold text-amber-400"
+						class="inline-flex h-7 w-7 items-center justify-center rounded-md border border-zinc-700 bg-zinc-900 font-mono text-sm font-bold text-zinc-100"
 					>
 						1
 					</div>
-					<h3 class="mt-3 font-mono text-sm font-bold text-white">Входной контроль сырья</h3>
+					<h3 class="mt-3 font-semibold text-sm text-white">Входной контроль сырья</h3>
 					<p class="mt-2 text-zinc-400">
 						100% заготовок проверяются на соответствие сертификатам заводов-изготовителей
 						(Северсталь, НЛМК, Мечел). Проводится визуальный осмотр на отсутствие внутренних
@@ -137,11 +144,11 @@
 				</div>
 				<div class="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
 					<div
-						class="inline-flex h-7 w-7 items-center justify-center rounded border border-amber-500/30 bg-amber-500/10 font-mono text-sm font-bold text-amber-400"
+						class="inline-flex h-7 w-7 items-center justify-center rounded-md border border-zinc-700 bg-zinc-900 font-mono text-sm font-bold text-zinc-100"
 					>
 						2
 					</div>
-					<h3 class="mt-3 font-mono text-sm font-bold text-white">
+					<h3 class="mt-3 font-semibold text-sm text-white">
 						First Article Inspection (FAI)
 					</h3>
 					<p class="mt-2 text-zinc-400">
@@ -152,11 +159,11 @@
 				</div>
 				<div class="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
 					<div
-						class="inline-flex h-7 w-7 items-center justify-center rounded border border-amber-500/30 bg-amber-500/10 font-mono text-sm font-bold text-amber-400"
+						class="inline-flex h-7 w-7 items-center justify-center rounded-md border border-zinc-700 bg-zinc-900 font-mono text-sm font-bold text-zinc-100"
 					>
 						3
 					</div>
-					<h3 class="mt-3 font-mono text-sm font-bold text-white">Выходной контроль и паспорт</h3>
+					<h3 class="mt-3 font-semibold text-sm text-white">Выходной контроль и паспорт</h3>
 					<p class="mt-2 text-zinc-400">
 						Выборочный или 100% обмер готовых деталей с оформлением протокола измерений (паспорта
 						ОТК). Консервация деталей в ингибированную бумагу с нанесением консервационной смазки от
@@ -172,8 +179,8 @@
 				Лаборатория измерительного инструмента и метрологии
 			</h2>
 			<div class="mt-4 overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950">
-				<table class="w-full text-left font-mono text-xs text-zinc-300">
-					<thead class="border-b border-zinc-800 bg-zinc-900/80 text-zinc-400 uppercase">
+				<table class="w-full text-left text-xs text-zinc-300">
+					<thead class="border-b border-zinc-800 bg-zinc-900/80 font-mono text-zinc-400 uppercase">
 						<tr>
 							<th class="px-4 py-3">Наименование прибора</th>
 							<th class="px-4 py-3">Диапазон измерений</th>
@@ -183,8 +190,8 @@
 					<tbody class="divide-y divide-zinc-800/60">
 						{#each metrology as item}
 							<tr>
-								<td class="px-4 py-3 font-sans font-medium text-zinc-200">{item.name}</td>
-								<td class="px-4 py-3 text-amber-400">{item.range}</td>
+								<td class="px-4 py-3 font-medium text-zinc-200">{item.name}</td>
+								<td class="px-4 py-3 font-mono text-zinc-100">{item.range}</td>
 								<td class="px-4 py-3 text-zinc-400">{item.accuracy}</td>
 							</tr>
 						{/each}
@@ -202,7 +209,7 @@
 				{#each machines as machine}
 					<div class="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
 						<div class="flex items-center justify-between border-b border-zinc-900 pb-2">
-							<span class="font-mono text-xs font-bold text-amber-400 uppercase"
+							<span class="font-mono text-xs font-semibold text-zinc-300 uppercase"
 								>{machine.category}</span
 							>
 							<span class="font-mono text-[11px] text-emerald-400">{machine.precision}</span>
@@ -218,18 +225,18 @@
 		<!-- B2B Contract Guarantee Banner -->
 		<section class="mt-14 rounded-xl border border-zinc-800 bg-zinc-900/60 p-6">
 			<h2 class="text-base font-bold text-white">Документальное сопровождение для юрлиц:</h2>
-			<ul class="mt-3 grid grid-cols-1 gap-2 font-mono text-xs text-zinc-300 sm:grid-cols-2">
-				<li class="flex items-center gap-2">
-					<span class="text-emerald-400">✓</span> Договор поставки металлоизделий с фиксированной ценой
+			<ul class="mt-3 grid grid-cols-1 gap-2 text-xs text-zinc-300 sm:grid-cols-2">
+				<li class="flex items-center">
+					<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2 shrink-0"></span> Договор поставки металлоизделий с фиксированной ценой
 				</li>
-				<li class="flex items-center gap-2">
-					<span class="text-emerald-400">✓</span> Универсальный передаточный документ (УПД с НДС 20%)
+				<li class="flex items-center">
+					<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2 shrink-0"></span> Универсальный передаточный документ (УПД с НДС 20%)
 				</li>
-				<li class="flex items-center gap-2">
-					<span class="text-emerald-400">✓</span> Паспорт изделия с фактическими замерами ОТК
+				<li class="flex items-center">
+					<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2 shrink-0"></span> Паспорт изделия с фактическими замерами ОТК
 				</li>
-				<li class="flex items-center gap-2">
-					<span class="text-emerald-400">✓</span> Копии заводских сертификатов на металл (ГОСТ)
+				<li class="flex items-center">
+					<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2 shrink-0"></span> Копии заводских сертификатов на металл (ГОСТ)
 				</li>
 			</ul>
 		</section>

@@ -19,9 +19,10 @@
 
 		<header class="max-w-4xl border-b border-zinc-800 pb-8">
 			<div
-				class="inline-flex items-center gap-2 rounded border border-amber-500/30 bg-amber-500/10 px-3 py-1 font-mono text-xs font-semibold text-amber-400 uppercase"
+				class="inline-flex items-center rounded-md border border-zinc-800 bg-zinc-900/80 px-3 py-1 font-mono text-xs font-medium text-zinc-300"
 			>
-				<span>📍</span> Прямая B2B связь
+				<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
+				Прямая B2B связь
 			</div>
 			<h1 class="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
 				Контакты, реквизиты цеха и логистика в Калининградской области
@@ -40,31 +41,31 @@
 				<div class="rounded-xl border border-zinc-800 bg-zinc-950 p-6">
 					<h2 class="text-base font-bold text-white">Прямые контакты цеха</h2>
 					<div class="mt-5 grid grid-cols-1 gap-4 font-mono text-xs sm:grid-cols-2">
-						<div class="rounded border border-zinc-900 bg-zinc-900/60 p-4">
+						<div class="rounded border border-zinc-800 bg-zinc-900/60 p-4">
 							<div class="text-zinc-500">Инженерный отдел (чертежи):</div>
 							<a
 								href="mailto:{siteConfig.contactEmail}"
-								class="mt-1 block text-sm font-bold text-amber-400 hover:underline"
+								class="mt-1 block text-sm font-semibold text-zinc-100 hover:text-white hover:underline"
 							>
 								{siteConfig.contactEmail}
 							</a>
-							<p class="mt-1 font-sans text-[11px] text-zinc-500">
+							<p class="mt-1 font-sans text-[11px] text-zinc-400">
 								Форматы: PDF, DXF, DWG, STEP, IGES
 							</p>
 						</div>
-						<div class="rounded border border-zinc-900 bg-zinc-900/60 p-4">
+						<div class="rounded border border-zinc-800 bg-zinc-900/60 p-4">
 							<div class="text-zinc-500">Диспетчер производства:</div>
 							<a
 								href="tel:{siteConfig.contactPhone}"
-								class="mt-1 block text-sm font-bold text-amber-400 hover:underline"
+								class="mt-1 block text-sm font-semibold text-zinc-100 hover:text-white hover:underline"
 							>
 								{siteConfig.contactPhone}
 							</a>
-							<p class="mt-1 font-sans text-[11px] text-zinc-500">Пн–Пт с 08:00 до 20:00 (МСК-1)</p>
+							<p class="mt-1 font-sans text-[11px] text-zinc-400">Пн–Пт с 08:00 до 20:00 (МСК-1)</p>
 						</div>
 					</div>
 
-					<div class="mt-5 border-t border-zinc-900 pt-4 font-mono text-xs text-zinc-400">
+					<div class="mt-5 border-t border-zinc-800 pt-4 font-mono text-xs text-zinc-400">
 						<div>
 							Фактический адрес производства:
 							<strong class="text-zinc-200">
@@ -81,20 +82,20 @@
 				<!-- Working Hours -->
 				<div class="rounded-xl border border-zinc-800 bg-zinc-950 p-6">
 					<h2 class="text-base font-bold text-white">Режим работы и отгрузки готовой продукции</h2>
-					<div class="mt-4 space-y-2 font-mono text-xs text-zinc-300">
-						<div class="flex justify-between border-b border-zinc-900 py-2">
+					<div class="mt-4 space-y-2 text-xs text-zinc-300">
+						<div class="flex justify-between border-b border-zinc-850 py-2">
 							<span class="text-zinc-400">Производственные смены станков ЧПУ:</span>
-							<span class="font-bold text-white"
+							<span class="font-medium text-white"
 								>Понедельник — Пятница: 08:00 – 20:00 (2 смены)</span
 							>
 						</div>
-						<div class="flex justify-between border-b border-zinc-900 py-2">
+						<div class="flex justify-between border-b border-zinc-850 py-2">
 							<span class="text-zinc-400">Инженерно-технологический отдел:</span>
-							<span class="font-bold text-white">Понедельник — Пятница: 08:30 – 17:30</span>
+							<span class="font-medium text-white">Понедельник — Пятница: 08:30 – 17:30</span>
 						</div>
 						<div class="flex justify-between py-2">
 							<span class="text-zinc-400">Склад отгрузки и дежурный мастер:</span>
-							<span class="font-bold text-amber-400">Суббота: 09:00 – 15:00</span>
+							<span class="font-medium text-zinc-200">Суббота: 09:00 – 15:00</span>
 						</div>
 					</div>
 				</div>
@@ -123,7 +124,7 @@
 			<!-- Requisites & Compliance Column -->
 			<div class="space-y-6 lg:col-span-5">
 				<div class="rounded-xl border border-zinc-800 bg-zinc-900 p-6">
-					<h2 class="font-mono text-xs font-bold tracking-wider text-zinc-200 uppercase">
+					<h2 class="text-xs font-semibold tracking-wider text-zinc-200 uppercase">
 						Реквизиты для заключения договоров
 					</h2>
 					<div class="mt-4 space-y-3 font-mono text-xs text-zinc-400">

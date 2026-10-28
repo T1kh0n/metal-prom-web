@@ -22,26 +22,26 @@
 	>
 		<div class="mx-auto flex max-w-7xl items-center justify-between">
 			<div class="flex items-center gap-4">
-				<span class="inline-flex items-center gap-1.5 font-mono text-zinc-300">
-					<span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+				<span class="inline-flex items-center text-zinc-300">
+					<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
 					Прием заказов: цех работает в 2 смены
 				</span>
-				<span class="hidden text-zinc-600 lg:inline">|</span>
-				<span class="hidden lg:inline">
+				<span class="hidden text-zinc-700 lg:inline">|</span>
+				<span class="hidden text-zinc-400 lg:inline">
 					г. Калининград · НДС 20% · Поверка ОТК Mitutoyo · Допуск IT6
 				</span>
 			</div>
 			<div class="flex items-center gap-4 font-mono text-xs">
 				<a
 					href="mailto:{siteConfig.contactEmail}"
-					class="text-zinc-300 transition-colors hover:text-amber-400"
+					class="text-zinc-300 transition-colors hover:text-zinc-100"
 				>
 					{siteConfig.contactEmail}
 				</a>
 				<span class="text-zinc-700">|</span>
 				<a
 					href="tel:{siteConfig.contactPhone}"
-					class="font-bold text-amber-400 transition-colors hover:text-amber-300"
+					class="font-medium text-zinc-200 transition-colors hover:text-white"
 				>
 					{siteConfig.contactPhone}
 				</a>
@@ -54,18 +54,18 @@
 		<!-- Brand Logo -->
 		<a href="/" class="group flex items-center gap-3">
 			<div
-				class="flex h-9 w-9 items-center justify-center rounded border border-amber-500/40 bg-zinc-900 font-mono text-base font-black text-amber-400 shadow-sm"
+				class="flex h-9 w-9 items-center justify-center rounded-md border border-zinc-700 bg-zinc-900 font-mono text-base font-bold text-zinc-100 shadow-sm"
 			>
 				M
 			</div>
 			<div>
 				<div class="flex items-baseline gap-1.5">
-					<span class="text-lg font-black tracking-wider text-white uppercase sm:text-xl">
+					<span class="text-lg font-bold tracking-wider text-white uppercase sm:text-xl">
 						{siteConfig.brandName}
 					</span>
-					<span class="font-mono text-[10px] font-semibold text-amber-500 uppercase">ЧПУ</span>
+					<span class="font-mono text-[11px] font-medium text-zinc-400 uppercase">ЧПУ</span>
 				</div>
-				<div class="text-[11px] font-medium tracking-tight text-zinc-400">
+				<div class="text-[11px] font-normal tracking-tight text-zinc-400">
 					Прецизионная металлообработка
 				</div>
 			</div>
@@ -76,7 +76,7 @@
 			{#each navLinks as link}
 				<a
 					href={link.href}
-					class="rounded px-2.5 py-1.5 text-xs font-semibold text-zinc-300 transition-colors hover:bg-zinc-900 hover:text-white"
+					class="rounded-md px-2.5 py-1.5 text-xs font-medium text-zinc-300 transition-colors hover:bg-zinc-900 hover:text-white"
 				>
 					{link.name}
 				</a>
@@ -87,9 +87,8 @@
 		<div class="hidden items-center gap-3 sm:flex xl:flex">
 			<a
 				href="/kalkulyator-stoimosti-chpu/"
-				class="inline-flex items-center gap-1.5 rounded border border-amber-500 bg-amber-500 px-3.5 py-2 font-mono text-xs font-bold text-zinc-950 transition-colors hover:bg-amber-400"
+				class="inline-flex items-center justify-center rounded-md bg-zinc-100 px-4 py-2 text-xs font-medium text-zinc-950 shadow-sm transition-colors hover:bg-white"
 			>
-				<span>⚡</span>
 				<span>Калькулятор ЧПУ</span>
 			</a>
 		</div>
@@ -97,7 +96,7 @@
 		<!-- Mobile Menu Button -->
 		<button
 			type="button"
-			class="flex h-9 w-9 items-center justify-center rounded border border-zinc-800 bg-zinc-900 text-zinc-300 hover:border-zinc-700 hover:text-white xl:hidden"
+			class="flex h-9 w-9 items-center justify-center rounded-md border border-zinc-800 bg-zinc-900 text-zinc-300 hover:border-zinc-700 hover:text-white xl:hidden"
 			onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}
 			aria-expanded={isMobileMenuOpen}
 			aria-label="Переключить меню"
@@ -117,23 +116,23 @@
 				{#each navLinks as link}
 					<a
 						href={link.href}
-						class="rounded border border-zinc-900 bg-zinc-900/40 px-3 py-2 text-sm font-semibold text-zinc-200 transition-colors hover:border-zinc-700 hover:text-amber-400"
+						class="rounded-md border border-zinc-900 bg-zinc-900/40 px-3 py-2 text-sm font-medium text-zinc-200 transition-colors hover:border-zinc-700 hover:text-white"
 						onclick={() => (isMobileMenuOpen = false)}
 					>
 						{link.name}
 					</a>
 				{/each}
 				<div class="mt-4 border-t border-zinc-800 pt-3">
-					<div class="font-mono text-xs text-zinc-400">Прямой контакт с цехом:</div>
+					<div class="text-xs text-zinc-400">Прямой контакт с цехом:</div>
 					<a
 						href="tel:{siteConfig.contactPhone}"
-						class="mt-1 block font-mono text-sm font-bold text-amber-400"
+						class="mt-1 block font-mono text-sm font-semibold text-zinc-100 hover:text-white"
 					>
 						{siteConfig.contactPhone}
 					</a>
 					<a
 						href="mailto:{siteConfig.contactEmail}"
-						class="mt-0.5 block font-mono text-xs text-zinc-300 hover:text-amber-400"
+						class="mt-0.5 block font-mono text-xs text-zinc-300 hover:text-white"
 					>
 						{siteConfig.contactEmail}
 					</a>

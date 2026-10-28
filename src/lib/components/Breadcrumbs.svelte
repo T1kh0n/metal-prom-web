@@ -18,10 +18,10 @@
 </svelte:head>
 
 <nav aria-label="Хлебные крошки" class="mb-6">
-	<ol class="flex flex-wrap items-center gap-1.5 font-mono text-xs text-zinc-400">
+	<ol class="flex flex-wrap items-center gap-1.5 text-xs text-zinc-400">
 		{#each fullItems as item, index}
 			{#if index > 0}
-				<li class="text-zinc-600 select-none" aria-hidden="true">/</li>
+				<li class="select-none text-zinc-600" aria-hidden="true">/</li>
 			{/if}
 			<li>
 				{#if index === fullItems.length - 1}
@@ -29,7 +29,7 @@
 				{:else}
 					<a
 						href={item.path}
-						class="text-zinc-400 transition-colors hover:text-amber-400 hover:underline"
+						class="text-zinc-400 transition-colors hover:text-zinc-100 hover:underline"
 					>
 						{item.name}
 					</a>

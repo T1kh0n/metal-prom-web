@@ -4,15 +4,18 @@
 
 	const breadcrumbs = [
 		{ name: 'База знаний', path: '/stati/' },
-		{ name: 'DFM-оптимизация стоимости ЧПУ', path: '/stati/optimizaciya-stoimosti-detaley-chpu/' }
+		{
+			name: 'DFM-оптимизация стоимости ЧПУ',
+			path: '/stati/optimizaciya-stoimosti-detaley-chpu/'
+		}
 	];
 </script>
 
 <svelte:head>
-	<title>DFM-оптимизация: 7 правил снижения себестоимости ЧПУ | {siteConfig.brandName}</title>
+	<title>DFM-оптимизация: снижение себестоимости деталей ЧПУ на 25–40% | {siteConfig.brandName}</title>
 	<meta
 		name="description"
-		content="Как конструктору снизить стоимость изготовления детали на станках с ЧПУ на 25-40%. Радиусы углов, глубина карманов, технологичность резьб и серийность."
+		content="Практические советы инженерам-конструкторам по технологичности (DFM). Как радиусы карманов, глубина резьб и базы снижают цену механической обработки на станках с ЧПУ."
 	/>
 </svelte:head>
 
@@ -23,9 +26,9 @@
 		<article>
 			<header class="border-b border-zinc-800 pb-8">
 				<div class="flex items-center gap-3 font-mono text-xs text-zinc-500">
-					<span class="rounded bg-amber-500/10 px-2 py-0.5 text-amber-400"
-						>DFM и проектирование</span
-					>
+					<span class="rounded border border-zinc-800 bg-zinc-900 px-2 py-0.5 text-zinc-300">
+						DFM и проектирование
+					</span>
 					<span>Опубликовано: 27.10.2026</span>
 					<span>Время чтения: 8 мин</span>
 				</div>
@@ -47,7 +50,7 @@
 			<div class="my-8 space-y-6 text-sm leading-relaxed text-zinc-300">
 				<!-- Rule 1 -->
 				<section class="rounded-xl border border-zinc-800 bg-zinc-950 p-6">
-					<div class="flex items-center gap-2 font-mono text-xs font-bold text-amber-400 uppercase">
+					<div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase">
 						<span>Правило 1</span>
 						<span class="text-zinc-600">/</span>
 						<span>Радиусы внутренних углов карманов</span>
@@ -62,9 +65,10 @@
 						резания, вибрацию и поломку инструмента.
 					</p>
 					<div
-						class="mt-3 rounded border border-zinc-800 bg-zinc-900/60 p-3 font-mono text-xs text-emerald-400"
+						class="mt-3 rounded-md border border-zinc-800 bg-zinc-900/60 p-3 text-xs text-zinc-300"
 					>
-						💡 Рекомендация DFM: Задавайте радиус угла минимум на 10–15% больше радиуса стандартной
+						<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
+						<strong class="text-zinc-100">Рекомендация DFM:</strong> Задавайте радиус угла минимум на 10–15% больше радиуса стандартной
 						фрезы (например, R=5.5–6.0 мм для фрезы ⌀10 мм). Это позволяет инструменту плавно
 						огибать угол по траектории трохоидального фрезерования без снижения подачи.
 					</div>
@@ -72,7 +76,7 @@
 
 				<!-- Rule 2 -->
 				<section class="rounded-xl border border-zinc-800 bg-zinc-950 p-6">
-					<div class="flex items-center gap-2 font-mono text-xs font-bold text-amber-400 uppercase">
+					<div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase">
 						<span>Правило 2</span>
 						<span class="text-zinc-600">/</span>
 						<span>Глубина карманов и вылетов инструмента</span>
@@ -91,7 +95,7 @@
 
 				<!-- Rule 3 -->
 				<section class="rounded-xl border border-zinc-800 bg-zinc-950 p-6">
-					<div class="flex items-center gap-2 font-mono text-xs font-bold text-amber-400 uppercase">
+					<div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase">
 						<span>Правило 3</span>
 						<span class="text-zinc-600">/</span>
 						<span>Глубина глухих резьбовых отверстий</span>
@@ -109,7 +113,7 @@
 
 				<!-- Rule 4 -->
 				<section class="rounded-xl border border-zinc-800 bg-zinc-950 p-6">
-					<div class="flex items-center gap-2 font-mono text-xs font-bold text-amber-400 uppercase">
+					<div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase">
 						<span>Правило 4</span>
 						<span class="text-zinc-600">/</span>
 						<span>Минимальная толщина стенок</span>
@@ -126,7 +130,7 @@
 
 				<!-- Rule 5 -->
 				<section class="rounded-xl border border-zinc-800 bg-zinc-950 p-6">
-					<div class="flex items-center gap-2 font-mono text-xs font-bold text-amber-400 uppercase">
+					<div class="flex items-center gap-2 text-xs font-semibold text-zinc-300 uppercase">
 						<span>Правило 5</span>
 						<span class="text-zinc-600">/</span>
 						<span>Минимизация количества установов детали</span>
@@ -144,11 +148,11 @@
 			</div>
 
 			<!-- Batch Amortization Insight -->
-			<div class="mt-8 rounded-xl border border-amber-500/30 bg-zinc-900/60 p-6 font-mono text-xs">
-				<div class="font-bold text-amber-400 uppercase">
+			<div class="mt-8 rounded-xl border border-zinc-800 bg-zinc-900/60 p-6 text-xs">
+				<div class="font-semibold text-zinc-200">
 					Экономика серии: почему партия из 20 шт. выгоднее штучного образца
 				</div>
-				<p class="mt-2 font-sans text-xs leading-relaxed text-zinc-300">
+				<p class="mt-2 text-xs leading-relaxed text-zinc-400">
 					Фиксированная стоимость наладки станка и написания программы (3 000 – 5 000 ₽) при
 					изготовлении 1 детали ложится на нее целиком. При заказе партии из 50 штук наладка
 					распределяется по 60–100 ₽ на деталь, а наша автоматическая серийная скидка (до 40%)
@@ -159,20 +163,20 @@
 			<!-- Contextual Cross Links -->
 			<div class="mt-10 rounded-lg border border-zinc-800 bg-zinc-900/40 p-5">
 				<h3 class="font-bold text-white">Инструменты для проверки DFM:</h3>
-				<div class="mt-3 flex flex-wrap gap-4 font-mono text-xs">
+				<div class="mt-3 flex flex-wrap gap-4 text-xs">
 					<a
 						href="/kalkulyator-stoimosti-chpu/"
-						class="text-amber-400 hover:text-amber-300 hover:underline"
+						class="text-zinc-300 hover:text-white hover:underline"
 					>
 						→ Онлайн-калькулятор с мгновенной оценкой сложности
 					</a>
 					<a
 						href="/frezernye-raboty-chpu/"
-						class="text-amber-400 hover:text-amber-300 hover:underline"
+						class="text-zinc-300 hover:text-white hover:underline"
 					>
 						→ Возможности 3- и 4-осевого фрезерования
 					</a>
-					<a href="/portfolio/" class="text-amber-400 hover:text-amber-300 hover:underline">
+					<a href="/portfolio/" class="text-zinc-300 hover:text-white hover:underline">
 						→ Примеры оптимизированных корпусных деталей
 					</a>
 				</div>

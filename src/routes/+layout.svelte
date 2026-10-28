@@ -23,7 +23,7 @@
 </svelte:head>
 
 <div
-	class="flex min-h-screen flex-col bg-zinc-950 text-zinc-100 antialiased selection:bg-amber-500 selection:text-zinc-950"
+	class="flex min-h-screen flex-col bg-zinc-950 text-zinc-100 antialiased selection:bg-zinc-800 selection:text-zinc-100"
 >
 	<Header />
 	<div class="flex-1">
