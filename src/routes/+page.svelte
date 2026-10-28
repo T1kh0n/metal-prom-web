@@ -44,64 +44,99 @@
 </svelte:head>
 
 <main>
-	<!-- Hero Section -->
-	<section class="border-b border-zinc-800 bg-zinc-950 py-14 sm:py-20">
+	<!-- Hero Section: Stage Posture with Engineering Material -->
+	<section class="border-b border-zinc-800 bg-zinc-950 py-16 sm:py-24">
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-			<div class="max-w-4xl">
-				<div
-					class="inline-flex items-center rounded-md border border-zinc-800 bg-zinc-900/80 px-3 py-1 font-mono text-xs font-medium text-zinc-300"
-				>
-					<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
-					Контрактное ЧПУ производство · Калининград
-				</div>
-				<h1 class="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-					Металлообработка с ЧПУ на заказ в Калининграде: токарные и фрезерные работы
-				</h1>
-				<p class="mt-5 text-base leading-relaxed text-zinc-300 sm:text-lg">
-					Изготовление прецизионных серийных деталей по чертежам заказчика для судостроения,
-					агропромышленного комплекса, приборостроения и спецтехники. Допуски до
-					<strong class="font-mono text-zinc-100">IT6–IT7</strong>, безналичный расчет с НДС 20%,
-					инструментальный контроль ОТК приборами Mitutoyo.
-				</p>
-				<div class="mt-8 flex flex-wrap items-center gap-4">
-					<a
-						href="#calculator-section"
-						class="rounded-md bg-zinc-100 px-4 py-2.5 font-medium text-zinc-950 shadow-sm transition-colors hover:bg-white"
-					>
-						Инженерный калькулятор онлайн
-					</a>
-					<a
-						href="mailto:{siteConfig.contactEmail}"
-						class="rounded-md border border-zinc-700 bg-zinc-900/60 px-4 py-2.5 font-medium text-zinc-200 transition-colors hover:bg-zinc-800"
-					>
-						Отправить чертежи на {siteConfig.contactEmail}
-					</a>
-				</div>
-			</div>
+			<div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+				<!-- Left Column: Core Value Proposition & Actions -->
+				<div class="lg:col-span-7">
+					<h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+						Металлообработка с ЧПУ на заказ в Калининграде
+					</h1>
+					<p class="mt-5 text-base leading-relaxed text-zinc-300 sm:text-lg">
+						Серийное изготовление токарных и 4-осевых фрезерных деталей по чертежам заказчика. Квалитеты точности до IT6, инструментальный контроль ОТК Mitutoyo, расчет с НДС 20%.
+					</p>
+					<div class="mt-8 flex flex-wrap items-center gap-4">
+						<a
+							href="#calculator-section"
+							class="inline-flex items-center justify-center rounded-md bg-zinc-100 px-5 py-3 text-sm font-medium text-zinc-950 shadow-sm transition-colors hover:bg-white"
+						>
+							Инженерный калькулятор онлайн
+						</a>
+						<a
+							href="mailto:{siteConfig.contactEmail}"
+							class="inline-flex items-center justify-center rounded-md border border-zinc-700 bg-zinc-900/60 px-5 py-3 text-sm font-medium text-zinc-200 transition-colors hover:bg-zinc-800"
+						>
+							Отправить чертежи
+						</a>
+					</div>
 
-			<!-- Quantitative Trust Metrics Bar (Hallmark Data Sheet) -->
-			<div
-				class="mt-12 grid grid-cols-2 gap-4 border-t border-zinc-800 pt-8 font-mono text-xs sm:grid-cols-4"
-			>
-				<div class="rounded-lg border border-zinc-800 bg-zinc-900/40 p-4">
-					<div class="text-zinc-500">Станочный парк:</div>
-					<div class="mt-1 text-base font-bold text-white">4 ЧПУ центра</div>
-					<div class="mt-0.5 text-[11px] text-zinc-400">Токарные и 3D фрезерные</div>
+					<!-- Clean Hairline Metrics Row -->
+					<div class="mt-12 grid grid-cols-2 gap-6 border-t border-zinc-800/80 pt-8 sm:grid-cols-4">
+						<div>
+							<div class="text-xs text-zinc-400">Станочный парк</div>
+							<div class="mt-1 font-mono text-base font-bold text-white">4 ЧПУ центра</div>
+							<div class="mt-0.5 text-xs text-zinc-500">Токарные и 3D фрезерные</div>
+						</div>
+						<div>
+							<div class="text-xs text-zinc-400">Точность деталей</div>
+							<div class="mt-1 font-mono text-base font-bold text-emerald-400">до IT6 (Ra 0.4)</div>
+							<div class="mt-0.5 text-xs text-zinc-500">Шлифование и ОТК</div>
+						</div>
+						<div>
+							<div class="text-xs text-zinc-400">Сроки поставки</div>
+							<div class="mt-1 font-mono text-base font-bold text-zinc-100">5 – 7 дней</div>
+							<div class="mt-0.5 text-xs text-zinc-500">Экспресс от 48ч</div>
+						</div>
+						<div>
+							<div class="text-xs text-zinc-400">Порог запуска</div>
+							<div class="mt-1 font-mono text-base font-bold text-white">от 5 000 ₽</div>
+							<div class="mt-0.5 text-xs text-zinc-500">Безнал с НДС 20%</div>
+						</div>
+					</div>
 				</div>
-				<div class="rounded-lg border border-zinc-800 bg-zinc-900/40 p-4">
-					<div class="text-zinc-500">Точность деталей:</div>
-					<div class="mt-1 text-base font-bold text-emerald-400">до IT6 (Ra 0.4)</div>
-					<div class="mt-0.5 text-[11px] text-zinc-400">Шлифование и ОТК Mitutoyo</div>
-				</div>
-				<div class="rounded-lg border border-zinc-800 bg-zinc-900/40 p-4">
-					<div class="text-zinc-500">Сроки поставки:</div>
-					<div class="mt-1 text-base font-bold text-zinc-100">5 – 7 дней</div>
-					<div class="mt-0.5 text-[11px] text-zinc-400">Экспресс-запуск 48ч</div>
-				</div>
-				<div class="rounded-lg border border-zinc-800 bg-zinc-900/40 p-4">
-					<div class="text-zinc-500">Порог заказа:</div>
-					<div class="mt-1 text-base font-bold text-white">от 5 000 ₽</div>
-					<div class="mt-0.5 text-[11px] text-zinc-400">Безнал с НДС 20% / УСН</div>
+
+				<!-- Right Column: The Signature Visual (Technical Envelope Passport) -->
+				<div class="lg:col-span-5">
+					<div class="rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 shadow-xs">
+						<div class="border-b border-zinc-800 pb-4">
+							<div class="text-xs font-medium text-zinc-400">Технологический паспорт</div>
+							<div class="mt-1 text-base font-bold text-white">Лимиты оборудования цеха</div>
+						</div>
+						<div class="divide-y divide-zinc-800/80 text-xs">
+							<div class="flex justify-between py-3">
+								<span class="text-zinc-400">Токарная обработка</span>
+								<span class="font-mono text-zinc-100">⌀ 320 мм / L 750 мм</span>
+							</div>
+							<div class="flex justify-between py-3">
+								<span class="text-zinc-400">4-осевое фрезерование</span>
+								<span class="font-mono text-zinc-100">800 × 500 × 500 мм</span>
+							</div>
+							<div class="flex justify-between py-3">
+								<span class="text-zinc-400">Зубонарезание шестерен</span>
+								<span class="font-mono text-zinc-100">m1 – m8 (до ⌀500 мм)</span>
+							</div>
+							<div class="flex justify-between py-3">
+								<span class="text-zinc-400">Круглое шлифование</span>
+								<span class="font-mono text-emerald-400">Ra 0.4 мкм (IT6)</span>
+							</div>
+							<div class="flex justify-between py-3">
+								<span class="text-zinc-400">Позиционирование</span>
+								<span class="font-mono text-emerald-400">±0.005 мм</span>
+							</div>
+							<div class="flex justify-between py-3">
+								<span class="text-zinc-400">Инструментальный ОТК</span>
+								<span class="text-zinc-200">Mitutoyo (Япония)</span>
+							</div>
+							<div class="flex justify-between py-3">
+								<span class="text-zinc-400">Серийные партии</span>
+								<span class="font-mono text-zinc-100">от 5 до 1 000 шт.</span>
+							</div>
+						</div>
+						<div class="mt-4 border-t border-zinc-800 pt-4 text-xs text-zinc-500">
+							Серийные скидки до 40% · Паспорт качества ОТК к партии
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -115,10 +150,7 @@
 	>
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 			<div class="max-w-3xl">
-				<div class="text-xs font-semibold tracking-wider text-zinc-400 uppercase">
-					Технологические переделы
-				</div>
-				<h2 id="services-overview-heading" class="mt-2 text-2xl font-bold text-white sm:text-3xl">
+				<h2 id="services-overview-heading" class="text-2xl font-bold text-white sm:text-3xl">
 					Производственные участки цеха {siteConfig.brandName}
 				</h2>
 			</div>
@@ -136,8 +168,8 @@
 							320 мм, длина до 750 мм. Квалитеты точности IT7–IT8.
 						</p>
 						<div class="mt-4 space-y-1 font-mono text-[11px] text-zinc-300">
-							<div>• Базовая ставка: <strong class="text-zinc-100">2 500 ₽ / час</strong></div>
-							<div>• Серии: <strong class="text-white">от 5 до 1 000 шт.</strong></div>
+							<div>Базовая ставка: <strong class="text-zinc-100">2 500 ₽ / час</strong></div>
+							<div>Серии: <strong class="text-white">от 5 до 1 000 шт.</strong></div>
 						</div>
 					</div>
 					<div class="mt-6 border-t border-zinc-800 pt-4">
@@ -145,7 +177,7 @@
 							href="/tokarnye-raboty-chpu/"
 							class="text-xs font-medium text-zinc-300 hover:text-white hover:underline"
 						>
-							Параметры токарного участка →
+							Параметры токарного участка
 						</a>
 					</div>
 				</div>
@@ -162,8 +194,8 @@
 							Рабочая зона 800×500×500 мм с поворотной 4-й осью.
 						</p>
 						<div class="mt-4 space-y-1 font-mono text-[11px] text-zinc-300">
-							<div>• 3 оси: <strong class="text-zinc-100">3 000 ₽ / час</strong></div>
-							<div>• 4 оси / 3D: <strong class="text-zinc-100">3 500 ₽ / час</strong></div>
+							<div>3 оси: <strong class="text-zinc-100">3 000 ₽ / час</strong></div>
+							<div>4 оси / 3D: <strong class="text-zinc-100">3 500 ₽ / час</strong></div>
 						</div>
 					</div>
 					<div class="mt-6 border-t border-zinc-800 pt-4">
@@ -171,7 +203,7 @@
 							href="/frezernye-raboty-chpu/"
 							class="text-xs font-medium text-zinc-300 hover:text-white hover:underline"
 						>
-							Параметры фрезерного участка →
+							Параметры фрезерного участка
 						</a>
 					</div>
 				</div>
@@ -188,8 +220,8 @@
 							круглое и плоское шлифование до IT6 (Ra 0.4), закалка ТВЧ.
 						</p>
 						<div class="mt-4 space-y-1 font-mono text-[11px] text-zinc-300">
-							<div>• Чистота поверхности: <strong class="text-emerald-400">Ra 0.4 мкм</strong></div>
-							<div>• Твердость ТВЧ: <strong class="text-white">до 55 HRCэ</strong></div>
+							<div>Чистота поверхности: <strong class="text-emerald-400">Ra 0.4 мкм</strong></div>
+							<div>Твердость ТВЧ: <strong class="text-white">до 55 HRCэ</strong></div>
 						</div>
 					</div>
 					<div class="mt-6 border-t border-zinc-800 pt-4">
@@ -197,7 +229,7 @@
 							href="/zuboreznye-i-shlifovalnye-raboty/"
 							class="text-xs font-medium text-zinc-300 hover:text-white hover:underline"
 						>
-							Параметры зуборезного участка →
+							Параметры зуборезного участка
 						</a>
 					</div>
 				</div>
@@ -256,10 +288,7 @@
 	<section class="border-b border-zinc-800 bg-zinc-950 py-16" aria-labelledby="faq-heading">
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 			<div class="max-w-3xl">
-				<div class="text-xs font-semibold tracking-wider text-zinc-400 uppercase">
-					Часто задаваемые вопросы
-				</div>
-				<h2 id="faq-heading" class="mt-2 text-2xl font-bold text-white sm:text-3xl">
+				<h2 id="faq-heading" class="text-2xl font-bold text-white sm:text-3xl">
 					Инженерные и организационные вопросы заказчиков
 				</h2>
 			</div>

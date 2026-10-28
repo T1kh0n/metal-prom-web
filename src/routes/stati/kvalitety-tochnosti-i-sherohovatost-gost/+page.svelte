@@ -168,19 +168,19 @@
 						href="/kontrol-kachestva-i-oborudovanie/"
 						class="text-zinc-300 hover:text-white hover:underline"
 					>
-						→ Лаборатория ОТК и приборы Mitutoyo
+						Лаборатория ОТК и приборы Mitutoyo
 					</a>
 					<a
 						href="/zuboreznye-i-shlifovalnye-raboty/"
 						class="text-zinc-300 hover:text-white hover:underline"
 					>
-						→ Круглое шлифование до IT6
+						Круглое шлифование до IT6
 					</a>
 					<a
 						href="/kalkulyator-stoimosti-chpu/"
 						class="text-zinc-300 hover:text-white hover:underline"
 					>
-						→ Расчет стоимости с надбавкой за точность
+						Расчет стоимости с надбавкой за точность
 					</a>
 				</div>
 			</div>

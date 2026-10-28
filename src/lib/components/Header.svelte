@@ -9,7 +9,7 @@
 		{ name: 'Зуборезка и шлифовка', href: '/zuboreznye-i-shlifovalnye-raboty/' },
 		{ name: 'Калькулятор', href: '/kalkulyator-stoimosti-chpu/' },
 		{ name: 'Портфолио', href: '/portfolio/' },
-		{ name: 'ОТК и парк станков', href: '/kontrol-kachestva-i-oborudovanie/' },
+		{ name: 'ОТК и оборудование', href: '/kontrol-kachestva-i-oborudovanie/' },
 		{ name: 'База знаний', href: '/stati/' },
 		{ name: 'Контакты', href: '/kontakty/' }
 	];
@@ -18,27 +18,26 @@
 <header class="sticky top-0 z-40 border-b border-zinc-800 bg-zinc-950/95 backdrop-blur-md">
 	<!-- Top Precision Status Bar -->
 	<div
-		class="hidden border-b border-zinc-900 bg-zinc-900/50 px-4 py-1.5 text-xs text-zinc-400 sm:block"
+		class="hidden border-b border-zinc-800/80 bg-zinc-900/40 px-4 py-1.5 text-xs text-zinc-400 sm:block"
 	>
 		<div class="mx-auto flex max-w-7xl items-center justify-between">
-			<div class="flex items-center gap-4">
-				<span class="inline-flex items-center text-zinc-300">
-					<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
-					Прием заказов: цех работает в 2 смены
-				</span>
-				<span class="hidden text-zinc-700 lg:inline">|</span>
-				<span class="hidden text-zinc-400 lg:inline">
-					г. Калининград · НДС 20% · Поверка ОТК Mitutoyo · Допуск IT6
-				</span>
+			<div class="flex items-center gap-4 text-xs">
+				<span class="text-zinc-200">Цех работает в 2 смены</span>
+				<span class="text-zinc-700" aria-hidden="true">/</span>
+				<span>Калининград</span>
+				<span class="text-zinc-700" aria-hidden="true">/</span>
+				<span>НДС 20%</span>
+				<span class="text-zinc-700" aria-hidden="true">/</span>
+				<span>Контроль ОТК Mitutoyo до IT6</span>
 			</div>
 			<div class="flex items-center gap-4 font-mono text-xs">
 				<a
 					href="mailto:{siteConfig.contactEmail}"
-					class="text-zinc-300 transition-colors hover:text-zinc-100"
+					class="text-zinc-300 transition-colors hover:text-white"
 				>
 					{siteConfig.contactEmail}
 				</a>
-				<span class="text-zinc-700">|</span>
+				<span class="text-zinc-700" aria-hidden="true">/</span>
 				<a
 					href="tel:{siteConfig.contactPhone}"
 					class="font-medium text-zinc-200 transition-colors hover:text-white"
@@ -60,10 +59,10 @@
 			</div>
 			<div>
 				<div class="flex items-baseline gap-1.5">
-					<span class="text-lg font-bold tracking-wider text-white uppercase sm:text-xl">
+					<span class="text-lg font-bold tracking-tight text-white sm:text-xl">
 						{siteConfig.brandName}
 					</span>
-					<span class="font-mono text-[11px] font-medium text-zinc-400 uppercase">ЧПУ</span>
+					<span class="font-mono text-xs text-zinc-400">ЧПУ</span>
 				</div>
 				<div class="text-[11px] font-normal tracking-tight text-zinc-400">
 					Прецизионная металлообработка
@@ -71,47 +70,48 @@
 			</div>
 		</a>
 
-		<!-- Desktop Navigation -->
-		<nav class="hidden items-center gap-1 xl:flex" aria-label="Основная навигация">
-			{#each navLinks as link}
-				<a
-					href={link.href}
-					class="rounded-md px-2.5 py-1.5 text-xs font-medium text-zinc-300 transition-colors hover:bg-zinc-900 hover:text-white"
-				>
-					{link.name}
-				</a>
-			{/each}
-		</nav>
+		<!-- Right Section: Navigation Links & Actions -->
+		<div class="flex items-center gap-3 sm:gap-4">
+			<!-- Desktop Navigation -->
+			<nav class="hidden items-center gap-1 lg:flex" aria-label="Основная навигация">
+				{#each navLinks as link}
+					<a
+						href={link.href}
+						class="rounded-md px-2.5 py-1.5 text-xs font-medium text-zinc-300 transition-colors hover:bg-zinc-900 hover:text-white"
+					>
+						{link.name}
+					</a>
+				{/each}
+			</nav>
 
-		<!-- Desktop Quick CTA -->
-		<div class="hidden items-center gap-3 sm:flex xl:flex">
+			<!-- Quick CTA -->
 			<a
 				href="/kalkulyator-stoimosti-chpu/"
-				class="inline-flex items-center justify-center rounded-md bg-zinc-100 px-4 py-2 text-xs font-medium text-zinc-950 shadow-sm transition-colors hover:bg-white"
+				class="inline-flex items-center justify-center rounded-md bg-zinc-100 px-3.5 py-1.5 text-xs font-medium text-zinc-950 shadow-sm transition-colors hover:bg-white"
 			>
 				<span>Калькулятор ЧПУ</span>
 			</a>
-		</div>
 
-		<!-- Mobile Menu Button -->
-		<button
-			type="button"
-			class="flex h-9 w-9 items-center justify-center rounded-md border border-zinc-800 bg-zinc-900 text-zinc-300 hover:border-zinc-700 hover:text-white xl:hidden"
-			onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}
-			aria-expanded={isMobileMenuOpen}
-			aria-label="Переключить меню"
-		>
-			{#if isMobileMenuOpen}
-				<span class="text-base font-bold">✕</span>
-			{:else}
-				<span class="text-base font-bold">☰</span>
-			{/if}
-		</button>
+			<!-- Mobile Menu Button -->
+			<button
+				type="button"
+				class="flex h-9 w-9 items-center justify-center rounded-md border border-zinc-800 bg-zinc-900 text-zinc-300 hover:border-zinc-700 hover:text-white lg:hidden"
+				onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}
+				aria-expanded={isMobileMenuOpen}
+				aria-label="Переключить меню"
+			>
+				{#if isMobileMenuOpen}
+					<span class="text-base font-bold">✕</span>
+				{:else}
+					<span class="text-base font-bold">☰</span>
+				{/if}
+			</button>
+		</div>
 	</div>
 
 	<!-- Mobile Dropdown Navigation -->
 	{#if isMobileMenuOpen}
-		<div class="border-b border-zinc-800 bg-zinc-950 px-4 py-4 xl:hidden">
+		<div class="border-b border-zinc-800 bg-zinc-950 px-4 py-4 lg:hidden">
 			<nav class="flex flex-col space-y-2">
 				{#each navLinks as link}
 					<a

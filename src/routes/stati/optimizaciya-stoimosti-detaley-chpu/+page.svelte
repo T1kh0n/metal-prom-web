@@ -168,16 +168,16 @@
 						href="/kalkulyator-stoimosti-chpu/"
 						class="text-zinc-300 hover:text-white hover:underline"
 					>
-						→ Онлайн-калькулятор с мгновенной оценкой сложности
+						Онлайн-калькулятор с мгновенной оценкой сложности
 					</a>
 					<a
 						href="/frezernye-raboty-chpu/"
 						class="text-zinc-300 hover:text-white hover:underline"
 					>
-						→ Возможности 3- и 4-осевого фрезерования
+						Возможности 3- и 4-осевого фрезерования
 					</a>
 					<a href="/portfolio/" class="text-zinc-300 hover:text-white hover:underline">
-						→ Примеры оптимизированных корпусных деталей
+						Примеры оптимизированных корпусных деталей
 					</a>
 				</div>
 			</div>

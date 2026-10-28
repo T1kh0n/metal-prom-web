@@ -192,12 +192,6 @@
 <div class="rounded-xl border border-zinc-800 bg-zinc-950 p-6 text-zinc-100 md:p-8">
 	{#if showTitle}
 		<div class="mb-8 border-b border-zinc-800 pb-6">
-			<div
-				class="inline-flex items-center rounded-md border border-zinc-800 bg-zinc-900/80 px-3 py-1 font-mono text-xs font-medium text-zinc-300"
-			>
-				<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
-				Расчет стоимости онлайн
-			</div>
 			<h2 class="mt-3 text-2xl font-bold tracking-tight text-white md:text-3xl">
 				Инженерный калькулятор механической обработки с ЧПУ
 			</h2>
@@ -558,7 +552,7 @@
 		<div class="lg:col-span-5">
 			<div class="sticky top-6 rounded-xl border border-zinc-800 bg-zinc-900 p-6">
 				<div class="flex items-center justify-between border-b border-zinc-800 pb-4">
-					<span class="text-xs font-semibold tracking-wider text-zinc-400 uppercase">
+					<span class="text-xs font-semibold text-zinc-300">
 						Итоговая оценка партии
 					</span>
 					<span

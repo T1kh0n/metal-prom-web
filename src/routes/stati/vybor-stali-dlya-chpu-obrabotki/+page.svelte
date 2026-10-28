@@ -158,19 +158,19 @@
 						href="/tokarnye-raboty-chpu/"
 						class="text-zinc-300 hover:text-white hover:underline"
 					>
-						→ Токарная обработка сталей на ЧПУ
+						Токарная обработка сталей на ЧПУ
 					</a>
 					<a
 						href="/frezernye-raboty-chpu/"
 						class="text-zinc-300 hover:text-white hover:underline"
 					>
-						→ Фрезерование корпусов из Д16Т
+						Фрезерование корпусов из Д16Т
 					</a>
 					<a
 						href="/kalkulyator-stoimosti-chpu/"
 						class="text-zinc-300 hover:text-white hover:underline"
 					>
-						→ Расчет стоимости с выбором материала
+						Расчет стоимости с выбором материала
 					</a>
 				</div>
 			</div>

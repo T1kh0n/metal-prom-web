@@ -32,7 +32,7 @@
 
 			<!-- Col 2: Core Machining Services -->
 			<div>
-				<h3 class="text-xs font-semibold tracking-wider text-zinc-200 uppercase">
+				<h3 class="text-xs font-semibold text-zinc-200">
 					Услуги механообработки
 				</h3>
 				<ul class="mt-4 space-y-2.5 text-xs">
@@ -73,7 +73,7 @@
 
 			<!-- Col 3: Quality, Park & Knowledge Base -->
 			<div>
-				<h3 class="text-xs font-semibold tracking-wider text-zinc-200 uppercase">
+				<h3 class="text-xs font-semibold text-zinc-200">
 					Инженерия и стандарты
 				</h3>
 				<ul class="mt-4 space-y-2.5 text-xs">
@@ -98,25 +98,33 @@
 					<li>
 						<a
 							href="/stati/vybor-stali-dlya-chpu-obrabotki/"
-							class="text-zinc-300 transition-colors hover:text-white hover:underline"
+							class="text-zinc-400 transition-colors hover:text-zinc-200 hover:underline"
 						>
-							Выбор сталей и сплавов для ЧПУ
+							Справочник сталей (Ст45, 40Х, Д16Т)
 						</a>
 					</li>
 					<li>
 						<a
 							href="/stati/kvalitety-tochnosti-i-sherohovatost-gost/"
-							class="text-zinc-300 transition-colors hover:text-white hover:underline"
+							class="text-zinc-400 transition-colors hover:text-zinc-200 hover:underline"
 						>
-							Квалитеты IT6–IT12 и шероховатость Ra
+							Таблицы допусков IT6–IT12 и Ra
+						</a>
+					</li>
+					<li>
+						<a
+							href="/stati/optimizaciya-stoimosti-detaley-chpu/"
+							class="text-zinc-400 transition-colors hover:text-zinc-200 hover:underline"
+						>
+							7 правил снижения цены ЧПУ (DFM)
 						</a>
 					</li>
 				</ul>
 			</div>
 
-			<!-- Col 4: Contacts & B2B Requisites -->
+			<!-- Col 4: Contacts & B2B Legal Details -->
 			<div>
-				<h3 class="text-xs font-semibold tracking-wider text-zinc-200 uppercase">
+				<h3 class="text-xs font-semibold text-zinc-200">
 					Контакты и реквизиты
 				</h3>
 				<div class="mt-4 space-y-2 text-xs">
@@ -169,7 +177,7 @@
 				>
 					Политика конфиденциальности
 				</a>
-				<span>·</span>
+				<span class="text-zinc-700" aria-hidden="true">/</span>
 				<a href="/sitemap/" class="text-zinc-400 transition-colors hover:text-zinc-200 hover:underline">
 					Карта сайта
 				</a>

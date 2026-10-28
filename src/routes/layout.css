@@ -1,6 +1,34 @@
+/* hallmark: modern-minimal · theme: metal-prom (bespoke engineering) · posture: restrained */
+/* critique: high-precision machining workshop, tabular tolerances, hairline grids, zero AI-slop tells */
+
 @import 'tailwindcss';
+
+:root {
+	--color-paper: oklch(14% 0.005 250);
+	--color-paper-2: oklch(18% 0.008 250);
+	--color-paper-3: oklch(22% 0.01 250);
+	--color-ink: oklch(98% 0.005 250);
+	--color-ink-muted: oklch(75% 0.01 250);
+	--color-rule: oklch(28% 0.008 250);
+	--color-accent: oklch(98% 0.005 250);
+	--color-accent-ink: oklch(12% 0.005 250);
+	--color-focus: oklch(75% 0.16 160);
+	--font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
 
 html,
 body {
 	overflow-x: clip;
+	background-color: #09090b;
+	color: #f4f4f5;
+}
+
+::selection {
+	background-color: oklch(30% 0.01 250);
+	color: #ffffff;
+}
+
+:focus-visible {
+	outline: 2px solid var(--color-focus);
+	outline-offset: 2px;
 }

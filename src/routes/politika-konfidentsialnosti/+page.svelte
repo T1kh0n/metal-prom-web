@@ -19,12 +19,6 @@
 
 		<article>
 			<header class="border-b border-zinc-800 pb-8">
-				<div
-					class="inline-flex items-center rounded-md border border-zinc-800 bg-zinc-900/80 px-3 py-1 font-mono text-xs font-medium text-zinc-300"
-				>
-					<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
-					Правовой статус: 152-ФЗ и 149-ФЗ
-				</div>
 				<h1 class="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
 					Политика конфиденциальности и правовые стандарты взаимодействия
 				</h1>

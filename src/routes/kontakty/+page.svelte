@@ -18,12 +18,6 @@
 		<Breadcrumbs items={breadcrumbs} />
 
 		<header class="max-w-4xl border-b border-zinc-800 pb-8">
-			<div
-				class="inline-flex items-center rounded-md border border-zinc-800 bg-zinc-900/80 px-3 py-1 font-mono text-xs font-medium text-zinc-300"
-			>
-				<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
-				Прямая B2B связь
-			</div>
 			<h1 class="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
 				Контакты, реквизиты цеха и логистика в Калининградской области
 			</h1>
@@ -124,7 +118,7 @@
 			<!-- Requisites & Compliance Column -->
 			<div class="space-y-6 lg:col-span-5">
 				<div class="rounded-xl border border-zinc-800 bg-zinc-900 p-6">
-					<h2 class="text-xs font-semibold tracking-wider text-zinc-200 uppercase">
+					<h2 class="text-xs font-semibold text-zinc-200">
 						Реквизиты для заключения договоров
 					</h2>
 					<div class="mt-4 space-y-3 font-mono text-xs text-zinc-400">

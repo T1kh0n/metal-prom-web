@@ -36,12 +36,6 @@
 
 		<!-- Header & Direct Summary -->
 		<header class="max-w-4xl border-b border-zinc-800 pb-8">
-			<div
-				class="inline-flex items-center rounded-md border border-zinc-800 bg-zinc-900/80 px-3 py-1 font-mono text-xs font-medium text-zinc-300"
-			>
-				<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
-				Финишные и зуборезные переделы
-			</div>
 			<h1 class="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
 				Зуборезные и шлифовальные работы в Калининграде: нарезка зубьев, круглое и плоское
 				шлифование
