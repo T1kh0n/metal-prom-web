@@ -3,58 +3,58 @@
 	import { siteConfig } from '#lib/config/site';
 
 	const breadcrumbs = [
-		{ name: 'ОТК и оборудование', path: '/kontrol-kachestva-i-oborudovanie/' }
+		{ name: 'Контроль качества и оборудование', path: '/kontrol-kachestva-i-oborudovanie/' }
 	];
 
 	const metrology = [
 		{
-			name: 'Микрометры цифровые гладкие Mitutoyo QuantuMike (IP65)',
-			range: '0–25 мм, 25–50 мм, 50–75 мм, 75–100 мм',
-			accuracy: 'Погрешность ±0.001 мм, дискретность 0.001 мм'
+			name: 'Цифровой микрометр Mitutoyo QuantuMike (Япония)',
+			range: '0 – 25 мм / 25 – 50 мм',
+			accuracy: 'Дискретность 0.001 мм, погрешность ±1 мкм'
 		},
 		{
-			name: 'Штангенциркули прецизионные Mitutoyo Digimatic',
-			range: '0–150 мм, 0–300 мм, 0–600 мм',
-			accuracy: 'Погрешность ±0.02 мм, защита IP67 от СОЖ'
+			name: 'Индикатор часового типа Mitutoyo с магнитной стойкой',
+			range: '0 – 10 мм',
+			accuracy: 'Цена деления 0.001 мм, контроль радиального биения'
 		},
 		{
-			name: 'Нутрометры индикаторные и микрометрические',
-			range: 'Диаметр отверстий от 18 до 160 мм',
-			accuracy: 'Цена деления 0.002 мм, поверка колец по ГОСТ'
+			name: 'Портативный профилометр шероховатости Surftest SJ-210',
+			range: 'Ra 0.05 – 40 мкм, Rz 0.1 – 160 мкм',
+			accuracy: 'Алмазный щуп 2 мкм, стандарт ISO 1997 / ГОСТ 2789-73'
 		},
 		{
-			name: 'Профилометр портативный Mitutoyo Surftest SJ-210',
-			range: 'Шероховатость Ra 0.05 – 16.0 мкм, Rz 0.1 – 100 мкм',
-			accuracy: 'Алмазная игла 2 мкм, протокол измерений с графиком'
+			name: 'Электронный нутромер Mitutoyo Holtest (трехточечный)',
+			range: '⌀12 – 100 мм',
+			accuracy: 'Погрешность ±0.002 мм, замер глубоких глухих отверстий'
 		},
 		{
-			name: 'Набор концевых мер длины (КМД) класс 1 (ГОСТ 9038)',
-			range: '83 меры из легированной стали',
-			accuracy: 'Эталон для калибровки цеховых микрометров'
+			name: 'Калибры гладкие проходные/непроходные (ПР-НЕ)',
+			range: 'Ряды квалитетов H7, H8, h6, f7',
+			accuracy: 'Поверка ВНИИМС, калибровка 2026 г.'
+		},
+		{
+			name: 'Калибры резьбовые метрические и трубные (М, G)',
+			range: 'М3 – М48, шаг 0.5 – 3.0 мм, резьбы G1/8" – G2"',
+			accuracy: 'Класс точности 6g / 6H по ГОСТ 16093-2004'
 		}
 	];
 
 	const machines = [
 		{
-			model: 'Токарный обрабатывающий центр с ЧПУ (Fanuc 0i-TF)',
+			model: 'Токарно-револьверный обрабатывающий центр с ЧПУ (Fanuc 0i-TF)',
 			category: 'Токарная группа',
-			specs: 'Патрон ⌀210 мм, макс. диаметр точения 320 мм, длина до 750 мм, шпиндель 4 500 об/мин',
-			precision: 'Позиционирование ±0.005 мм, револьверная головка на 12 позиций (BMT45)',
-			features: 'Жесткая чугунная наклонная станина (45°), автоматический стружкоуборочный конвейер'
-		},
-		{
-			model: 'Токарно-винторезный станок повышенной точности (ЧПУ Балт-Систем)',
-			category: 'Токарная группа',
-			specs: 'Диаметр обработки над станиной 400 мм, длина заготовки в центрах до 1000 мм',
-			precision: 'Квалитет точности IT7, нарезание любых типов резьб (метрическая, дюймовая, трапеция)',
-			features: 'Оснащен механизированным люнетом для точения длинных гребных валов без биения'
+			specs: 'Макс. диаметр ⌀320 мм, длина точения в центрах 750 мм, патрон ⌀210 мм',
+			precision: 'Повторяемость позиционирования ±0.003 мм, гидропатрон Kitagawa',
+			features:
+				'12-позиционная револьверная головка BMT с быстрым временем смены инструмента (0.2 с)'
 		},
 		{
 			model: 'Вертикальный фрезерный обрабатывающий центр (Siemens 828D)',
 			category: 'Фрезерная группа',
 			specs: 'Рабочий стол 900 × 500 мм, перемещения по осям X/Y/Z: 800 × 500 × 500 мм',
 			precision: 'Оптические линейки с дискретностью 0.001 мм, точность позиционирования ±0.005 мм',
-			features: 'Шпиндель 10 000 об/мин (BT40) с прямой подачей СОЖ под давлением 20 бар через инструмент'
+			features:
+				'Шпиндель 10 000 об/мин (BT40) с прямой подачей СОЖ под давлением 20 бар через инструмент'
 		},
 		{
 			model: 'Координатно-поворотный стол (4-я ось ЧПУ)',
@@ -106,62 +106,60 @@
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<Breadcrumbs items={breadcrumbs} />
 
-		<header class="max-w-4xl border-b border-zinc-800 pb-8">
-			<h1 class="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-				Контроль качества (ОТК), метрология и станочный парк ЧПУ в Калининграде
+		<header class="border-b border-[var(--color-rule)] pb-8">
+			<h1 class="mt-4 text-3xl text-[var(--color-ink)] sm:text-4xl">
+				Лаборатория ОТК и станочный парк цеха
 			</h1>
-			<p class="mt-4 text-base leading-relaxed text-zinc-300">
-				Многоступенчатая система контроля качества в цехе {siteConfig.brandName} исключает передачу брака
-				заказчику. Каждая изготовленная серийная партия сопровождается паспортом изделия с фактическими
-				замерами линейных размеров, биения и шероховатости.
+			<p class="lead mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
+				Многоступенчатый контроль качества: входная проверка сырья, протокол FAI и паспорт ОТК с
+				замерами приборами Mitutoyo на каждую партию.
 			</p>
 		</header>
 
 		<!-- 3-Stage QC Protocol -->
 		<section class="mt-10" aria-labelledby="qc-stages-heading">
-			<h2 id="qc-stages-heading" class="text-xl font-bold tracking-tight text-white sm:text-2xl">
+			<h2 id="qc-stages-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
 				Трехэтапный протокол входного, межоперационного и выходного контроля
 			</h2>
 			<div class="mt-6 grid grid-cols-1 gap-6 text-xs leading-relaxed md:grid-cols-3">
-				<div class="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
+				<div class="well">
 					<div
-						class="inline-flex h-7 w-7 items-center justify-center rounded-md border border-zinc-700 bg-zinc-900 font-mono text-sm font-bold text-zinc-100"
+						class="inline-flex h-7 w-7 items-center justify-center rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] font-mono text-xs text-[var(--color-ink)]"
 					>
 						1
 					</div>
-					<h3 class="mt-3 font-semibold text-sm text-white">Входной контроль сырья</h3>
-					<p class="mt-2 text-zinc-400">
+					<h3 class="mt-3 text-sm font-normal text-[var(--color-ink)]">Входной контроль сырья</h3>
+					<p class="mt-2 text-[var(--color-muted)]">
 						100% заготовок проверяются на соответствие сертификатам заводов-изготовителей
-						(Северсталь, НЛМК, Мечел). Проводится визуальный осмотр на отсутствие внутренних
-						раковин, закатов и поверхностных трещин перед раскроем на ленточнопильном станке.
+						(Северсталь, НЛМК, Мечел). Визуальный осмотр на отсутствие внутренних раковин и трещин.
 					</p>
 				</div>
-				<div class="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
+				<div class="well">
 					<div
-						class="inline-flex h-7 w-7 items-center justify-center rounded-md border border-zinc-700 bg-zinc-900 font-mono text-sm font-bold text-zinc-100"
+						class="inline-flex h-7 w-7 items-center justify-center rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] font-mono text-xs text-[var(--color-ink)]"
 					>
 						2
 					</div>
-					<h3 class="mt-3 font-semibold text-sm text-white">
+					<h3 class="mt-3 text-sm font-normal text-[var(--color-ink)]">
 						First Article Inspection (FAI)
 					</h3>
-					<p class="mt-2 text-zinc-400">
+					<p class="mt-2 text-[var(--color-muted)]">
 						Перед запуском серийной партии станок останавливается после изготовления первой детали.
-						Инженер ОТК проводит полный обмер всех критических параметров по чертежу. Только после
-						подписи листа FAI оператор получает допуск к серийному циклу.
+						Инженер ОТК проводит полный обмер по чертежу и подписывает лист FAI.
 					</p>
 				</div>
-				<div class="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
+				<div class="well">
 					<div
-						class="inline-flex h-7 w-7 items-center justify-center rounded-md border border-zinc-700 bg-zinc-900 font-mono text-sm font-bold text-zinc-100"
+						class="inline-flex h-7 w-7 items-center justify-center rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] font-mono text-xs text-[var(--color-ink)]"
 					>
 						3
 					</div>
-					<h3 class="mt-3 font-semibold text-sm text-white">Выходной контроль и паспорт</h3>
-					<p class="mt-2 text-zinc-400">
+					<h3 class="mt-3 text-sm font-normal text-[var(--color-ink)]">
+						Выходной контроль и паспорт
+					</h3>
+					<p class="mt-2 text-[var(--color-muted)]">
 						Выборочный или 100% обмер готовых деталей с оформлением протокола измерений (паспорта
-						ОТК). Консервация деталей в ингибированную бумагу с нанесением консервационной смазки от
-						коррозии в условиях морского климата Калининграда.
+						ОТК). Консервация деталей в ингибированную бумагу от морского климата.
 					</p>
 				</div>
 			</div>
@@ -169,24 +167,24 @@
 
 		<!-- Metrology Lab Equipment Table -->
 		<section class="mt-14" aria-labelledby="metrology-heading">
-			<h2 id="metrology-heading" class="text-xl font-bold tracking-tight text-white sm:text-2xl">
+			<h2 id="metrology-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
 				Лаборатория измерительного инструмента и метрологии
 			</h2>
-			<div class="mt-4 overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950">
-				<table class="w-full text-left text-xs text-zinc-300">
-					<thead class="border-b border-zinc-800 bg-zinc-900/80 font-mono text-zinc-400 uppercase">
+			<div class="mt-4 overflow-x-auto">
+				<table class="v-table">
+					<thead>
 						<tr>
-							<th class="px-4 py-3">Наименование прибора</th>
-							<th class="px-4 py-3">Диапазон измерений</th>
-							<th class="px-4 py-3">Погрешность / Характеристики</th>
+							<th>Наименование прибора</th>
+							<th>Диапазон измерений</th>
+							<th>Погрешность / Характеристики</th>
 						</tr>
 					</thead>
-					<tbody class="divide-y divide-zinc-800/60">
+					<tbody>
 						{#each metrology as item}
 							<tr>
-								<td class="px-4 py-3 font-medium text-zinc-200">{item.name}</td>
-								<td class="px-4 py-3 font-mono text-zinc-100">{item.range}</td>
-								<td class="px-4 py-3 text-zinc-400">{item.accuracy}</td>
+								<td class="font-normal text-[var(--color-ink)]">{item.name}</td>
+								<td class="num text-[var(--color-ink)]">{item.range}</td>
+								<td class="text-[var(--color-muted)]">{item.accuracy}</td>
 							</tr>
 						{/each}
 					</tbody>
@@ -196,41 +194,45 @@
 
 		<!-- Machine Park Table -->
 		<section class="mt-14" aria-labelledby="machine-park-heading">
-			<h2 id="machine-park-heading" class="text-xl font-bold tracking-tight text-white sm:text-2xl">
+			<h2 id="machine-park-heading" class="text-xl text-[var(--color-ink)] sm:text-2xl">
 				Станочный парк производственного цеха
 			</h2>
 			<div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
 				{#each machines as machine}
-					<div class="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
-						<div class="flex items-center justify-between border-b border-zinc-900 pb-2">
-							<span class="font-mono text-xs font-semibold text-zinc-300 uppercase"
-								>{machine.category}</span
-							>
-							<span class="font-mono text-[11px] text-emerald-400">{machine.precision}</span>
+					<div class="well">
+						<div class="flex items-center justify-between border-b border-[var(--color-rule)] pb-2">
+							<span class="text-xs text-[var(--color-muted)]">{machine.category}</span>
+							<span class="num text-[11px] text-[var(--color-muted)]">{machine.precision}</span>
 						</div>
-						<h3 class="mt-2 text-sm font-bold text-white">{machine.model}</h3>
-						<p class="mt-2 font-mono text-xs text-zinc-400">{machine.specs}</p>
-						<p class="mt-2 text-xs text-zinc-500">{machine.features}</p>
+						<h3 class="mt-2 text-sm font-normal text-[var(--color-ink)]">{machine.model}</h3>
+						<p class="num mt-2 text-xs text-[var(--color-ink-2)]">{machine.specs}</p>
+						<p class="mt-1 text-xs text-[var(--color-muted)]">{machine.features}</p>
 					</div>
 				{/each}
 			</div>
 		</section>
 
 		<!-- B2B Contract Guarantee Banner -->
-		<section class="mt-14 rounded-xl border border-zinc-800 bg-zinc-900/60 p-6">
-			<h2 class="text-base font-bold text-white">Документальное сопровождение для юрлиц:</h2>
-			<ul class="mt-3 grid grid-cols-1 gap-2 text-xs text-zinc-300 sm:grid-cols-2">
-				<li class="flex items-center">
-					<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2 shrink-0"></span> Договор поставки металлоизделий с фиксированной ценой
+		<section class="well mt-14">
+			<h2 class="text-sm font-normal text-[var(--color-ink)]">
+				Документальное сопровождение для юрлиц:
+			</h2>
+			<ul class="mt-3 grid grid-cols-1 gap-2 text-xs text-[var(--color-muted)] sm:grid-cols-2">
+				<li class="flex items-center gap-2">
+					<span class="live-dot" aria-hidden="true"></span>
+					<span>Договор поставки металлоизделий с фиксированной ценой</span>
 				</li>
-				<li class="flex items-center">
-					<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2 shrink-0"></span> Универсальный передаточный документ (УПД с НДС 20%)
+				<li class="flex items-center gap-2">
+					<span class="live-dot" aria-hidden="true"></span>
+					<span>Универсальный передаточный документ (УПД с НДС 20%)</span>
 				</li>
-				<li class="flex items-center">
-					<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2 shrink-0"></span> Паспорт изделия с фактическими замерами ОТК
+				<li class="flex items-center gap-2">
+					<span class="live-dot" aria-hidden="true"></span>
+					<span>Паспорт изделия с фактическими замерами ОТК</span>
 				</li>
-				<li class="flex items-center">
-					<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2 shrink-0"></span> Копии заводских сертификатов на металл (ГОСТ)
+				<li class="flex items-center gap-2">
+					<span class="live-dot" aria-hidden="true"></span>
+					<span>Копии заводских сертификатов на металл (ГОСТ)</span>
 				</li>
 			</ul>
 		</section>

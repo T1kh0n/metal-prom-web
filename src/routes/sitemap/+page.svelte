@@ -6,47 +6,42 @@
 
 	const sitemapSections = [
 		{
-			title: 'Основные разделы и производственные участки',
+			title: 'Производственные услуги механического цеха',
 			links: [
-				{
-					name: 'Главная страница',
-					href: '/',
-					desc: 'Обзор производственного цеха, сводка возможностей, базовые параметры и онлайн-калькулятор.'
-				},
 				{
 					name: 'Токарные работы с ЧПУ',
 					href: '/tokarnye-raboty-chpu/',
-					desc: 'Обработка тел вращения: валы, оси, фланцы, втулки до ⌀320 мм, длина до 750 мм.'
+					desc: 'Токарная обработка валов, втулок, фланцев до ⌀320 мм и длины 750 мм'
 				},
 				{
-					name: 'Фрезерные работы с ЧПУ (3 и 4 оси)',
+					name: 'Фрезерные работы с ЧПУ',
 					href: '/frezernye-raboty-chpu/',
-					desc: 'Высокоточная обработка корпусов, плит, приборных блоков. Поворотный стол, поле 800×500×500 мм.'
+					desc: '3- и 4-осевое фрезерование корпусов, плит и кронштейнов с точностью ±0.005 мм'
 				},
 				{
 					name: 'Зуборезные и шлифовальные работы',
 					href: '/zuboreznye-i-shlifovalnye-raboty/',
-					desc: 'Нарезание шестерен m1-m8, шлицевых валов, круглое шлифование до IT6 (Ra 0.4 мкм), закалка ТВЧ.'
-				},
+					desc: 'Нарезка шестерен m1–m8, шлицевых соединений, шлифование валов до Ra 0.4 мкм и ТВЧ'
+				}
+			]
+		},
+		{
+			title: 'Инженерные инструменты и контроль качества',
+			links: [
 				{
-					name: 'Инженерный калькулятор стоимости ЧПУ',
+					name: 'Онлайн-калькулятор стоимости ЧПУ',
 					href: '/kalkulyator-stoimosti-chpu/',
-					desc: 'Интерактивный расчет сметы по нормо-часам, анализ 3D-моделей (STL/STEP) и серийные скидки.'
-				},
-				{
-					name: 'Портфолио выполненных деталей',
-					href: '/portfolio/',
-					desc: 'Кейсы изготовленных гребных валов, гидрофланцев, фрезерованных корпусов и шестерен.'
+					desc: 'Интерактивный расчет нормо-часов, партионных скидок и загрузка 3D-моделей STEP/STL'
 				},
 				{
 					name: 'Контроль качества (ОТК) и станочный парк',
 					href: '/kontrol-kachestva-i-oborudovanie/',
-					desc: 'Метрологическая лаборатория, цифровые приборы Mitutoyo, паспорт изделия и перечень станков.'
+					desc: 'Протокол FAI, измерительная лаборатория Mitutoyo и паспорта качества изделий'
 				},
 				{
-					name: 'Контакты и реквизиты цеха',
-					href: '/kontakty/',
-					desc: 'Прямые контакты диспетчера, почта для чертежей, схема проезда в Калининграде и реквизиты B2B.'
+					name: 'Портфолио выполненных деталей',
+					href: '/portfolio/',
+					desc: 'Реализованные проекты: судовые валы, гидравлические коллекторы, корпуса и шестерни'
 				}
 			]
 		},
@@ -54,34 +49,39 @@
 			title: 'Инженерная база знаний и статьи',
 			links: [
 				{
-					name: 'Все статьи базы знаний',
+					name: 'Все публикации базы знаний',
 					href: '/stati/',
-					desc: 'Каталог экспертных материалов главных технологов для конструкторов и снабженцев.'
+					desc: 'Руководства по выбору материалов, допускам и снижению себестоимости деталей'
 				},
 				{
-					name: 'Выбор сталей для ЧПУ обработки',
+					name: 'Выбор конструкционных и нержавеющих сталей',
 					href: '/stati/vybor-stali-dlya-chpu-obrabotki/',
-					desc: 'Анализ обрабатываемости марок Ст45, 40Х, 09Г2С, 12Х18Н10Т и алюминия Д16Т.'
+					desc: 'Сравнительный анализ обрабатываемости Ст45, 40Х, 09Г2С, 12Х18Н10Т и Д16Т'
 				},
 				{
 					name: 'Квалитеты точности IT6–IT12 и шероховатость Ra',
 					href: '/stati/kvalitety-tochnosti-i-sherohovatost-gost/',
-					desc: 'Таблицы допусков по ГОСТ 25346-2015, влияние точности на себестоимость деталей.'
+					desc: 'Таблица допусков ГОСТ 25346 и экономическая целесообразность шлифования'
 				},
 				{
 					name: 'DFM-оптимизация себестоимости деталей',
 					href: '/stati/optimizaciya-stoimosti-detaley-chpu/',
-					desc: '7 ключевых правил проектирования для снижения цены металлообработки на 25–40%.'
+					desc: '7 правил конструирования технологичных деталей для снижения цены на 25–40%'
 				}
 			]
 		},
 		{
-			title: 'Правовая документация',
+			title: 'Контакты и правовая информация',
 			links: [
+				{
+					name: 'Контакты и схема проезда',
+					href: '/kontakty/',
+					desc: 'Телефон цеха, инженерная почта, реквизиты юридического лица с НДС 20%'
+				},
 				{
 					name: 'Политика конфиденциальности и 152-ФЗ',
 					href: '/politika-konfidentsialnosti/',
-					desc: 'Правовая позиция ресурса: формат B2B, отсутствие сбора персональных данных граждан.'
+					desc: 'Правовой статус B2B-взаимодействия и регламент защиты КД заказчиков (NDA)'
 				}
 			]
 		}
@@ -89,7 +89,7 @@
 </script>
 
 <svelte:head>
-	<title>Карта сайта и навигация по каталогу услуг ЧПУ | {siteConfig.brandName}</title>
+	<title>Карта сайта и каталог услуг механообработки | {siteConfig.brandName}</title>
 	<meta
 		name="description"
 		content="Карта сайта металлообрабатывающего цеха MetalProm39 в Калининграде. Полный перечень услуг токарной, фрезерной обработки, калькулятора и статей."
@@ -100,36 +100,33 @@
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<Breadcrumbs items={breadcrumbs} />
 
-		<header class="max-w-4xl border-b border-zinc-800 pb-8">
-			<h1 class="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-				Карта сайта и каталог услуг механической обработки в Калининграде
+		<header class="border-b border-[var(--color-rule)] pb-8">
+			<h1 class="mt-4 text-3xl text-[var(--color-ink)] sm:text-4xl">
+				Карта сайта и каталог услуг цеха
 			</h1>
-			<p class="mt-4 text-base leading-relaxed text-zinc-300">
-				Полная иерархическая структура веб-сайта производственного цеха {siteConfig.brandName}.
-				Быстрый доступ к описаниям технологических возможностей, инженерным руководствам и расчетным
-				инструментам.
+			<p class="lead mt-4 max-w-2xl text-sm leading-relaxed sm:text-base">
+				Иерархическая структура сайта цеха {siteConfig.brandName}. Навигация по технологическим
+				услугам, оборудованию, базе знаний и онлайн-калькулятору.
 			</p>
 		</header>
 
 		<!-- Sitemap Tree -->
 		<div class="mt-10 space-y-10">
 			{#each sitemapSections as section}
-				<section class="rounded-xl border border-zinc-800 bg-zinc-950 p-6">
-					<h2 class="text-xs font-semibold text-zinc-300">
+				<section class="border-b border-[var(--color-rule)] pb-8">
+					<h2 class="text-xs font-normal text-[var(--color-muted)]">
 						{section.title}
 					</h2>
 					<div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
 						{#each section.links as link}
-							<div
-								class="rounded-lg border border-zinc-900 bg-zinc-900/40 p-4 transition-colors hover:border-zinc-700"
-							>
+							<div class="well transition-colors hover:border-[var(--color-rule-2)]">
 								<a
 									href={link.href}
-									class="text-sm font-semibold text-white transition-colors hover:text-zinc-300 hover:underline"
+									class="text-xs font-normal text-[var(--color-ink)] hover:underline"
 								>
-									{link.name}
+									{link.name} &rarr;
 								</a>
-								<p class="mt-2 text-xs leading-relaxed text-zinc-400">{link.desc}</p>
+								<p class="mt-1.5 text-xs leading-relaxed text-[var(--color-muted)]">{link.desc}</p>
 							</div>
 						{/each}
 					</div>

@@ -23,7 +23,7 @@
 </svelte:head>
 
 <div
-	class="flex min-h-screen flex-col bg-zinc-950 text-zinc-100 antialiased selection:bg-zinc-800 selection:text-zinc-100"
+	class="flex min-h-screen flex-col bg-[var(--color-paper)] text-[var(--color-ink)] antialiased selection:bg-[color-mix(in_oklab,var(--color-accent)_30%,transparent)]"
 >
 	<Header />
 	<div class="flex-1">

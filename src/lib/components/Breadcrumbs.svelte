@@ -18,18 +18,18 @@
 </svelte:head>
 
 <nav aria-label="Хлебные крошки" class="mb-6">
-	<ol class="flex flex-wrap items-center gap-1.5 text-xs text-zinc-400">
+	<ol class="flex flex-wrap items-center gap-2 text-xs text-[var(--color-muted)]">
 		{#each fullItems as item, index}
 			{#if index > 0}
-				<li class="select-none text-zinc-600" aria-hidden="true">/</li>
+				<li class="text-[var(--color-rule-2)] select-none" aria-hidden="true">→</li>
 			{/if}
 			<li>
 				{#if index === fullItems.length - 1}
-					<span class="font-medium text-zinc-200" aria-current="page">{item.name}</span>
+					<span class="font-normal text-[var(--color-ink)]" aria-current="page">{item.name}</span>
 				{:else}
 					<a
 						href={item.path}
-						class="text-zinc-400 transition-colors hover:text-zinc-100 hover:underline"
+						class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 					>
 						{item.name}
 					</a>

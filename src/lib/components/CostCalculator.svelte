@@ -42,21 +42,24 @@
 	let complexityId = $state('simple');
 	let materialId = $state('steel_45');
 	let isCustomerMaterial = $state(false);
-	let blankLengthMm = $state(120);
-	let blankWidthMm = $state(45);
-	let blankHeightMm = $state(45);
-	let toleranceId = $state('standard');
+
+	let blankLengthMm = $state(100);
+	let blankWidthMm = $state(50);
+	let blankHeightMm = $state(50);
+
+	let toleranceId = $state('it8_it9_normal');
 	let cooperativeOpIds = $state<string[]>([]);
 	let urgencyId = $state('standard');
 	let engineeringHours = $state(0);
 
-	// CAD file upload status & metadata
+	// CAD upload state
 	let isParsingCad = $state(false);
-	let cadFileName = $state<string | null>(null);
 	let cadParseError = $state<string | null>(null);
 	let parsedCadInfo = $state<CadDimensions | null>(null);
+	let cadFileName = $state<string | null>(null);
 
-	const isLathe = $derived(operationId === 'lathe_turning');
+	// Convenience derived flags
+	let isLathe = $derived(operationId === 'lathe_turning');
 
 	// Reactive calculation result
 	let quote = $derived(
@@ -118,64 +121,73 @@
 		const file = target.files?.[0];
 		if (!file) return;
 
-		isParsingCad = true;
 		cadParseError = null;
+		parsedCadInfo = null;
 		cadFileName = file.name;
+		isParsingCad = true;
 
 		try {
-			const dims: CadDimensions = await parseCadFile(file);
+			const dims = await parseCadFile(file);
 			parsedCadInfo = dims;
 			applyCadDimensions(dims);
-		} catch (err: unknown) {
-			const msg = err instanceof Error ? err.message : 'Ошибка при обработке файла';
-			cadParseError = msg;
-			parsedCadInfo = null;
+		} catch (err) {
+			cadParseError =
+				err instanceof Error
+					? err.message
+					: 'Не удалось проанализировать CAD-файл. Проверьте геометрию 3D-модели.';
 		} finally {
 			isParsingCad = false;
+			// Reset file input value to allow uploading the same file again
 			target.value = '';
 		}
 	}
 
 	function clearCadModel() {
-		cadFileName = null;
 		parsedCadInfo = null;
+		cadFileName = null;
 		cadParseError = null;
 	}
 
 	function downloadQuoteEstimate() {
-		const summary = {
-			timestamp: new Date().toISOString(),
-			quoteBreakdown: {
-				operation: quote.selectedOperationName,
-				quantity: quote.totalBatchQuantity,
-				material: quote.selectedMaterialName,
-				ownMaterial: isCustomerMaterial,
+		const estimateData = {
+			documentType: 'MetalProm39 CNC Commercial Estimate',
+			createdAt: new Date().toISOString(),
+			quoteParameters: {
+				operation: OPERATIONS[operationId]?.nameRu,
+				ratePerHour: OPERATIONS[operationId]?.ratePerHour,
+				batchQuantity,
+				complexity: SETUP_COMPLEXITIES[complexityId]?.nameRu,
+				material: MATERIALS[materialId]?.nameRu,
+				isCustomerMaterial,
 				dimensionsMm: {
 					length: blankLengthMm,
 					width: blankWidthMm,
 					height: blankHeightMm
 				},
-				tolerance: quote.selectedToleranceName,
-				cooperativeOperations: quote.cooperativeBreakdown.map((c: CooperativeItemBreakdown) => ({
-					name: c.nameRu,
-					cost: c.cost
-				})),
-				urgency: quote.selectedUrgencyName,
-				costs: {
-					totalMaterialCost: quote.totalMaterialCost,
-					totalMachiningCost: quote.totalMachiningCost,
-					totalSetupCost: quote.totalSetupCost,
-					totalEngineeringCost: quote.totalEngineeringCost,
-					totalCooperativeCost: quote.totalCooperativeCost,
-					urgencySurcharge: quote.urgencySurcharge,
-					finalTotalRub: quote.finalTotal,
-					finalUnitPriceRub: quote.finalUnitPrice
-				},
-				minimumOrderValueApplied: quote.isMinimumOrderApplied
+				tolerance: TOLERANCES[toleranceId]?.nameRu,
+				roughnessRa: TOLERANCES[toleranceId]?.roughnessRa,
+				cooperativeOperations: cooperativeOpIds.map((id) => COOPERATIVE_OPERATIONS[id]?.nameRu),
+				urgency: URGENCIES[urgencyId]?.nameRu
+			},
+			calculatedCost: {
+				totalMaterialCostRub: quote.totalMaterialCost,
+				totalMachiningCostRub: quote.totalMachiningCost,
+				totalSetupCostRub: quote.totalSetupCost,
+				totalCooperativeCostRub: quote.totalCooperativeCost,
+				urgencySurchargeRub: quote.urgencySurcharge,
+				batchDiscountPercent: quote.batchDiscountPercent,
+				isMinimumOrderApplied: quote.isMinimumOrderApplied,
+				finalTotalRub: quote.finalTotal,
+				finalUnitPriceRub: quote.finalUnitPrice
+			},
+			plantNotice: {
+				validityDays: 14,
+				vatIncludedPercent: 20,
+				terms: 'Безналичный расчет с НДС 20% по договору поставки'
 			}
 		};
 
-		const blob = new Blob([JSON.stringify(summary, null, 2)], {
+		const blob = new Blob([JSON.stringify(estimateData, null, 2)], {
 			type: 'application/json'
 		});
 		const url = URL.createObjectURL(blob);
@@ -189,15 +201,17 @@
 	}
 </script>
 
-<div class="rounded-xl border border-zinc-800 bg-zinc-950 p-6 text-zinc-100 md:p-8">
+<div
+	class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-6 text-[var(--color-ink)] md:p-8"
+>
 	{#if showTitle}
-		<div class="mb-8 border-b border-zinc-800 pb-6">
-			<h2 class="mt-3 text-2xl font-bold tracking-tight text-white md:text-3xl">
+		<div class="mb-8 border-b border-[var(--color-rule)] pb-6">
+			<h2 class="text-2xl text-[var(--color-ink)] md:text-3xl">
 				Инженерный калькулятор механической обработки с ЧПУ
 			</h2>
-			<p class="mt-2 text-sm text-zinc-400 md:text-base">
+			<p class="lead mt-2 text-sm md:text-base">
 				Мгновенный расчет себестоимости по нормо-часам и рыночным ценам сырья в Калининградской
-				области. Базовый порог заказа для юридических лиц — 5 000 ₽.
+				области. Базовый порог заказа для юридических лиц — 5&thinsp;000&thinsp;₽.
 			</p>
 		</div>
 	{/if}
@@ -209,7 +223,7 @@
 			<div>
 				<label
 					for="calc-operation"
-					class="mb-2 block text-sm font-semibold tracking-wide text-zinc-300"
+					class="mb-2 block text-xs font-normal tracking-wide text-[var(--color-muted)]"
 				>
 					1. Вид технологической операции:
 				</label>
@@ -217,10 +231,10 @@
 					{#each OPERATIONS_LIST as op}
 						<button
 							type="button"
-							class="flex flex-col rounded-lg border p-3.5 text-left transition-all {operationId ===
+							class="flex flex-col rounded-[var(--radius-card)] border p-3.5 text-left transition-all {operationId ===
 							op.id
-								? 'border-zinc-300 bg-zinc-800/90 text-white shadow-xs'
-								: 'border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'}"
+								? 'border-[var(--color-accent)] bg-[var(--color-paper-2)] text-[var(--color-ink)]'
+								: 'border-[var(--color-rule)] bg-[var(--color-paper)] text-[var(--color-ink-2)] hover:border-[var(--color-rule-2)]'}"
 							onclick={() => {
 								operationId = op.id;
 								if (parsedCadInfo) {
@@ -228,10 +242,12 @@
 								}
 							}}
 						>
-							<span class="text-sm font-semibold text-zinc-100">{op.shortNameRu}</span>
-							<span class="mt-1 font-mono text-xs text-zinc-300"
-								>{op.ratePerHour.toLocaleString('ru-RU')} ₽ / нормо-час</span
-							>
+							<span class="text-xs font-normal text-[var(--color-ink)]">{op.shortNameRu}</span>
+							<span class="num mt-1 text-xs text-[var(--color-muted)]">
+								{op.ratePerHour.toLocaleString('ru-RU')}<span class="u">
+									&thinsp;₽&thinsp;/&thinsp;нормо-час</span
+								>
+							</span>
 						</button>
 					{/each}
 				</div>
@@ -240,14 +256,12 @@
 			<!-- 2. Quantity & Batch Discount -->
 			<div>
 				<div class="mb-2 flex items-center justify-between">
-					<label for="batch-qty-slider" class="text-sm font-semibold text-zinc-300">
+					<label for="batch-qty-slider" class="text-xs font-normal text-[var(--color-muted)]">
 						2. Размер партии (шт.):
 					</label>
 					<div class="flex items-center gap-2">
 						{#if quote.batchDiscountPercent > 0}
-							<span
-								class="rounded bg-emerald-500/20 px-2 py-0.5 font-mono text-xs font-semibold text-emerald-400"
-							>
+							<span class="num text-xs text-[var(--color-accent)]">
 								Скидка за серию: -{quote.batchDiscountPercent}%
 							</span>
 						{/if}
@@ -256,7 +270,7 @@
 							min="1"
 							max="5000"
 							bind:value={batchQuantity}
-							class="w-20 rounded border border-zinc-700 bg-zinc-900 px-2.5 py-1 text-right font-mono text-sm font-bold text-white focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
+							class="num w-20 rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-2.5 py-1 text-right text-sm text-[var(--color-ink)] focus:border-[var(--color-focus)] focus:outline-none"
 						/>
 					</div>
 				</div>
@@ -266,36 +280,42 @@
 					min="1"
 					max="200"
 					bind:value={batchQuantity}
-					class="h-2 w-full cursor-pointer appearance-none rounded-lg bg-zinc-800 accent-zinc-100"
+					class="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-[var(--color-paper-2)] accent-[var(--color-accent)]"
 				/>
-				<div class="mt-1 flex justify-between font-mono text-[11px] text-zinc-500">
-					<span>1 шт (0%)</span>
-					<span>5 шт (-10%)</span>
-					<span>20 шт (-20%)</span>
-					<span>50 шт (-30%)</span>
-					<span>100+ шт (-40%)</span>
+				<div class="mt-1 flex justify-between text-[11px] text-[var(--color-muted)]">
+					<span class="num">1<span class="u">&thinsp;шт</span> (0%)</span>
+					<span class="num">5<span class="u">&thinsp;шт</span> (-10%)</span>
+					<span class="num">20<span class="u">&thinsp;шт</span> (-20%)</span>
+					<span class="num">50<span class="u">&thinsp;шт</span> (-30%)</span>
+					<span class="num">100+<span class="u">&thinsp;шт</span> (-40%)</span>
 				</div>
 			</div>
 
 			<!-- 3. Setup Complexity -->
 			<div>
-				<label for="calc-complexity" class="mb-2 block text-sm font-semibold text-zinc-300">
+				<label
+					for="calc-complexity"
+					class="mb-2 block text-xs font-normal text-[var(--color-muted)]"
+				>
 					3. Сложность наладки и оснастки:
 				</label>
 				<div class="grid grid-cols-1 gap-2 sm:grid-cols-3">
 					{#each SETUP_COMPLEXITIES_LIST as comp}
 						<button
 							type="button"
-							class="rounded-lg border p-3 text-left transition-all {complexityId === comp.id
-								? 'border-zinc-300 bg-zinc-800/90 text-white shadow-xs'
-								: 'border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'}"
+							class="rounded-[var(--radius-card)] border p-3 text-left transition-all {complexityId ===
+							comp.id
+								? 'border-[var(--color-accent)] bg-[var(--color-paper-2)] text-[var(--color-ink)]'
+								: 'border-[var(--color-rule)] bg-[var(--color-paper)] text-[var(--color-ink-2)] hover:border-[var(--color-rule-2)]'}"
 							onclick={() => (complexityId = comp.id)}
 						>
-							<div class="text-xs font-semibold text-zinc-200">{comp.nameRu}</div>
-							<div class="mt-1 font-mono text-xs text-zinc-300">
-								+{comp.fee.toLocaleString('ru-RU')} ₽
+							<div class="text-xs font-normal text-[var(--color-ink)]">{comp.nameRu}</div>
+							<div class="num mt-1 text-xs text-[var(--color-muted)]">
+								+{comp.fee.toLocaleString('ru-RU')}<span class="u">&thinsp;₽</span>
 							</div>
-							<div class="mt-1 line-clamp-2 text-[11px] text-zinc-500">{comp.descriptionRu}</div>
+							<div class="mt-1 line-clamp-2 text-[11px] text-[var(--color-muted)]">
+								{comp.descriptionRu}
+							</div>
 						</button>
 					{/each}
 				</div>
@@ -304,14 +324,16 @@
 			<!-- 4. Material Selection & Own Material Toggle -->
 			<div>
 				<div class="mb-2 flex items-center justify-between">
-					<label for="material-select" class="text-sm font-semibold text-zinc-300">
+					<label for="material-select" class="text-xs font-normal text-[var(--color-muted)]">
 						4. Материал заготовки:
 					</label>
-					<label class="flex cursor-pointer items-center gap-2 text-xs font-medium text-zinc-300">
+					<label
+						class="flex cursor-pointer items-center gap-2 text-xs font-normal text-[var(--color-ink-2)]"
+					>
 						<input
 							type="checkbox"
 							bind:checked={isCustomerMaterial}
-							class="h-4 w-4 rounded border-zinc-700 bg-zinc-900 text-zinc-100 focus:ring-zinc-400 accent-zinc-100"
+							class="h-4 w-4 rounded-sm border-[var(--color-rule-2)] bg-[var(--color-paper-2)] accent-[var(--color-accent)]"
 						/>
 						<span>Материал заказчика (давальческий)</span>
 					</label>
@@ -319,10 +341,10 @@
 				<select
 					id="material-select"
 					bind:value={materialId}
-					class="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3.5 py-2.5 text-sm font-medium text-zinc-100 focus:border-zinc-400 focus:outline-none"
+					class="w-full rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-3.5 py-2.5 text-xs text-[var(--color-ink)] focus:border-[var(--color-focus)] focus:outline-none"
 				>
 					{#each MATERIALS_LIST as mat}
-						<option value={mat.id}>
+						<option value={mat.id} class="bg-[var(--color-paper)] text-[var(--color-ink)]">
 							{mat.nameRu} ({mat.gradeRu}) — {mat.pricePerKg} ₽/кг, K={mat.machinabilityK}
 						</option>
 					{/each}
@@ -330,12 +352,16 @@
 			</div>
 
 			<!-- 5. Blank Dimensions & CAD Upload -->
-			<div class="rounded-lg border border-zinc-800 bg-zinc-900/40 p-4">
+			<div
+				class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4"
+			>
 				<div class="mb-3 flex flex-wrap items-center justify-between gap-2">
-					<span class="text-sm font-semibold text-zinc-300"> 5. Размеры заготовки (мм): </span>
+					<span class="text-xs font-normal text-[var(--color-muted)]">
+						5. Размеры заготовки (мм):
+					</span>
 					<!-- CAD Upload button -->
 					<label
-						class="inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-zinc-700 bg-zinc-800/90 px-3 py-1.5 text-xs font-medium text-zinc-200 transition-colors hover:border-zinc-500 hover:text-white"
+						class="btn btn--sm btn--line inline-flex cursor-pointer items-center gap-1.5 text-xs"
 					>
 						<span>{isParsingCad ? 'Анализ CAD...' : 'Загрузить STL / STEP'}</span>
 						<input
@@ -352,9 +378,9 @@
 				{#if cadParseError}
 					<div
 						data-testid="cad-error-alert"
-						class="mb-3 rounded border border-red-500/30 bg-red-500/10 p-2.5 text-xs text-red-400"
+						class="mb-3 rounded-[var(--radius-card)] border border-[var(--color-error)]/40 bg-[var(--color-error)]/10 p-2.5 text-xs text-[var(--color-error)]"
 					>
-						<span class="font-bold">Ошибка CAD:</span>
+						<span class="font-normal">Ошибка CAD:</span>
 						{cadParseError}
 					</div>
 				{/if}
@@ -362,55 +388,61 @@
 				{#if parsedCadInfo}
 					<div
 						data-testid="cad-info-card"
-						class="mb-3 rounded-lg border border-zinc-700 bg-zinc-900/90 p-3.5 text-xs"
+						class="mb-3 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3.5 text-xs"
 					>
-						<div class="flex items-center justify-between border-b border-zinc-800 pb-2">
+						<div class="flex items-center justify-between border-b border-[var(--color-rule)] pb-2">
 							<div class="flex items-center gap-2">
 								<span
-									class="rounded border border-zinc-700 bg-zinc-800 px-1.5 py-0.5 font-mono text-[10px] font-bold text-zinc-200"
+									class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-1.5 py-0.5 font-mono text-[10px] text-[var(--color-ink)]"
 								>
 									{parsedCadInfo.fileType.replace('_', ' ').toUpperCase()}
 								</span>
-								<span class="truncate font-semibold text-zinc-200">{cadFileName}</span>
+								<span class="truncate text-xs font-normal text-[var(--color-ink)]"
+									>{cadFileName}</span
+								>
 							</div>
 							<button
 								type="button"
 								data-testid="cad-clear-btn"
-								class="text-zinc-400 hover:text-white"
+								class="text-[var(--color-muted)] hover:text-[var(--color-ink)]"
 								onclick={clearCadModel}
 								title="Удалить привязку к CAD"
 							>
 								✕
 							</button>
 						</div>
-						<div class="mt-2 grid grid-cols-2 gap-2 text-zinc-400 sm:grid-cols-3">
+						<div class="mt-2 grid grid-cols-2 gap-2 text-[var(--color-muted)] sm:grid-cols-3">
 							<div>
 								Габариты:
-								<strong class="block font-mono text-zinc-200">
+								<strong class="num block font-normal text-[var(--color-ink)]">
 									{parsedCadInfo.boundingBox.dx.toFixed(1)} × {parsedCadInfo.boundingBox.dy.toFixed(
 										1
-									)} × {parsedCadInfo.boundingBox.dz.toFixed(1)} мм
+									)} × {parsedCadInfo.boundingBox.dz.toFixed(1)}<span class="u">&thinsp;мм</span>
 								</strong>
 							</div>
 							<div>
 								Объем:
-								<strong class="block font-mono text-zinc-200">
-									{parsedCadInfo.volumeCm3.toFixed(2)} см³
+								<strong class="num block font-normal text-[var(--color-ink)]">
+									{parsedCadInfo.volumeCm3.toFixed(2)}<span class="u">&thinsp;см³</span>
 								</strong>
 							</div>
 							<div>
 								Сетка:
-								<strong class="block font-mono text-zinc-200">
-									{parsedCadInfo.triangleCount.toLocaleString('ru-RU')} тр.
+								<strong class="num block font-normal text-[var(--color-ink)]">
+									{parsedCadInfo.triangleCount.toLocaleString('ru-RU')}<span class="u"
+										>&thinsp;тр.</span
+									>
 								</strong>
 							</div>
 						</div>
 						{#if parsedCadInfo.isRotationalSymmetric}
-							<div class="mt-2 border-t border-zinc-800/60 pt-2 text-zinc-300">
-								<span class="text-zinc-400">Распознано тело вращения: </span>
-								<strong class="font-mono text-zinc-100"
-									>⌀{parsedCadInfo.suggestedDiameterMm} × L{parsedCadInfo.suggestedLengthMm} мм</strong
-								>
+							<div class="mt-2 border-t border-[var(--color-rule)] pt-2 text-[var(--color-muted)]">
+								<span>Распознано тело вращения: </span>
+								<strong class="num font-normal text-[var(--color-ink)]">
+									⌀{parsedCadInfo.suggestedDiameterMm} × L{parsedCadInfo.suggestedLengthMm}<span
+										class="u">&thinsp;мм</span
+									>
+								</strong>
 							</div>
 						{/if}
 					</div>
@@ -418,7 +450,7 @@
 
 				<div class="grid grid-cols-3 gap-3">
 					<div>
-						<label for="dim-length" class="block text-[11px] font-medium text-zinc-400">
+						<label for="dim-length" class="block text-[11px] text-[var(--color-muted)]">
 							Длина L (мм):
 						</label>
 						<input
@@ -427,11 +459,11 @@
 							min="5"
 							max="3000"
 							bind:value={blankLengthMm}
-							class="mt-1 w-full rounded border border-zinc-700 bg-zinc-950 px-2.5 py-1.5 font-mono text-sm font-bold text-white focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
+							class="num mt-1 w-full rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper)] px-2.5 py-1.5 text-xs text-[var(--color-ink)] focus:border-[var(--color-focus)] focus:outline-none"
 						/>
 					</div>
 					<div>
-						<label for="dim-width" class="block text-[11px] font-medium text-zinc-400">
+						<label for="dim-width" class="block text-[11px] text-[var(--color-muted)]">
 							{isLathe ? 'Диаметр ⌀ (мм):' : 'Ширина W (мм):'}
 						</label>
 						<input
@@ -440,11 +472,11 @@
 							min="5"
 							max="1000"
 							bind:value={blankWidthMm}
-							class="mt-1 w-full rounded border border-zinc-700 bg-zinc-950 px-2.5 py-1.5 font-mono text-sm font-bold text-white focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
+							class="num mt-1 w-full rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper)] px-2.5 py-1.5 text-xs text-[var(--color-ink)] focus:border-[var(--color-focus)] focus:outline-none"
 						/>
 					</div>
 					<div>
-						<label for="dim-height" class="block text-[11px] font-medium text-zinc-400">
+						<label for="dim-height" class="block text-[11px] text-[var(--color-muted)]">
 							{isLathe ? 'Толщ. стенки / H (мм):' : 'Высота H (мм):'}
 						</label>
 						<input
@@ -454,41 +486,50 @@
 							max="1000"
 							bind:value={blankHeightMm}
 							disabled={isLathe}
-							class="mt-1 w-full rounded border border-zinc-700 bg-zinc-950 px-2.5 py-1.5 font-mono text-sm font-bold text-white focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 disabled:opacity-50"
+							class="num mt-1 w-full rounded-[var(--radius-card)] border border-[var(--color-rule-2)] bg-[var(--color-paper)] px-2.5 py-1.5 text-xs text-[var(--color-ink)] focus:border-[var(--color-focus)] focus:outline-none disabled:opacity-40"
 						/>
 					</div>
 				</div>
-				<div class="mt-2.5 flex items-center justify-between text-xs text-zinc-400">
+
+				<div class="mt-2.5 flex items-center justify-between text-xs text-[var(--color-muted)]">
 					<span>
 						Масса заготовки:
-						<strong class="font-mono text-zinc-200">{quote.blankMassKg} кг</strong>/шт
+						<strong class="num font-normal text-[var(--color-ink)]"
+							>{quote.blankMassKg}<span class="u">&thinsp;кг</span></strong
+						>/шт
 					</span>
 					<span>
 						Объем:
-						<strong class="font-mono text-zinc-200">{quote.blankVolumeCm3} см³</strong>
+						<strong class="num font-normal text-[var(--color-ink)]"
+							>{quote.blankVolumeCm3}<span class="u">&thinsp;см³</span></strong
+						>
 					</span>
 				</div>
 			</div>
 
 			<!-- 6. Tolerance & Grinding -->
 			<div>
-				<label for="tolerance-select" class="mb-2 block text-sm font-semibold text-zinc-300">
+				<label
+					for="tolerance-select"
+					class="mb-2 block text-xs font-normal text-[var(--color-muted)]"
+				>
 					6. Квалитет точности и шероховатость поверхности:
 				</label>
 				<div class="grid grid-cols-1 gap-2 sm:grid-cols-3">
 					{#each TOLERANCES_LIST as tol}
 						<button
 							type="button"
-							class="rounded-lg border p-3 text-left transition-all {toleranceId === tol.id
-								? 'border-zinc-300 bg-zinc-800/90 text-white shadow-xs'
-								: 'border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'}"
+							class="rounded-[var(--radius-card)] border p-3 text-left transition-all {toleranceId ===
+							tol.id
+								? 'border-[var(--color-accent)] bg-[var(--color-paper-2)] text-[var(--color-ink)]'
+								: 'border-[var(--color-rule)] bg-[var(--color-paper)] text-[var(--color-ink-2)] hover:border-[var(--color-rule-2)]'}"
 							onclick={() => (toleranceId = tol.id)}
 						>
-							<div class="text-xs font-semibold text-zinc-200">{tol.nameRu}</div>
-							<div class="mt-1 font-mono text-xs text-zinc-300">{tol.roughnessRa}</div>
+							<div class="text-xs font-normal text-[var(--color-ink)]">{tol.nameRu}</div>
+							<div class="num mt-1 text-xs text-[var(--color-muted)]">{tol.roughnessRa}</div>
 							{#if tol.includesGrinding}
 								<div
-									class="mt-1 inline-block rounded border border-zinc-700 bg-zinc-800 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-zinc-200"
+									class="mt-1 inline-block rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] px-1.5 py-0.5 text-[10px] text-[var(--color-ink)]"
 								>
 									+Шлифовка
 								</div>
@@ -500,26 +541,28 @@
 
 			<!-- 7. Cooperative Operations -->
 			<div>
-				<span class="mb-2 block text-sm font-semibold text-zinc-300">
+				<span class="mb-2 block text-xs font-normal text-[var(--color-muted)]">
 					7. Дополнительные кооперационные операции:
 				</span>
 				<div class="space-y-2">
 					{#each COOPERATIVE_OPERATIONS_LIST as coop}
 						<label
-							class="flex cursor-pointer items-start gap-3 rounded-lg border border-zinc-800 bg-zinc-900/50 p-3 transition-colors hover:border-zinc-700"
+							class="flex cursor-pointer items-start gap-3 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-3 transition-colors hover:border-[var(--color-rule-2)]"
 						>
 							<input
 								type="checkbox"
 								checked={cooperativeOpIds.includes(coop.id)}
 								onchange={() => toggleCooperativeOp(coop.id)}
-								class="mt-1 h-4 w-4 rounded border-zinc-700 bg-zinc-950 text-zinc-100 focus:ring-zinc-400 accent-zinc-100"
+								class="mt-0.5 h-4 w-4 rounded-sm border-[var(--color-rule-2)] bg-[var(--color-paper)] accent-[var(--color-accent)]"
 							/>
 							<div class="flex-1">
 								<div class="flex items-center justify-between">
-									<span class="text-xs font-semibold text-zinc-200">{coop.nameRu}</span>
-									<span class="font-mono text-xs text-zinc-300">+{coop.pricePerPiece} ₽/шт</span>
+									<span class="text-xs font-normal text-[var(--color-ink)]">{coop.nameRu}</span>
+									<span class="num text-xs text-[var(--color-muted)]"
+										>+{coop.pricePerPiece}<span class="u">&thinsp;₽/шт</span></span
+									>
 								</div>
-								<p class="mt-0.5 text-[11px] text-zinc-500">{coop.descriptionRu}</p>
+								<p class="mt-0.5 text-[11px] text-[var(--color-muted)]">{coop.descriptionRu}</p>
 							</div>
 						</label>
 					{/each}
@@ -528,20 +571,24 @@
 
 			<!-- 8. Urgency -->
 			<div>
-				<label for="urgency-select" class="mb-2 block text-sm font-semibold text-zinc-300">
+				<label
+					for="urgency-select"
+					class="mb-2 block text-xs font-normal text-[var(--color-muted)]"
+				>
 					8. Срочность выполнения:
 				</label>
 				<div class="grid grid-cols-2 gap-3">
 					{#each URGENCIES_LIST as urg}
 						<button
 							type="button"
-							class="rounded-lg border p-3 text-left transition-all {urgencyId === urg.id
-								? 'border-zinc-300 bg-zinc-800/90 text-white shadow-xs'
-								: 'border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'}"
+							class="rounded-[var(--radius-card)] border p-3 text-left transition-all {urgencyId ===
+							urg.id
+								? 'border-[var(--color-accent)] bg-[var(--color-paper-2)] text-[var(--color-ink)]'
+								: 'border-[var(--color-rule)] bg-[var(--color-paper)] text-[var(--color-ink-2)] hover:border-[var(--color-rule-2)]'}"
 							onclick={() => (urgencyId = urg.id)}
 						>
-							<div class="text-xs font-semibold text-zinc-200">{urg.nameRu}</div>
-							<div class="mt-1 font-mono text-xs text-zinc-300">{urg.leadTimeRu}</div>
+							<div class="text-xs font-normal text-[var(--color-ink)]">{urg.nameRu}</div>
+							<div class="mt-1 text-xs text-[var(--color-muted)]">{urg.leadTimeRu}</div>
 						</button>
 					{/each}
 				</div>
@@ -550,13 +597,15 @@
 
 		<!-- Right / Live Quotation Summary Panel -->
 		<div class="lg:col-span-5">
-			<div class="sticky top-6 rounded-xl border border-zinc-800 bg-zinc-900 p-6">
-				<div class="flex items-center justify-between border-b border-zinc-800 pb-4">
-					<span class="text-xs font-semibold text-zinc-300">
+			<div
+				class="rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-6 lg:sticky lg:top-24"
+			>
+				<div class="flex items-center justify-between border-b border-[var(--color-rule)] pb-4">
+					<span class="text-xs font-normal text-[var(--color-muted)]">
 						Итоговая оценка партии
 					</span>
 					<span
-						class="rounded border border-zinc-700 bg-zinc-800/80 px-2.5 py-0.5 font-mono text-xs font-semibold text-zinc-300"
+						class="rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper)] px-2.5 py-0.5 text-xs text-[var(--color-muted)]"
 					>
 						Ориентировочная смета
 					</span>
@@ -565,16 +614,15 @@
 				<!-- Total Price Big Display -->
 				<div class="my-5">
 					<div class="flex items-baseline justify-between">
-						<span class="text-xs font-medium text-zinc-400">Общая сумма:</span>
-						<div class="font-mono text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-							{quote.finalTotal.toLocaleString('ru-RU')}
-							<span class="text-2xl font-normal text-zinc-400">₽</span>
+						<span class="text-xs text-[var(--color-muted)]">Общая сумма:</span>
+						<div class="num text-3xl font-light tracking-tight text-[var(--color-ink)] md:text-4xl">
+							{quote.finalTotal.toLocaleString('ru-RU')}<span class="u">&thinsp;₽</span>
 						</div>
 					</div>
-					<div class="mt-1 flex items-baseline justify-between text-sm">
-						<span class="text-zinc-400">Цена за деталь:</span>
-						<span class="font-mono font-bold text-zinc-100">
-							{quote.finalUnitPrice.toLocaleString('ru-RU')} ₽ / шт
+					<div class="mt-1 flex items-baseline justify-between text-xs">
+						<span class="text-[var(--color-muted)]">Цена за деталь:</span>
+						<span class="num text-sm font-normal text-[var(--color-ink)]">
+							{quote.finalUnitPrice.toLocaleString('ru-RU')}<span class="u">&thinsp;₽ / шт</span>
 						</span>
 					</div>
 				</div>
@@ -583,27 +631,33 @@
 				{#if quote.isMinimumOrderApplied}
 					<div
 						data-testid="mov-alert"
-						class="mb-5 rounded-lg border border-zinc-700 bg-zinc-900/90 p-3.5 text-xs text-zinc-300"
+						class="mb-5 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3.5 text-xs text-[var(--color-ink-2)]"
 					>
-						<div class="flex items-center font-semibold text-zinc-100">
-							<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span>
-							Минимальный заказ для юрлиц — 5 000 ₽
+						<div class="flex items-center gap-2 font-normal text-[var(--color-ink)]">
+							<span class="live-dot"></span>
+							<span>Минимальный заказ для юрлиц — 5&thinsp;000&thinsp;₽</span>
 						</div>
-						<p class="mt-1 text-zinc-400">
+						<p class="mt-1 text-[var(--color-muted)]">
 							Включает переналадку станка ЧПУ, написание управляющей программы и инструментальный
 							контроль ОТК.
 						</p>
 						{#if quote.recommendedBatchForMov > quote.totalBatchQuantity}
-							<div class="mt-2.5 rounded-md border border-zinc-800 bg-zinc-950 p-2.5 text-zinc-300">
+							<div
+								class="mt-2.5 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-2.5 text-[var(--color-muted)]"
+							>
 								<span>Рекомендуем увеличить партию до </span>
-								<strong class="font-mono text-white">{quote.recommendedBatchForMov} шт.</strong>,
+								<strong class="num font-normal text-[var(--color-ink)]"
+									>{quote.recommendedBatchForMov}<span class="u">&thinsp;шт.</span></strong
+								>,
 								<span> чтобы снизить себестоимость до </span>
-								<strong class="font-mono text-emerald-400"
-									>{quote.recommendedBatchUnitCost.toLocaleString('ru-RU')} ₽/шт</strong
-								>.
+								<strong class="num font-normal text-[var(--color-accent)]">
+									{quote.recommendedBatchUnitCost.toLocaleString('ru-RU')}<span class="u"
+										>&thinsp;₽/шт</span
+									>
+								</strong>.
 								<button
 									type="button"
-									class="mt-2 block w-full rounded-md border border-zinc-700 bg-zinc-900/80 px-3 py-1.5 text-center text-xs font-medium text-zinc-200 transition-colors hover:bg-zinc-800"
+									class="btn btn--sm btn--line mt-2 block w-full text-center text-xs"
 									onclick={applyRecommendedBatch}
 								>
 									Пересчитать на {quote.recommendedBatchForMov} шт.
@@ -614,71 +668,64 @@
 				{/if}
 
 				<!-- Cost Components Breakdown -->
-				<div class="space-y-2.5 border-t border-zinc-800 pt-4 text-xs">
-					<div class="flex justify-between text-zinc-400">
+				<div class="space-y-2 border-t border-[var(--color-rule)] pt-4 text-xs">
+					<div class="flex justify-between text-[var(--color-muted)]">
 						<span>Металл / Заготовка:</span>
-						<span class="font-mono text-zinc-200">
+						<span class="num text-[var(--color-ink)]">
 							{isCustomerMaterial
 								? 'Давальческий (0 ₽)'
 								: `${quote.totalMaterialCost.toLocaleString('ru-RU')} ₽`}
 						</span>
 					</div>
-					<div class="flex justify-between text-zinc-400">
+					<div class="flex justify-between text-[var(--color-muted)]">
 						<span>Механообработка ЧПУ:</span>
-						<span class="font-mono text-zinc-200">
+						<span class="num text-[var(--color-ink)]">
 							{quote.totalMachiningCost.toLocaleString('ru-RU')} ₽
 							{#if quote.batchDiscountPercent > 0}
-								<span class="text-emerald-400">(-{quote.batchDiscountPercent}%)</span>
+								<span class="text-[var(--color-accent)]">(-{quote.batchDiscountPercent}%)</span>
 							{/if}
 						</span>
 					</div>
-					<div class="flex justify-between text-zinc-400">
+					<div class="flex justify-between text-[var(--color-muted)]">
 						<span>Наладка, оснастка и УП:</span>
-						<span class="font-mono text-zinc-200">
+						<span class="num text-[var(--color-ink)]">
 							{(quote.totalSetupCost + quote.totalEngineeringCost).toLocaleString('ru-RU')} ₽
 						</span>
 					</div>
 					{#if quote.totalCooperativeCost > 0}
-						<div class="flex justify-between text-zinc-400">
+						<div class="flex justify-between text-[var(--color-muted)]">
 							<span>Кооперация (термо/зуб/покрытие):</span>
-							<span class="font-mono text-zinc-200"
-								>{quote.totalCooperativeCost.toLocaleString('ru-RU')} ₽</span
-							>
+							<span class="num text-[var(--color-ink)]">
+								{quote.totalCooperativeCost.toLocaleString('ru-RU')} ₽
+							</span>
 						</div>
 					{/if}
 					{#if quote.urgencySurcharge > 0}
-						<div class="flex justify-between text-zinc-400">
+						<div class="flex justify-between text-[var(--color-muted)]">
 							<span>Надбавка за срочность (48-72ч):</span>
-							<span class="font-mono text-zinc-300"
-								>+{quote.urgencySurcharge.toLocaleString('ru-RU')} ₽</span
-							>
+							<span class="num text-[var(--color-ink)]">
+								+{quote.urgencySurcharge.toLocaleString('ru-RU')} ₽
+							</span>
 						</div>
 					{/if}
 				</div>
 
 				<!-- Action Buttons -->
-				<div class="mt-6 space-y-2.5">
-					<a
-						href="#order-form"
-						class="flex w-full items-center justify-center rounded-md bg-zinc-100 px-4 py-2.5 text-center text-sm font-medium text-zinc-950 shadow-sm transition-colors hover:bg-white"
-					>
+				<div class="mt-6 space-y-2">
+					<a href="#order-form" class="btn btn--wide">
 						<span>Отправить чертеж на точный расчет</span>
 					</a>
-					<button
-						type="button"
-						class="flex w-full items-center justify-center rounded-md border border-zinc-700 bg-zinc-900/60 px-4 py-2.5 text-center text-xs font-medium text-zinc-200 transition-colors hover:bg-zinc-800"
-						onclick={downloadQuoteEstimate}
-					>
+					<button type="button" class="btn btn--wide btn--line" onclick={downloadQuoteEstimate}>
 						<span>Скачать смету (JSON)</span>
 					</button>
 				</div>
 
 				<!-- B2B Trust Guarantee Callout -->
 				<div
-					class="mt-5 rounded-lg border border-zinc-800 bg-zinc-950 p-3 text-[11px] text-zinc-400"
+					class="mt-5 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper)] p-3 text-[11px] text-[var(--color-muted)]"
 				>
-					<div class="font-semibold text-zinc-300">Гарантии цеха MetalProm39:</div>
-					<ul class="mt-1 list-inside list-disc space-y-1 text-zinc-400">
+					<div class="font-normal text-[var(--color-ink)]">Гарантии цеха MetalProm39:</div>
+					<ul class="mt-1 list-inside list-disc space-y-1 text-[var(--color-muted)]">
 						<li>Безналичный расчет с НДС 20% / УСН</li>
 						<li>Паспорт качества ОТК (поверка Mitutoyo)</li>
 						<li>Сертификаты на металлопрокат по ГОСТ</li>
