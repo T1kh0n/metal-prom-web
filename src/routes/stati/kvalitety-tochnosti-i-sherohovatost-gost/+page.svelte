@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
 
@@ -202,19 +203,19 @@
 						<h3 class="text-xs font-normal text-[var(--color-ink)]">Связанные разделы сайта:</h3>
 						<div class="mt-3 flex flex-col space-y-2 text-xs">
 							<a
-								href="/kontrol-kachestva-i-oborudovanie/"
+								href="{base}/kontrol-kachestva-i-oborudovanie/"
 								class="text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:underline"
 							>
 								Лаборатория ОТК и приборы Mitutoyo &rarr;
 							</a>
 							<a
-								href="/zuboreznye-i-shlifovalnye-raboty/"
+								href="{base}/zuboreznye-i-shlifovalnye-raboty/"
 								class="text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:underline"
 							>
 								Круглое шлифование до IT6 &rarr;
 							</a>
 							<a
-								href="/kalkulyator-stoimosti-chpu/"
+								href="{base}/kalkulyator-stoimosti-chpu/"
 								class="text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:underline"
 							>
 								Расчет стоимости с надбавкой за точность &rarr;

@@ -1,20 +1,22 @@
 import { expect, test } from '@playwright/test';
 
+const BASE = '/metal-prom-web';
+
 const coreRoutes = [
-	{ path: '/', titlePart: 'Металлообработка' },
-	{ path: '/tokarnye-raboty-chpu/', titlePart: 'Токарные работы' },
-	{ path: '/frezernye-raboty-chpu/', titlePart: 'Фрезерные работы' },
-	{ path: '/zuboreznye-i-shlifovalnye-raboty/', titlePart: 'Зуборезные' },
-	{ path: '/kalkulyator-stoimosti-chpu/', titlePart: 'калькулятор' },
-	{ path: '/portfolio/', titlePart: 'Портфолио' },
-	{ path: '/kontrol-kachestva-i-oborudovanie/', titlePart: 'Контроль качества' },
-	{ path: '/kontakty/', titlePart: 'Контакты' },
-	{ path: '/stati/', titlePart: 'база знаний' },
-	{ path: '/stati/vybor-stali-dlya-chpu-obrabotki/', titlePart: 'Выбор сталей' },
-	{ path: '/stati/kvalitety-tochnosti-i-sherohovatost-gost/', titlePart: 'Квалитеты точности' },
-	{ path: '/stati/optimizaciya-stoimosti-detaley-chpu/', titlePart: 'DFM-оптимизация' },
-	{ path: '/politika-konfidentsialnosti/', titlePart: 'Политика конфиденциальности' },
-	{ path: '/sitemap/', titlePart: 'Карта сайта' }
+	{ path: `${BASE}/`, titlePart: 'Металлообработка' },
+	{ path: `${BASE}/tokarnye-raboty-chpu/`, titlePart: 'Токарные работы' },
+	{ path: `${BASE}/frezernye-raboty-chpu/`, titlePart: 'Фрезерные работы' },
+	{ path: `${BASE}/zuboreznye-i-shlifovalnye-raboty/`, titlePart: 'Зуборезные' },
+	{ path: `${BASE}/kalkulyator-stoimosti-chpu/`, titlePart: 'калькулятор' },
+	{ path: `${BASE}/portfolio/`, titlePart: 'Портфолио' },
+	{ path: `${BASE}/kontrol-kachestva-i-oborudovanie/`, titlePart: 'Контроль качества' },
+	{ path: `${BASE}/kontakty/`, titlePart: 'Контакты' },
+	{ path: `${BASE}/stati/`, titlePart: 'база знаний' },
+	{ path: `${BASE}/stati/vybor-stali-dlya-chpu-obrabotki/`, titlePart: 'Выбор сталей' },
+	{ path: `${BASE}/stati/kvalitety-tochnosti-i-sherohovatost-gost/`, titlePart: 'Квалитеты точности' },
+	{ path: `${BASE}/stati/optimizaciya-stoimosti-detaley-chpu/`, titlePart: 'DFM-оптимизация' },
+	{ path: `${BASE}/politika-konfidentsialnosti/`, titlePart: 'Политика конфиденциальности' },
+	{ path: `${BASE}/sitemap/`, titlePart: 'Карта сайта' }
 ];
 
 test.describe('B2B Core Routes Navigation & Hallmark Design Verification', () => {
@@ -38,7 +40,7 @@ test.describe('B2B Core Routes Navigation & Hallmark Design Verification', () =>
 			expect(telInputs).toBe(0);
 
 			// Check breadcrumbs present on subpages
-			if (route.path !== '/') {
+			if (route.path !== `${BASE}/`) {
 				const breadcrumbs = page.locator('nav[aria-label="Хлебные крошки"]');
 				await expect(breadcrumbs).toBeVisible();
 			}
@@ -46,7 +48,7 @@ test.describe('B2B Core Routes Navigation & Hallmark Design Verification', () =>
 	}
 
 	test('service pages include Schema.org JSON-LD structured data', async ({ page }) => {
-		await page.goto('/tokarnye-raboty-chpu/');
+		await page.goto(`${BASE}/tokarnye-raboty-chpu/`);
 
 		const jsonLdScripts = page.locator('script[type="application/ld+json"]');
 		const count = await jsonLdScripts.count();
@@ -64,10 +66,10 @@ test.describe('B2B Core Routes Navigation & Hallmark Design Verification', () =>
 	});
 
 	test('header navigation links point to valid routes and respond to clicks', async ({ page }) => {
-		await page.goto('/');
+		await page.goto(`${BASE}/`);
 
 		// Click to Turning services from header
-		const turningLink = page.locator('header nav a[href="/tokarnye-raboty-chpu/"]');
+		const turningLink = page.locator('header nav a[href$="/tokarnye-raboty-chpu/"]');
 		await turningLink.click();
 
 		await expect(page).toHaveURL(/\/tokarnye-raboty-chpu\/?$/);

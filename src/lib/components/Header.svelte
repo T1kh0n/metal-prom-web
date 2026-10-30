@@ -1,17 +1,18 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import { siteConfig } from '#lib/config/site';
 
 	let isMobileMenuOpen = $state(false);
 
 	const navLinks = [
-		{ name: 'Токарная', href: '/tokarnye-raboty-chpu/' },
-		{ name: 'Фрезерная', href: '/frezernye-raboty-chpu/' },
-		{ name: 'Зуборезка', href: '/zuboreznye-i-shlifovalnye-raboty/' },
-		{ name: 'Калькулятор', href: '/kalkulyator-stoimosti-chpu/' },
-		{ name: 'Портфолио', href: '/portfolio/' },
-		{ name: 'ОТК и станки', href: '/kontrol-kachestva-i-oborudovanie/' },
-		{ name: 'Статьи', href: '/stati/' },
-		{ name: 'Контакты', href: '/kontakty/' }
+		{ name: 'Токарная', href: `${base}/tokarnye-raboty-chpu/` },
+		{ name: 'Фрезерная', href: `${base}/frezernye-raboty-chpu/` },
+		{ name: 'Зуборезка', href: `${base}/zuboreznye-i-shlifovalnye-raboty/` },
+		{ name: 'Калькулятор', href: `${base}/kalkulyator-stoimosti-chpu/` },
+		{ name: 'Портфолио', href: `${base}/portfolio/` },
+		{ name: 'ОТК и станки', href: `${base}/kontrol-kachestva-i-oborudovanie/` },
+		{ name: 'Статьи', href: `${base}/stati/` },
+		{ name: 'Контакты', href: `${base}/kontakty/` }
 	];
 </script>
 
@@ -21,7 +22,7 @@
 	<!-- Single Clean Navigation Bar -->
 	<div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
 		<!-- Brand Logo -->
-		<a href="/" class="group flex shrink-0 items-center gap-3">
+		<a href="{base}/" class="group flex shrink-0 items-center gap-3">
 			<div
 				class="flex h-8 w-8 items-center justify-center rounded-sm border border-[var(--color-rule-2)] bg-[var(--color-paper-2)] font-mono text-sm font-light text-[var(--color-ink)]"
 			>
@@ -56,7 +57,7 @@
 
 			<!-- Quick CTA (Vantage hairline secondary pill button, hidden on mobile/tablet) -->
 			<a
-				href="/kalkulyator-stoimosti-chpu/"
+				href="{base}/kalkulyator-stoimosti-chpu/"
 				class="btn btn--sm btn--line !hidden shrink-0 lg:!inline-flex"
 			>
 				<span>Калькулятор ЧПУ</span>

@@ -1,7 +1,5 @@
 /**
- * Client-side CAD parser caller.
- * Runs parsing in an isolated, auto-terminating Web Worker to keep main thread free of CPU load.
- * Falls back to synchronous parsing if Web Workers are unavailable in the runtime environment.
+ * High-performance CAD parsing helper with automatic Web Worker offloading and robust in-thread fallback.
  */
 
 import { parseCadBuffer, type CadDimensions } from '../calculator/cad-parser-core';
@@ -16,6 +14,7 @@ export async function parseCadFile(file: File): Promise<CadDimensions> {
 		return new Promise((resolve, reject) => {
 			let worker: Worker | null = null;
 			let timeoutId: ReturnType<typeof setTimeout> | null = null;
+			let finished = false;
 
 			const cleanup = () => {
 				if (timeoutId) clearTimeout(timeoutId);
@@ -25,12 +24,26 @@ export async function parseCadFile(file: File): Promise<CadDimensions> {
 				}
 			};
 
+			const fallbackSync = () => {
+				if (finished) return;
+				finished = true;
+				cleanup();
+				try {
+					const result = parseCadBuffer(buffer, file.name);
+					resolve(result);
+				} catch (err) {
+					reject(err);
+				}
+			};
+
 			try {
 				worker = new Worker(new URL('./cad-parser.worker.ts', import.meta.url), { type: 'module' });
 
 				worker.onmessage = (
 					e: MessageEvent<{ success: boolean; data?: CadDimensions; error?: string }>
 				) => {
+					if (finished) return;
+					finished = true;
 					cleanup();
 					if (e.data.success && e.data.data) {
 						resolve(e.data.data);
@@ -39,31 +52,22 @@ export async function parseCadFile(file: File): Promise<CadDimensions> {
 					}
 				};
 
-				worker.onerror = (e) => {
-					cleanup();
-					reject(new Error(e.message || 'Worker error parsing CAD file'));
+				worker.onerror = () => {
+					fallbackSync();
 				};
 
-				// Set safety timeout of 10s
+				// Fallback after 1.5s if worker is slow or restricted
 				timeoutId = setTimeout(() => {
-					cleanup();
-					reject(new Error('CAD parsing timed out. The file might be corrupted or too complex.'));
-				}, 10000);
+					fallbackSync();
+				}, 1500);
 
-				worker.postMessage({ fileBuffer: buffer, fileName: file.name }, [buffer]);
-			} catch (err) {
-				cleanup();
-				// Fallback to in-thread parsing if worker instantiation fails (e.g. CSP restrictions)
-				try {
-					const result = parseCadBuffer(buffer, file.name);
-					resolve(result);
-				} catch (fallbackErr) {
-					reject(fallbackErr);
-				}
+				const copy = buffer.slice(0);
+				worker.postMessage({ fileBuffer: copy, fileName: file.name }, [copy]);
+			} catch {
+				fallbackSync();
 			}
 		});
 	}
 
-	// Direct execution fallback for non-worker environments (e.g. tests or server)
 	return parseCadBuffer(buffer, file.name);
 }

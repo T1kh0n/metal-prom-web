@@ -713,7 +713,7 @@
 				<!-- Action Buttons -->
 				<div class="mt-6 space-y-2">
 					<a href="#order-form" class="btn btn--wide">
-						<span>Отправить чертеж на точный расчет</span>
+						<span>Отправить чертеж на расчет</span>
 					</a>
 					<button type="button" class="btn btn--wide btn--line" onclick={downloadQuoteEstimate}>
 						<span>Скачать смету (JSON)</span>

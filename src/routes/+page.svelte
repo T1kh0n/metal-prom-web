@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import CostCalculator from '#lib/components/CostCalculator.svelte';
 	import WorkpieceInspectionScan from '#lib/components/WorkpieceInspectionScan.svelte';
 	import { siteConfig } from '#lib/config/site';
@@ -55,7 +56,7 @@
 						Цех в Калининграде, 2 смены, прием заказов
 					</div>
 
-					<h1 class="text-3xl text-[var(--color-ink)] sm:text-5xl lg:text-6xl">
+					<h1 class="text-3xl text-[var(--color-ink)] sm:text-4xl lg:text-5xl">
 						Прецизионная металлообработка с ЧПУ в Калининграде
 					</h1>
 
@@ -107,31 +108,31 @@
 						<dl class="passport__list">
 							<div class="passport__row">
 								<dt>Токарная обработка</dt>
-								<dd class="num">⌀320 × 750<span class="u">&thinsp;мм</span></dd>
+								<dd class="num whitespace-nowrap">⌀320 × 750<span class="u">&thinsp;мм</span></dd>
 							</div>
 							<div class="passport__row">
 								<dt>Фрезерная (3 оси)</dt>
-								<dd class="num">800 × 500 × 500<span class="u">&thinsp;мм</span></dd>
+								<dd class="num whitespace-nowrap">800 × 500 × 500<span class="u">&thinsp;мм</span></dd>
 							</div>
 							<div class="passport__row">
 								<dt>Поворотный стол (4-я ось)</dt>
-								<dd class="num">⌀200<span class="u">&thinsp;мм</span> (0.001°)</dd>
+								<dd class="num whitespace-nowrap">⌀200<span class="u">&thinsp;мм</span> (0.001°)</dd>
 							</div>
 							<div class="passport__row">
 								<dt>Предельный квалитет</dt>
-								<dd class="num">IT6<span class="u">&thinsp;(до ±0.008 мм)</span></dd>
+								<dd class="num whitespace-nowrap">IT6 <span class="u">(до&nbsp;±0.008&nbsp;мм)</span></dd>
 							</div>
 							<div class="passport__row">
 								<dt>Шероховатость поверхности</dt>
-								<dd class="num">Ra 0.4 – 1.6<span class="u">&thinsp;мкм</span></dd>
+								<dd class="num whitespace-nowrap">Ra&nbsp;0.4&nbsp;–&nbsp;1.6<span class="u">&thinsp;мкм</span></dd>
 							</div>
 							<div class="passport__row">
 								<dt>Инструментальный контроль</dt>
-								<dd>Mitutoyo (ОТК 100%)</dd>
+								<dd class="whitespace-nowrap">Mitutoyo (ОТК&nbsp;100%)</dd>
 							</div>
 							<div class="passport__row">
 								<dt>Базовый порог заказа</dt>
-								<dd class="num">5&thinsp;000<span class="u">&thinsp;₽</span> (с НДС 20%)</dd>
+								<dd class="num whitespace-nowrap">5&thinsp;000<span class="u">&thinsp;₽</span> <span class="u text-[11px]">(НДС&nbsp;20%)</span></dd>
 							</div>
 						</dl>
 
@@ -201,7 +202,7 @@
 					</div>
 					<div class="mt-6">
 						<a
-							href="/tokarnye-raboty-chpu/"
+							href="{base}/tokarnye-raboty-chpu/"
 							class="text-xs text-[var(--color-ink-2)] hover:text-[var(--color-accent)]"
 						>
 							Параметры токарного участка &rarr;
@@ -247,7 +248,7 @@
 					</div>
 					<div class="mt-6">
 						<a
-							href="/frezernye-raboty-chpu/"
+							href="{base}/frezernye-raboty-chpu/"
 							class="text-xs text-[var(--color-ink-2)] hover:text-[var(--color-accent)]"
 						>
 							Параметры фрезерного участка &rarr;
@@ -291,7 +292,7 @@
 					</div>
 					<div class="mt-6">
 						<a
-							href="/zuboreznye-i-shlifovalnye-raboty/"
+							href="{base}/zuboreznye-i-shlifovalnye-raboty/"
 							class="text-xs text-[var(--color-ink-2)] hover:text-[var(--color-accent)]"
 						>
 							Параметры зуборезного участка &rarr;

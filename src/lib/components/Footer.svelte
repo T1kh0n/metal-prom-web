@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import { siteConfig } from '#lib/config/site';
 
 	const currentYear = new Date().getFullYear();
@@ -44,7 +45,7 @@
 				<ul class="mt-4 space-y-2.5 text-xs">
 					<li>
 						<a
-							href="/tokarnye-raboty-chpu/"
+							href="{base}/tokarnye-raboty-chpu/"
 							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Токарные работы с ЧПУ (до ⌀320 мм)
@@ -52,7 +53,7 @@
 					</li>
 					<li>
 						<a
-							href="/frezernye-raboty-chpu/"
+							href="{base}/frezernye-raboty-chpu/"
 							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Фрезерная ЧПУ обработка (3 и 4 оси)
@@ -60,7 +61,7 @@
 					</li>
 					<li>
 						<a
-							href="/zuboreznye-i-shlifovalnye-raboty/"
+							href="{base}/zuboreznye-i-shlifovalnye-raboty/"
 							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Зубонарезные и шлифовальные работы
@@ -68,7 +69,7 @@
 					</li>
 					<li>
 						<a
-							href="/kalkulyator-stoimosti-chpu/"
+							href="{base}/kalkulyator-stoimosti-chpu/"
 							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Онлайн-калькулятор стоимости
@@ -83,7 +84,7 @@
 				<ul class="mt-4 space-y-2.5 text-xs">
 					<li>
 						<a
-							href="/kontrol-kachestva-i-oborudovanie/"
+							href="{base}/kontrol-kachestva-i-oborudovanie/"
 							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Лаборатория ОТК и станочный парк
@@ -91,7 +92,7 @@
 					</li>
 					<li>
 						<a
-							href="/portfolio/"
+							href="{base}/portfolio/"
 							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Портфолио изготовленных деталей
@@ -99,7 +100,7 @@
 					</li>
 					<li>
 						<a
-							href="/stati/"
+							href="{base}/stati/"
 							class="text-[var(--color-ink-2)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Инженерная база знаний и статьи
@@ -107,7 +108,7 @@
 					</li>
 					<li>
 						<a
-							href="/stati/vybor-stali-dlya-chpu-obrabotki/"
+							href="{base}/stati/vybor-stali-dlya-chpu-obrabotki/"
 							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Справочник сталей (Ст45, 40Х, Д16Т)
@@ -115,7 +116,7 @@
 					</li>
 					<li>
 						<a
-							href="/stati/kvalitety-tochnosti-i-sherohovatost-gost/"
+							href="{base}/stati/kvalitety-tochnosti-i-sherohovatost-gost/"
 							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							Таблицы допусков IT6–IT12 и Ra
@@ -123,7 +124,7 @@
 					</li>
 					<li>
 						<a
-							href="/stati/optimizaciya-stoimosti-detaley-chpu/"
+							href="{base}/stati/optimizaciya-stoimosti-detaley-chpu/"
 							class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 						>
 							7 правил снижения цены ЧПУ (DFM)
@@ -160,13 +161,11 @@
 			</div>
 		</div>
 
-		<!-- 152-FZ Legal Notice -->
+		<!-- 152-FZ Compliance Disclaimer Box -->
 		<div
 			class="mt-10 rounded-[var(--radius-card)] border border-[var(--color-rule)] bg-[var(--color-paper-2)] p-4 text-xs leading-relaxed text-[var(--color-muted)]"
 		>
-			<strong class="font-normal text-[var(--color-ink-2)]"
-				>Правовое уведомление (152-ФЗ и 149-ФЗ):</strong
-			>
+			<strong class="font-normal text-[var(--color-ink-2)]">Правовое уведомление (152-ФЗ и 149-ФЗ):</strong>
 			Веб-сайт {siteConfig.brandName} не осуществляет сбор, хранение, систематизацию или передачу персональных
 			данных физических лиц и не является оператором персональных данных Роскомнадзора. Все расчеты калькулятора
 			носят характер предварительной технической оценки. Взаимодействие с заказчиками осуществляется исключительно
@@ -183,13 +182,13 @@
 			</div>
 			<div class="mt-3 flex items-center gap-6 text-xs sm:mt-0">
 				<a
-					href="/politika-konfidentsialnosti/"
+					href="{base}/politika-konfidentsialnosti/"
 					class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 				>
 					Политика конфиденциальности
 				</a>
 				<a
-					href="/sitemap/"
+					href="{base}/sitemap/"
 					class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 				>
 					Карта сайта

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
 
@@ -151,19 +152,19 @@
 						</h3>
 						<div class="mt-3 flex flex-col space-y-2 text-xs">
 							<a
-								href="/kalkulyator-stoimosti-chpu/"
+								href="{base}/kalkulyator-stoimosti-chpu/"
 								class="text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:underline"
 							>
 								Онлайн-калькулятор с оценкой сложности &rarr;
 							</a>
 							<a
-								href="/frezernye-raboty-chpu/"
+								href="{base}/frezernye-raboty-chpu/"
 								class="text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:underline"
 							>
 								Возможности 3- и 4-осевого фрезерования &rarr;
 							</a>
 							<a
-								href="/portfolio/"
+								href="{base}/portfolio/"
 								class="text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:underline"
 							>
 								Примеры оптимизированных корпусных деталей &rarr;

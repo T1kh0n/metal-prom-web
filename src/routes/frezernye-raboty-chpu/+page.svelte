@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
 	import { createServiceSchema, serializeSchema } from '#lib/seo/schema';
@@ -225,7 +226,7 @@
 			</h2>
 			<div class="mt-4 grid grid-cols-1 gap-4 text-xs sm:grid-cols-3">
 				<a
-					href="/tokarnye-raboty-chpu/"
+					href="{base}/tokarnye-raboty-chpu/"
 					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
 				>
 					<span class="block font-normal text-[var(--color-ink)]">Токарная ЧПУ обработка</span>
@@ -234,7 +235,7 @@
 					>
 				</a>
 				<a
-					href="/zuboreznye-i-shlifovalnye-raboty/"
+					href="{base}/zuboreznye-i-shlifovalnye-raboty/"
 					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
 				>
 					<span class="block font-normal text-[var(--color-ink)]">Плоское шлифование</span>
@@ -243,7 +244,7 @@
 					>
 				</a>
 				<a
-					href="/portfolio/"
+					href="{base}/portfolio/"
 					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
 				>
 					<span class="block font-normal text-[var(--color-ink)]">Портфолио корпусных деталей</span>
@@ -264,7 +265,7 @@
 				нашему технологу.
 			</p>
 			<div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-				<a href="/kalkulyator-stoimosti-chpu/" class="btn btn--sm">
+				<a href="{base}/kalkulyator-stoimosti-chpu/" class="btn btn--sm">
 					Перейти в онлайн-калькулятор
 				</a>
 				<a href="mailto:{siteConfig.contactEmail}" class="btn btn--sm btn--line">

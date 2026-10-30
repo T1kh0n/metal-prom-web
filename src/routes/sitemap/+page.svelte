@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
 
-	const breadcrumbs = [{ name: 'Карта сайта', path: '/sitemap/' }];
+	const breadcrumbs = [{ name: 'Карта сайта', path: `${base}/sitemap/` }];
 
 	const sitemapSections = [
 		{
@@ -10,17 +11,17 @@
 			links: [
 				{
 					name: 'Токарные работы с ЧПУ',
-					href: '/tokarnye-raboty-chpu/',
+					href: `${base}/tokarnye-raboty-chpu/`,
 					desc: 'Токарная обработка валов, втулок, фланцев до ⌀320 мм и длины 750 мм'
 				},
 				{
 					name: 'Фрезерные работы с ЧПУ',
-					href: '/frezernye-raboty-chpu/',
+					href: `${base}/frezernye-raboty-chpu/`,
 					desc: '3- и 4-осевое фрезерование корпусов, плит и кронштейнов с точностью ±0.005 мм'
 				},
 				{
 					name: 'Зуборезные и шлифовальные работы',
-					href: '/zuboreznye-i-shlifovalnye-raboty/',
+					href: `${base}/zuboreznye-i-shlifovalnye-raboty/`,
 					desc: 'Нарезка шестерен m1–m8, шлицевых соединений, шлифование валов до Ra 0.4 мкм и ТВЧ'
 				}
 			]
@@ -30,17 +31,17 @@
 			links: [
 				{
 					name: 'Онлайн-калькулятор стоимости ЧПУ',
-					href: '/kalkulyator-stoimosti-chpu/',
+					href: `${base}/kalkulyator-stoimosti-chpu/`,
 					desc: 'Интерактивный расчет нормо-часов, партионных скидок и загрузка 3D-моделей STEP/STL'
 				},
 				{
 					name: 'Контроль качества (ОТК) и станочный парк',
-					href: '/kontrol-kachestva-i-oborudovanie/',
+					href: `${base}/kontrol-kachestva-i-oborudovanie/`,
 					desc: 'Протокол FAI, измерительная лаборатория Mitutoyo и паспорта качества изделий'
 				},
 				{
 					name: 'Портфолио выполненных деталей',
-					href: '/portfolio/',
+					href: `${base}/portfolio/`,
 					desc: 'Реализованные проекты: судовые валы, гидравлические коллекторы, корпуса и шестерни'
 				}
 			]
@@ -50,22 +51,22 @@
 			links: [
 				{
 					name: 'Все публикации базы знаний',
-					href: '/stati/',
+					href: `${base}/stati/`,
 					desc: 'Руководства по выбору материалов, допускам и снижению себестоимости деталей'
 				},
 				{
 					name: 'Выбор конструкционных и нержавеющих сталей',
-					href: '/stati/vybor-stali-dlya-chpu-obrabotki/',
+					href: `${base}/stati/vybor-stali-dlya-chpu-obrabotki/`,
 					desc: 'Сравнительный анализ обрабатываемости Ст45, 40Х, 09Г2С, 12Х18Н10Т и Д16Т'
 				},
 				{
 					name: 'Квалитеты точности IT6–IT12 и шероховатость Ra',
-					href: '/stati/kvalitety-tochnosti-i-sherohovatost-gost/',
+					href: `${base}/stati/kvalitety-tochnosti-i-sherohovatost-gost/`,
 					desc: 'Таблица допусков ГОСТ 25346 и экономическая целесообразность шлифования'
 				},
 				{
 					name: 'DFM-оптимизация себестоимости деталей',
-					href: '/stati/optimizaciya-stoimosti-detaley-chpu/',
+					href: `${base}/stati/optimizaciya-stoimosti-detaley-chpu/`,
 					desc: '7 правил конструирования технологичных деталей для снижения цены на 25–40%'
 				}
 			]
@@ -75,12 +76,12 @@
 			links: [
 				{
 					name: 'Контакты и схема проезда',
-					href: '/kontakty/',
+					href: `${base}/kontakty/`,
 					desc: 'Телефон цеха, инженерная почта, реквизиты юридического лица с НДС 20%'
 				},
 				{
 					name: 'Политика конфиденциальности и 152-ФЗ',
-					href: '/politika-konfidentsialnosti/',
+					href: `${base}/politika-konfidentsialnosti/`,
 					desc: 'Правовой статус B2B-взаимодействия и регламент защиты КД заказчиков (NDA)'
 				}
 			]

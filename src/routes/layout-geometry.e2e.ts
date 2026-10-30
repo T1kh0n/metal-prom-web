@@ -1,6 +1,9 @@
 import { test, expect, type Page } from '@playwright/test';
 
-const ROUTES = [
+const BASE = '/metal-prom-web';
+const toRoute = (r: string) => (r.startsWith(BASE) ? r : `${BASE}${r === "/" ? "/" : r}`);
+
+const RAW_ROUTES = [
 	'/',
 	'/tokarnye-raboty-chpu/',
 	'/frezernye-raboty-chpu/',
@@ -16,6 +19,8 @@ const ROUTES = [
 	'/politika-konfidentsialnosti/',
 	'/sitemap/'
 ];
+
+const ROUTES = RAW_ROUTES.map(toRoute);
 
 const VIEWPORTS = {
 	desktop1440: { width: 1440, height: 900 },
@@ -67,15 +72,15 @@ test.describe('Rule 1: Viewport Containment & Zero Horizontal Overflow', () => {
 	}) => {
 		for (const vp of [VIEWPORTS.mobile390, VIEWPORTS.mobile320]) {
 			await page.setViewportSize(vp);
-			await page.goto('/');
+			await page.goto(toRoute('/'));
 
 			const headerMetrics = await page.evaluate(() => {
 				const header = document.querySelector('header');
 				if (!header) return null;
 
-				const brand = header.querySelector('a[href="/"]');
+				const brand = header.querySelector('a');
 				const burger = header.querySelector('button[aria-label="Переключить меню"]');
-				const cta = header.querySelector('a.btn[href="/kalkulyator-stoimosti-chpu/"]');
+				const cta = header.querySelector('a.btn');
 
 				const brandRect = brand?.getBoundingClientRect();
 				const burgerRect = burger?.getBoundingClientRect();
@@ -151,7 +156,7 @@ test.describe('Rule 2: Header Navigation Geometry & Single-Line Discipline', () 
 	}) => {
 		for (const vp of [VIEWPORTS.desktop1440, VIEWPORTS.desktop1280]) {
 			await page.setViewportSize(vp);
-			await page.goto('/');
+			await page.goto(toRoute('/'));
 
 			const navLinkMetrics = await page.evaluate(() => {
 				const links = Array.from(document.querySelectorAll('header nav a'));
@@ -183,7 +188,7 @@ test.describe('Rule 2: Header Navigation Geometry & Single-Line Discipline', () 
 
 	test('Invariant 2.2: Concise navigation labels', async ({ page }) => {
 		await page.setViewportSize(VIEWPORTS.desktop1440);
-		await page.goto('/');
+		await page.goto(toRoute('/'));
 
 		const labels = await page.evaluate(() => {
 			const links = Array.from(document.querySelectorAll('header nav a'));
@@ -198,12 +203,12 @@ test.describe('Rule 2: Header Navigation Geometry & Single-Line Discipline', () 
 	}) => {
 		for (const vp of [VIEWPORTS.desktop1440, VIEWPORTS.desktop1280]) {
 			await page.setViewportSize(vp);
-			await page.goto('/');
+			await page.goto(toRoute('/'));
 
 			const clearances = await page.evaluate(() => {
-				const brand = document.querySelector('header a[href="/"]');
+				const brand = document.querySelector('header a');
 				const nav = document.querySelector('header nav');
-				const cta = document.querySelector('header a.btn[href="/kalkulyator-stoimosti-chpu/"]');
+				const cta = document.querySelector('header a.btn');
 
 				if (!brand || !nav || !cta) return null;
 
@@ -234,12 +239,12 @@ test.describe('Rule 2: Header Navigation Geometry & Single-Line Discipline', () 
 	}) => {
 		for (const vp of [VIEWPORTS.desktop1440, VIEWPORTS.desktop1280]) {
 			await page.setViewportSize(vp);
-			await page.goto('/');
+			await page.goto(toRoute('/'));
 
 			const alignment = await page.evaluate(() => {
-				const brand = document.querySelector('header a[href="/"]');
+				const brand = document.querySelector('header a');
 				const nav = document.querySelector('header nav');
-				const cta = document.querySelector('header a.btn[href="/kalkulyator-stoimosti-chpu/"]');
+				const cta = document.querySelector('header a.btn');
 
 				if (!brand || !nav || !cta) return null;
 
@@ -359,7 +364,7 @@ test.describe('Rule 3: Copywriting & Typographic Discipline', () => {
 
 	test('Invariant 3.2: Paragraph measure on desktop stays <= 760px', async ({ page }) => {
 		await page.setViewportSize(VIEWPORTS.desktop1440);
-		for (const route of ['/tokarnye-raboty-chpu/', '/frezernye-raboty-chpu/', '/stati/']) {
+		for (const route of ['/tokarnye-raboty-chpu/', '/frezernye-raboty-chpu/', '/stati/'].map(toRoute)) {
 			await page.goto(route);
 			const wideParagraphs = await page.evaluate(() => {
 				const paragraphs = Array.from(document.querySelectorAll('main p'));
@@ -429,7 +434,7 @@ test.describe('Rule 4: Macro-Layout Proportions & Container Utilization', () => 
 			'/tokarnye-raboty-chpu/',
 			'/frezernye-raboty-chpu/',
 			'/zuboreznye-i-shlifovalnye-raboty/'
-		]) {
+		].map(toRoute)) {
 			await page.goto(route);
 
 			const mobileWidths = await page.evaluate(() => {
@@ -457,7 +462,7 @@ test.describe('Vantage Interactive CNC CMM Inspection Twin Component', () => {
 		page
 	}) => {
 		await page.setViewportSize(VIEWPORTS.desktop1440);
-		await page.goto('/');
+		await page.goto(toRoute('/'));
 
 		const section = page.locator('#cmm-twin-section');
 		await expect(section).toBeVisible();
@@ -479,7 +484,7 @@ test.describe('Vantage Interactive CNC CMM Inspection Twin Component', () => {
 
 	test('switchboard toggles all 4 layers reactively', async ({ page }) => {
 		await page.setViewportSize(VIEWPORTS.desktop1440);
-		await page.goto('/');
+		await page.goto(toRoute('/'));
 
 		const section = page.locator('#cmm-twin-section');
 		const switches = section.locator('button[role="switch"]');
@@ -508,7 +513,7 @@ test.describe('Vantage Interactive CNC CMM Inspection Twin Component', () => {
 	}) => {
 		for (const vp of [VIEWPORTS.mobile390, VIEWPORTS.mobile320]) {
 			await page.setViewportSize(vp);
-			await page.goto('/');
+			await page.goto(toRoute('/'));
 
 			const overflow = await page.evaluate(() => {
 				const section = document.getElementById('cmm-twin-section');
@@ -526,7 +531,7 @@ test.describe('Vantage Interactive CNC CMM Inspection Twin Component', () => {
 
 	test('callout plaques do not collide or overlap in 2D space', async ({ page }) => {
 		await page.setViewportSize(VIEWPORTS.desktop1440);
-		await page.goto('/');
+		await page.goto(toRoute('/'));
 
 		const section = page.locator('#cmm-twin-section');
 		await section.scrollIntoViewIfNeeded();

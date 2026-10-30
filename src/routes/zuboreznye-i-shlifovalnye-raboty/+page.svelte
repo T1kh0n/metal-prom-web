@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
 	import { createServiceSchema, serializeSchema } from '#lib/seo/schema';
@@ -217,7 +218,7 @@
 			<h2 class="text-sm font-normal text-[var(--color-ink)]">Связанные разделы сайта:</h2>
 			<div class="mt-4 grid grid-cols-1 gap-4 text-xs sm:grid-cols-3">
 				<a
-					href="/tokarnye-raboty-chpu/"
+					href="{base}/tokarnye-raboty-chpu/"
 					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
 				>
 					<span class="block font-normal text-[var(--color-ink)]">Токарная ЧПУ обработка</span>
@@ -226,7 +227,7 @@
 					>
 				</a>
 				<a
-					href="/kontrol-kachestva-i-oborudovanie/"
+					href="{base}/kontrol-kachestva-i-oborudovanie/"
 					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
 				>
 					<span class="block font-normal text-[var(--color-ink)]">Метрология и ОТК</span>
@@ -235,7 +236,7 @@
 					>
 				</a>
 				<a
-					href="/portfolio/"
+					href="{base}/portfolio/"
 					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
 				>
 					<span class="block font-normal text-[var(--color-ink)]">Примеры шестерен в портфолио</span
@@ -257,7 +258,7 @@
 				5&thinsp;000&thinsp;₽ с НДС.
 			</p>
 			<div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-				<a href="/kalkulyator-stoimosti-chpu/" class="btn btn--sm"> Расчет стоимости онлайн </a>
+				<a href="{base}/kalkulyator-stoimosti-chpu/" class="btn btn--sm"> Расчет стоимости онлайн </a>
 				<a href="mailto:{siteConfig.contactEmail}" class="btn btn--sm btn--line">
 					Отправить эскиз на {siteConfig.contactEmail}
 				</a>

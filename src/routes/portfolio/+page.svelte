@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
 
@@ -158,21 +159,21 @@
 			<h2 class="text-sm font-normal text-[var(--color-ink)]">Разделы услуг по видам обработки:</h2>
 			<div class="mt-4 grid grid-cols-1 gap-4 text-xs sm:grid-cols-3">
 				<a
-					href="/tokarnye-raboty-chpu/"
+					href="{base}/tokarnye-raboty-chpu/"
 					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
 				>
 					<span class="block font-normal text-[var(--color-ink)]">Токарная ЧПУ обработка</span>
 					<span class="mt-1 block text-[var(--color-muted)]">Валы, оси, пальцы, штуцеры</span>
 				</a>
 				<a
-					href="/frezernye-raboty-chpu/"
+					href="{base}/frezernye-raboty-chpu/"
 					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
 				>
 					<span class="block font-normal text-[var(--color-ink)]">Фрезерная ЧПУ обработка</span>
 					<span class="mt-1 block text-[var(--color-muted)]">Корпуса, плиты, кронштейны</span>
 				</a>
 				<a
-					href="/zuboreznye-i-shlifovalnye-raboty/"
+					href="{base}/zuboreznye-i-shlifovalnye-raboty/"
 					class="well block text-[var(--color-ink-2)] transition-colors hover:border-[var(--color-rule-2)] hover:text-[var(--color-ink)]"
 				>
 					<span class="block font-normal text-[var(--color-ink)]">Зуборезка и шлифовка</span>
@@ -192,7 +193,7 @@
 				разбивкой по этапам в течение 3 часов.
 			</p>
 			<div class="mt-6 flex flex-wrap items-center justify-center gap-4">
-				<a href="/kalkulyator-stoimosti-chpu/" class="btn btn--sm">
+				<a href="{base}/kalkulyator-stoimosti-chpu/" class="btn btn--sm">
 					Рассчитать в онлайн-калькуляторе
 				</a>
 				<a href="mailto:{siteConfig.contactEmail}" class="btn btn--sm btn--line">

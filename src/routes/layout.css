@@ -1,147 +1,167 @@
-/* hallmark: modern-minimal · theme: vantage (calibrated engineering) · posture: restrained */
-/* vantage: terrain/steel · high-precision machining workshop, tabular tolerances, corner ticks, zero AI-slop tells */
-
 @import 'tailwindcss';
 
-:root {
-	color-scheme: dark;
-	--space-3xs: 2px;
-	--space-2xs: 4px;
-	--space-xs: 8px;
-	--space-sm: 12px;
-	--space-md: 16px;
-	--space-lg: 24px;
-	--space-xl: 40px;
-	--space-2xl: 64px;
-	--space-3xl: 96px;
-	--space-4xl: 144px;
+/* Vantage Design System Tokens & Base Theme Foundations */
+@layer theme {
+	:root {
+		/* Canvas & Background Surfaces */
+		--color-paper: oklch(13.5% 0.012 235);
+		--color-paper-2: oklch(17.5% 0.014 235);
+		--color-paper-3: oklch(21.5% 0.016 235);
 
-	--text-xs: 0.8125rem;
-	--text-sm: 0.875rem;
-	--text-md: 1rem;
-	--text-lg: 1.1875rem;
-	--text-xl: 1.5rem;
-	--text-2xl: 1.875rem;
-	--text-3xl: 2.375rem;
-	--text-display: clamp(2.5rem, 3.4vw + 1rem, 4.5rem);
-	--text-section: clamp(1.875rem, 1.6vw + 1.25rem, 2.75rem);
-	--text-title: clamp(1.125rem, 0.4vw + 1rem, 1.3125rem);
-	--text-lead: clamp(1.0625rem, 0.3vw + 1rem, 1.25rem);
-	--text-figure: clamp(4.5rem, 12vw + 1rem, 14rem);
+		/* Foregrounds & Typography */
+		--color-ink: oklch(98% 0.005 235);
+		--color-ink-2: oklch(86% 0.01 235);
+		--color-muted: oklch(62% 0.02 235);
 
-	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-	--ease-in: cubic-bezier(0.7, 0, 0.84, 0);
-	--ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-	--dur-micro: 120ms;
-	--dur-short: 240ms;
-	--dur-long: 560ms;
+		/* Vantage Signal Accent (Instrument Lime) */
+		--color-accent: oklch(89% 0.19 126);
+		--color-accent-hi: oklch(93% 0.21 126);
+		--color-accent-ink: oklch(12% 0.03 126);
 
-	--color-error: oklch(72% 0.15 27);
-	--color-success: oklch(89% 0.19 126);
+		/* Architectural Rules & Structural Hairlines */
+		--color-rule: oklch(26% 0.015 235);
+		--color-rule-2: oklch(34% 0.02 235);
+		--rule-hair: 1px;
 
-	--container: 1440px;
-	--gutter: 64px;
-	--gap-columns: 32px;
-	--section-gap-s: 120px;
-	--section-gap: 152px;
-	--section-gap-l: 184px;
+		/* Point-Cloud 3D Altitude Tiers */
+		--point-lo: oklch(42% 0.04 245);
+		--point-mid: oklch(70% 0.04 232);
+		--point-hi: oklch(96% 0.02 215);
 
-	--z-base: 1;
-	--z-raised: 10;
-	--z-dropdown: 100;
-	--z-sticky: 200;
-	--z-sticky-nav: 300;
-	--z-modal: 400;
-	--z-toast: 500;
-	--z-tooltip: 600;
+		/* Geometry & Radii */
+		--radius-pill: 9999px;
+		--radius-card: 4px;
 
-	/* Vantage Exact OKLCH Palette */
-	--color-paper: oklch(13.5% 0.012 235);
-	--color-paper-2: oklch(17% 0.014 235);
-	--color-paper-3: oklch(21% 0.016 235);
+		/* Durations & Easing Curves */
+		--dur-micro: 120ms;
+		--dur-short: 240ms;
+		--dur-sweep: 75000ms;
+		--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
-	--color-ink: oklch(95% 0.006 230);
-	--color-ink-2: oklch(82% 0.012 230);
-	--color-muted: oklch(66% 0.016 230);
+		/* Hallmark Fluid Typography Tokens (At 1440px desktop) */
+		--text-display: clamp(40px, 5.5vw, 76px);
+		--text-display-s: clamp(32px, 4vw, 56px);
+		--text-section: clamp(26px, 3.2vw, 44px);
+		--text-title: clamp(18px, 1.8vw, 22px);
+		--text-lead: clamp(16px, 1.3vw, 19px);
+		--text-md: 15px;
+		--text-sm: 13px;
+		--text-xs: 11.5px;
 
-	--color-rule: oklch(27% 0.014 235);
-	--color-rule-2: oklch(34% 0.016 235);
-
-	--color-accent: oklch(89% 0.19 126);
-	--color-accent-hi: oklch(93% 0.17 126);
-	--color-accent-ink: oklch(19% 0.04 126);
-	--color-focus: oklch(89% 0.19 126);
-
-	--point-lo: oklch(42% 0.04 245);
-	--point-mid: oklch(70% 0.04 232);
-	--point-hi: oklch(96% 0.02 215);
-	--color-slot: oklch(21% 0.016 235);
-
-	--font-display: 'Geologica', ui-sans-serif, system-ui, sans-serif;
-	--font-body: 'Geologica', ui-sans-serif, system-ui, sans-serif;
-	--font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-
-	--radius-card: 4px;
-	--radius-pill: 999px;
-	--rule-hair: 1px;
-	--tick: 10px;
-	--shadow-card: none;
-
-	--tracking-display: -0.035em;
-	--display-weight: 300;
+		/* Rhythm Spacing Tokens */
+		--space-2xs: 4px;
+		--space-xs: 8px;
+		--space-sm: 12px;
+		--space-md: 16px;
+		--space-lg: 24px;
+		--space-xl: 32px;
+		--space-2xl: 48px;
+		--space-3xl: 64px;
+	}
 }
 
-html,
-body {
+/* Base Reset & Core Styles */
+html {
 	overflow-x: clip;
 	background-color: var(--color-paper);
 	color: var(--color-ink);
-	font-family: var(--font-body);
-	font-weight: 300;
-	font-variation-settings: 'SHRP' 0;
+	font-family:
+		'Geologica',
+		-apple-system,
+		BlinkMacSystemFont,
+		sans-serif;
+	font-feature-settings:
+		'cv01' 1,
+		'cv02' 1;
 	-webkit-font-smoothing: antialiased;
-	caret-color: var(--color-accent);
+	-moz-osx-font-smoothing: grayscale;
 }
 
-::selection {
-	background: color-mix(in oklab, var(--color-accent) 30%, transparent);
+body {
+	margin: 0;
+	background-color: var(--color-paper);
 	color: var(--color-ink);
+	overflow-x: clip;
+	min-width: 0;
+	width: 100%;
 }
 
-:focus-visible {
-	outline: 2px solid var(--color-focus);
-	outline-offset: 2px;
+.grid > * {
+	min-width: 0;
 }
 
-/* Vantage Display Typography: Ultrathin 300 with sharpened terminals */
-h1,
-h2,
-h3,
-h4 {
-	font-family: var(--font-display);
-	font-weight: 300 !important;
-	font-variation-settings: 'SHRP' 100;
-	letter-spacing: var(--tracking-display);
-	line-height: 1.05;
-	text-wrap: balance;
+header nav a {
+	white-space: nowrap;
 }
 
-h1 {
-	font-size: var(--text-display);
+/* Hairline Tick Corners (CSS Mask formula from Vantage Design Authority) */
+.ticks {
+	position: relative;
 }
 
-h2 {
-	font-size: var(--text-section);
+.ticks::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	border: var(--rule-hair) solid var(--color-rule-2);
+	-webkit-mask-image: radial-gradient(
+		circle 12px at 12px 12px,
+		transparent 11px,
+		var(--color-ink) 12px
+	);
+	mask-image: radial-gradient(circle 12px at 12px 12px, transparent 11px, var(--color-ink) 12px);
 }
 
-h3 {
-	font-size: var(--text-title);
-	letter-spacing: -0.015em;
+.ticks::after {
+	content: '';
+	position: absolute;
+	inset: -1px;
+	pointer-events: none;
+	background:
+		linear-gradient(to right, var(--color-ink-2) 6px, transparent 6px) 0 0,
+		linear-gradient(to bottom, var(--color-ink-2) 6px, transparent 6px) 0 0,
+		linear-gradient(to left, var(--color-ink-2) 6px, transparent 6px) 100% 0,
+		linear-gradient(to bottom, var(--color-ink-2) 6px, transparent 6px) 100% 0,
+		linear-gradient(to right, var(--color-ink-2) 6px, transparent 6px) 0 100%,
+		linear-gradient(to top, var(--color-ink-2) 6px, transparent 6px) 0 100%,
+		linear-gradient(to left, var(--color-ink-2) 6px, transparent 6px) 100% 100%,
+		linear-gradient(to top, var(--color-ink-2) 6px, transparent 6px) 100% 100%;
+	background-repeat: no-repeat;
+	background-size: 6px 6px;
+	opacity: 0.8;
 }
 
-b,
-strong {
-	font-weight: 400;
+/* Hallmark Craft Rule: 84px Display Type Spec */
+@layer base {
+	h1 {
+		font-size: var(--text-display);
+		line-height: 1.05;
+		font-weight: 300;
+		letter-spacing: -0.025em;
+		color: var(--color-ink);
+	}
+
+	h2 {
+		font-size: var(--text-section);
+		line-height: 1.15;
+		font-weight: 300;
+		letter-spacing: -0.02em;
+		color: var(--color-ink);
+	}
+
+	h3 {
+		font-size: var(--text-title);
+		line-height: 1.25;
+		font-weight: 400;
+		letter-spacing: -0.01em;
+		color: var(--color-ink);
+	}
+
+	b,
+	strong {
+		font-weight: 400;
+	}
 }
 
 /* Vantage Controls */
@@ -149,17 +169,19 @@ strong {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	text-align: center;
 	gap: var(--space-xs);
 	min-height: 48px;
-	padding: 0 var(--space-lg);
+	padding: 0.625rem var(--space-lg);
 	border: 0;
 	border-radius: var(--radius-pill);
 	background: var(--color-accent);
 	color: var(--color-accent-ink);
-	font: 400 var(--text-md) / 1 var(--font-body);
+	font: 400 var(--text-md) / 1.25 var(--font-body);
 	text-decoration: none;
 	cursor: pointer;
-	white-space: nowrap;
+	word-break: normal;
+	overflow-wrap: break-word;
 	transition:
 		background var(--dur-short) var(--ease-out),
 		box-shadow var(--dur-short) var(--ease-out),
@@ -193,6 +215,8 @@ strong {
 
 .btn--wide {
 	width: 100%;
+	white-space: normal;
+	padding: 0.75rem 1.25rem;
 }
 
 /* Vantage Typography & Numeric Formatting */
@@ -212,44 +236,50 @@ main p {
 	font-weight: 400;
 }
 
-.num .u,
-.u {
+.num .u {
+	font-size: 0.85em;
 	color: var(--color-muted);
-	font-size: 0.75em;
-	font-weight: 300;
+	white-space: nowrap;
 }
 
-/* Corner ticks: precision hairline frame drawn only at its corners */
-.ticks {
-	position: relative;
-}
-
-.ticks::before {
-	content: '';
-	position: absolute;
-	inset: 0;
-	pointer-events: none;
-	border: var(--rule-hair) solid var(--color-rule-2);
-	-webkit-mask: conic-gradient(at var(--tick) var(--tick), transparent 75%, var(--color-ink) 0) 0
-		0 / calc(100% - var(--tick)) calc(100% - var(--tick));
-	mask: conic-gradient(at var(--tick) var(--tick), transparent 75%, var(--color-ink) 0) 0 0 /
-		calc(100% - var(--tick)) calc(100% - var(--tick));
-}
-
-/* Chromatic Lime Signal Dot (Strictly for active state status) */
+/* Instrument Live Dot Pulse */
 .live-dot {
 	display: inline-block;
 	width: 7px;
 	height: 7px;
 	border-radius: 50%;
 	background: var(--color-accent);
-	box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-paper) 70%, transparent);
-	flex-shrink: 0;
+	box-shadow: 0 0 6px var(--color-accent);
+	animation: pulse-dot 2.5s infinite;
+}
+
+@keyframes pulse-dot {
+	0%,
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.35;
+		transform: scale(0.85);
+	}
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+	.live-dot {
+		animation: none;
+	}
+	* {
+		transition-duration: 0.001ms !important;
+		animation-duration: 0.001ms !important;
+	}
 }
 
 /* Readout Strip: Instrument-quiet hairline metric readout */
 .readout {
 	width: fit-content;
+	max-width: 100%;
 	display: grid;
 	grid-template-columns: repeat(4, auto);
 	justify-content: start;
@@ -305,18 +335,72 @@ main p {
 	}
 }
 
+/* Inner Page 12-Column Blueprint & Corridor Prevention Rules */
+.blueprint-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-xl);
+	width: 100%;
+}
+
+@media (min-width: 1024px) {
+	.blueprint-grid {
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+		gap: var(--space-2xl);
+	}
+
+	.blueprint-main {
+		grid-column: span 8 / span 8;
+		width: 100%;
+	}
+
+	.blueprint-aside {
+		grid-column: span 4 / span 4;
+		width: 100%;
+	}
+}
+
+/* Architectural Well Container (replacing bloated tube boxes) */
+.well {
+	background: var(--color-paper-2);
+	border: var(--rule-hair) solid var(--color-rule);
+	border-radius: var(--radius-card);
+	padding: var(--space-lg);
+}
+
+@media (min-width: 640px) {
+	.well {
+		padding: var(--space-xl);
+	}
+}
+
 /* Technical Passport Styling */
 .passport {
-	padding: var(--space-lg) var(--space-xl);
+	padding: var(--space-md);
 	background: var(--color-paper);
+}
+
+@media (min-width: 640px) {
+	.passport {
+		padding: var(--space-lg) var(--space-xl);
+	}
 }
 
 .passport__head {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--space-xs);
 	padding-bottom: var(--space-sm);
 	border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+
+@media (min-width: 640px) {
+	.passport__head {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
 }
 
 .passport__title {
@@ -344,21 +428,31 @@ main p {
 	display: flex;
 	align-items: baseline;
 	justify-content: space-between;
-	padding: var(--space-sm) 0;
+	padding: var(--space-xs) 0;
 	border-bottom: var(--rule-hair) solid var(--color-rule);
 	font-size: var(--text-sm);
-	gap: var(--space-md);
+	gap: var(--space-sm);
+}
+
+@media (min-width: 640px) {
+	.passport__row {
+		padding: var(--space-sm) 0;
+		gap: var(--space-md);
+	}
 }
 
 .passport__row dt {
 	color: var(--color-muted);
 	font-weight: 300;
+	min-width: 0;
 }
 
 .passport__row dd {
 	margin: 0;
 	color: var(--color-ink);
 	text-align: right;
+	white-space: nowrap;
+	flex-shrink: 0;
 }
 
 .passport__foot {
@@ -377,27 +471,19 @@ main p {
 
 .v-table th {
 	padding: var(--space-sm) var(--space-md);
-	border-bottom: var(--rule-hair) solid var(--color-rule);
+	border-bottom: var(--rule-hair) solid var(--color-rule-2);
 	color: var(--color-muted);
 	font-weight: 400;
-	letter-spacing: normal;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
 }
 
 .v-table td {
 	padding: var(--space-sm) var(--space-md);
 	border-bottom: var(--rule-hair) solid var(--color-rule);
-	color: var(--color-ink-2);
-}
-
-.v-table tbody tr:hover td {
-	background: var(--color-paper-2);
 	color: var(--color-ink);
 }
 
-/* Vantage Well / Panel */
-.well {
-	border: var(--rule-hair) solid var(--color-rule);
+.v-table tr:hover td {
 	background: var(--color-paper-2);
-	border-radius: var(--radius-card);
-	padding: var(--space-md);
 }

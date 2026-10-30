@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
 
@@ -75,14 +76,14 @@
 						<h2
 							class="mt-4 text-base leading-snug font-normal text-[var(--color-ink)] hover:text-white"
 						>
-							<a href="/stati/{article.slug}/">{article.title}</a>
+							<a href="{base}/stati/{article.slug}/">{article.title}</a>
 						</h2>
 						<p class="mt-3 text-xs leading-relaxed text-[var(--color-muted)]">{article.excerpt}</p>
 					</div>
 
 					<div class="mt-6 border-t border-[var(--color-rule)] pt-4">
 						<a
-							href="/stati/{article.slug}/"
+							href="{base}/stati/{article.slug}/"
 							class="text-xs text-[var(--color-ink-2)] hover:text-[var(--color-ink)]"
 						>
 							Читать инженерный разбор &rarr;

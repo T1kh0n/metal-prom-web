@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import { createBreadcrumbSchema, serializeSchema, type BreadcrumbItem } from '#lib/seo/schema';
 
 	interface Props {
@@ -7,8 +8,8 @@
 
 	let { items }: Props = $props();
 
-	// Full breadcrumb hierarchy including root
-	let fullItems = $derived([{ name: 'Главная', path: '/' }, ...items]);
+	// Full breadcrumb hierarchy including root with base path support
+	let fullItems = $derived([{ name: 'Главная', path: `${base || '/'}` }, ...items]);
 
 	let schemaObj = $derived(createBreadcrumbSchema(fullItems));
 </script>
@@ -28,7 +29,9 @@
 					<span class="font-normal text-[var(--color-ink)]" aria-current="page">{item.name}</span>
 				{:else}
 					<a
-						href={item.path}
+						href={item.path.startsWith('http') || item.path.startsWith(base)
+							? item.path
+							: `${base}${item.path}`}
 						class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
 					>
 						{item.name}

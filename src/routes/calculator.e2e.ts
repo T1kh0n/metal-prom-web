@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 
+const BASE = '/metal-prom-web';
+
 function createSyntheticBinaryStlBuffer(
 	dx: number,
 	dy: number,
@@ -67,7 +69,7 @@ function createSyntheticBinaryStlBuffer(
 
 test.describe('CNC Cost Calculator Interactive Component', () => {
 	test.beforeEach(async ({ page }) => {
-		await page.goto('/');
+		await page.goto(`${BASE}/`);
 	});
 
 	test('renders calculator with default turning operation and inputs', async ({ page }) => {

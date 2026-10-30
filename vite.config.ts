@@ -4,6 +4,10 @@ import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 import path from 'node:path';
 
+const base = (process.env.BASE_PATH !== undefined ? process.env.BASE_PATH : '/metal-prom-web') as
+	| ''
+	| `/${string}`;
+
 export default defineConfig({
 	plugins: [
 		tailwindcss(),
@@ -14,7 +18,7 @@ export default defineConfig({
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
 			paths: {
-				relative: true
+				base
 			},
 			adapter: adapter({
 				pages: 'build',

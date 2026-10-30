@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$lib/paths';
 	import Breadcrumbs from '#lib/components/Breadcrumbs.svelte';
 	import { siteConfig } from '#lib/config/site';
 
@@ -176,19 +177,19 @@
 						<h3 class="text-xs font-normal text-[var(--color-ink)]">Связанные разделы цеха:</h3>
 						<div class="mt-3 flex flex-col space-y-2 text-xs">
 							<a
-								href="/tokarnye-raboty-chpu/"
+								href="{base}/tokarnye-raboty-chpu/"
 								class="text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:underline"
 							>
 								Токарная обработка сталей на ЧПУ &rarr;
 							</a>
 							<a
-								href="/frezernye-raboty-chpu/"
+								href="{base}/frezernye-raboty-chpu/"
 								class="text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:underline"
 							>
 								Фрезерование корпусов из Д16Т &rarr;
 							</a>
 							<a
-								href="/kalkulyator-stoimosti-chpu/"
+								href="{base}/kalkulyator-stoimosti-chpu/"
 								class="text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:underline"
 							>
 								Расчет стоимости с выбором материала &rarr;
