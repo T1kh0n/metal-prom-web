@@ -1,5 +1,6 @@
 <script lang="ts">
 	import CostCalculator from '#lib/components/CostCalculator.svelte';
+	import WorkpieceInspectionScan from '#lib/components/WorkpieceInspectionScan.svelte';
 	import { siteConfig } from '#lib/config/site';
 	import { createFaqSchema, serializeSchema } from '#lib/seo/schema';
 
@@ -44,203 +45,270 @@
 </svelte:head>
 
 <main>
-	<!-- Hero Section: Stage Posture with Engineering Material -->
-	<section class="border-b border-zinc-800 bg-zinc-950 py-16 sm:py-24">
+	<!-- Hero Section: Laboratory Split Bench (Vantage Stage) -->
+	<section class="border-b border-[var(--color-rule)] bg-[var(--color-paper)] py-16 sm:py-24">
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-			<div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-				<!-- Left Column: Core Value Proposition & Actions -->
+			<div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
+				<!-- Left Column: Core Value Proposition, Actions & Readout Bar -->
 				<div class="lg:col-span-7">
-					<h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-						Металлообработка с ЧПУ на заказ в Калининграде
-					</h1>
-					<p class="mt-5 text-base leading-relaxed text-zinc-300 sm:text-lg">
-						Серийное изготовление токарных и 4-осевых фрезерных деталей по чертежам заказчика. Квалитеты точности до IT6, инструментальный контроль ОТК Mitutoyo, расчет с НДС 20%.
-					</p>
-					<div class="mt-8 flex flex-wrap items-center gap-4">
-						<a
-							href="#calculator-section"
-							class="inline-flex items-center justify-center rounded-md bg-zinc-100 px-5 py-3 text-sm font-medium text-zinc-950 shadow-sm transition-colors hover:bg-white"
-						>
-							Инженерный калькулятор онлайн
-						</a>
-						<a
-							href="mailto:{siteConfig.contactEmail}"
-							class="inline-flex items-center justify-center rounded-md border border-zinc-700 bg-zinc-900/60 px-5 py-3 text-sm font-medium text-zinc-200 transition-colors hover:bg-zinc-800"
-						>
-							Отправить чертежи
-						</a>
+					<div class="mb-4 text-xs font-light text-[var(--color-muted)]">
+						Цех в Калининграде, 2 смены, прием заказов
 					</div>
 
-					<!-- Clean Hairline Metrics Row -->
-					<div class="mt-12 grid grid-cols-2 gap-6 border-t border-zinc-800/80 pt-8 sm:grid-cols-4">
-						<div>
-							<div class="text-xs text-zinc-400">Станочный парк</div>
-							<div class="mt-1 font-mono text-base font-bold text-white">4 ЧПУ центра</div>
-							<div class="mt-0.5 text-xs text-zinc-500">Токарные и 3D фрезерные</div>
-						</div>
-						<div>
-							<div class="text-xs text-zinc-400">Точность деталей</div>
-							<div class="mt-1 font-mono text-base font-bold text-emerald-400">до IT6 (Ra 0.4)</div>
-							<div class="mt-0.5 text-xs text-zinc-500">Шлифование и ОТК</div>
-						</div>
-						<div>
-							<div class="text-xs text-zinc-400">Сроки поставки</div>
-							<div class="mt-1 font-mono text-base font-bold text-zinc-100">5 – 7 дней</div>
-							<div class="mt-0.5 text-xs text-zinc-500">Экспресс от 48ч</div>
-						</div>
-						<div>
-							<div class="text-xs text-zinc-400">Порог запуска</div>
-							<div class="mt-1 font-mono text-base font-bold text-white">от 5 000 ₽</div>
-							<div class="mt-0.5 text-xs text-zinc-500">Безнал с НДС 20%</div>
-						</div>
+					<h1 class="text-3xl text-[var(--color-ink)] sm:text-5xl lg:text-6xl">
+						Прецизионная металлообработка с ЧПУ в Калининграде
+					</h1>
+
+					<p class="lead mt-6 max-w-2xl">
+						Серийное изготовление токарных и 4-осевых фрезерных деталей по чертежам заказчика.
+						Квалитеты точности до IT6, инструментальный контроль ОТК Mitutoyo, расчет с НДС 20%.
+					</p>
+
+					<div class="mt-8 flex flex-wrap items-center gap-3">
+						<a href="#calculator-section" class="btn">Инженерный калькулятор онлайн</a>
+						<a href="mailto:{siteConfig.contactEmail}" class="btn btn--line">Отправить чертежи</a>
 					</div>
+
+					<!-- 4-item horizontal hairline readout line with corner ticks -->
+					<dl class="readout ticks" aria-label="Параметры производства">
+						<div>
+							<dt>Станочный парк</dt>
+							<dd class="num">4<span class="u">&thinsp;центра</span></dd>
+						</div>
+						<div>
+							<dt>Точность</dt>
+							<dd class="num">IT6<span class="u">&thinsp;(Ra 0.4)</span></dd>
+						</div>
+						<div>
+							<dt>Сроки партии</dt>
+							<dd class="num">5&ndash;7<span class="u">&thinsp;дней</span></dd>
+						</div>
+						<div>
+							<dt>Порог запуска</dt>
+							<dd class="num">5&thinsp;000<span class="u">&thinsp;₽</span></dd>
+						</div>
+					</dl>
 				</div>
 
-				<!-- Right Column: The Signature Visual (Technical Envelope Passport) -->
+				<!-- Right Column: Equipment Limits Passport enclosed in precision .ticks -->
 				<div class="lg:col-span-5">
-					<div class="rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 shadow-xs">
-						<div class="border-b border-zinc-800 pb-4">
-							<div class="text-xs font-medium text-zinc-400">Технологический паспорт</div>
-							<div class="mt-1 text-base font-bold text-white">Лимиты оборудования цеха</div>
-						</div>
-						<div class="divide-y divide-zinc-800/80 text-xs">
-							<div class="flex justify-between py-3">
-								<span class="text-zinc-400">Токарная обработка</span>
-								<span class="font-mono text-zinc-100">⌀ 320 мм / L 750 мм</span>
+					<aside class="ticks passport" aria-label="Технологический паспорт цеха">
+						<div class="passport__head">
+							<div>
+								<div class="text-xs text-[var(--color-muted)]">Технологический паспорт</div>
+								<div class="passport__title mt-0.5">Лимиты оборудования цеха</div>
 							</div>
-							<div class="flex justify-between py-3">
-								<span class="text-zinc-400">4-осевое фрезерование</span>
-								<span class="font-mono text-zinc-100">800 × 500 × 500 мм</span>
-							</div>
-							<div class="flex justify-between py-3">
-								<span class="text-zinc-400">Зубонарезание шестерен</span>
-								<span class="font-mono text-zinc-100">m1 – m8 (до ⌀500 мм)</span>
-							</div>
-							<div class="flex justify-between py-3">
-								<span class="text-zinc-400">Круглое шлифование</span>
-								<span class="font-mono text-emerald-400">Ra 0.4 мкм (IT6)</span>
-							</div>
-							<div class="flex justify-between py-3">
-								<span class="text-zinc-400">Позиционирование</span>
-								<span class="font-mono text-emerald-400">±0.005 мм</span>
-							</div>
-							<div class="flex justify-between py-3">
-								<span class="text-zinc-400">Инструментальный ОТК</span>
-								<span class="text-zinc-200">Mitutoyo (Япония)</span>
-							</div>
-							<div class="flex justify-between py-3">
-								<span class="text-zinc-400">Серийные партии</span>
-								<span class="font-mono text-zinc-100">от 5 до 1 000 шт.</span>
+							<div class="passport__badge">
+								<span class="live-dot" aria-hidden="true"></span>
+								<span>Статус: в работе (Калининград)</span>
 							</div>
 						</div>
-						<div class="mt-4 border-t border-zinc-800 pt-4 text-xs text-zinc-500">
-							Серийные скидки до 40% · Паспорт качества ОТК к партии
+
+						<dl class="passport__list">
+							<div class="passport__row">
+								<dt>Токарная обработка</dt>
+								<dd class="num">⌀320 × 750<span class="u">&thinsp;мм</span></dd>
+							</div>
+							<div class="passport__row">
+								<dt>Фрезерная (3 оси)</dt>
+								<dd class="num">800 × 500 × 500<span class="u">&thinsp;мм</span></dd>
+							</div>
+							<div class="passport__row">
+								<dt>Поворотный стол (4-я ось)</dt>
+								<dd class="num">⌀200<span class="u">&thinsp;мм</span> (0.001°)</dd>
+							</div>
+							<div class="passport__row">
+								<dt>Предельный квалитет</dt>
+								<dd class="num">IT6<span class="u">&thinsp;(до ±0.008 мм)</span></dd>
+							</div>
+							<div class="passport__row">
+								<dt>Шероховатость поверхности</dt>
+								<dd class="num">Ra 0.4 – 1.6<span class="u">&thinsp;мкм</span></dd>
+							</div>
+							<div class="passport__row">
+								<dt>Инструментальный контроль</dt>
+								<dd>Mitutoyo (ОТК 100%)</dd>
+							</div>
+							<div class="passport__row">
+								<dt>Базовый порог заказа</dt>
+								<dd class="num">5&thinsp;000<span class="u">&thinsp;₽</span> (с НДС 20%)</dd>
+							</div>
+						</dl>
+
+						<div class="passport__foot">
+							Партии от 5 до 1 000 шт. Доставка по Калининграду и области
 						</div>
-					</div>
+					</aside>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- Core Machining Services Grid -->
+	<!-- Production Divisions Grid -->
 	<section
-		id="services"
-		class="border-b border-zinc-800 bg-zinc-950 py-16"
-		aria-labelledby="services-overview-heading"
+		class="border-b border-[var(--color-rule)] bg-[var(--color-paper)] py-16 sm:py-24"
+		aria-labelledby="divisions-heading"
 	>
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 			<div class="max-w-3xl">
-				<h2 id="services-overview-heading" class="text-2xl font-bold text-white sm:text-3xl">
-					Производственные участки цеха {siteConfig.brandName}
+				<h2 id="divisions-heading" class="text-2xl text-[var(--color-ink)] sm:text-3xl">
+					Производственные участки цеха МеталлПром39
 				</h2>
+				<p class="lead mt-3 text-sm leading-relaxed sm:text-base">
+					Специализированные участки механической обработки, оснащенные станками с числовым
+					программным управлением и оснасткой для серийного выпуска
+				</p>
 			</div>
 
-			<div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-				<!-- Card 1: Turning -->
-				<div
-					class="flex flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 transition-colors hover:border-zinc-700"
-				>
+			<div
+				class="mt-12 grid grid-cols-1 gap-0 border-t border-[var(--color-rule)] md:grid-cols-3 md:divide-x md:divide-[var(--color-rule)]"
+			>
+				<!-- Division 1: Turning -->
+				<div class="flex flex-col justify-between py-8 pr-0 md:pr-8">
 					<div>
-						<div class="font-mono text-xs text-zinc-400">01 / Токарная группа</div>
-						<h3 class="mt-2 text-lg font-bold text-white">Токарные работы с ЧПУ</h3>
-						<p class="mt-2 text-xs leading-relaxed text-zinc-400">
-							Обработка тел вращения: валы, оси, втулки, фланцы, резьбовые переходники. Диаметр до
-							320 мм, длина до 750 мм. Квалитеты точности IT7–IT8.
+						<div class="text-xs text-[var(--color-muted)]">Участок 01</div>
+						<h3 class="mt-1 text-lg text-[var(--color-ink)]">Токарные работы с ЧПУ</h3>
+						<p class="mt-3 text-xs leading-relaxed text-[var(--color-ink-2)]">
+							Высокопроизводительная токарная обработка тел вращения из конструкционных,
+							легированных и нержавеющих сталей, бронзы и алюминия.
 						</p>
-						<div class="mt-4 space-y-1 font-mono text-[11px] text-zinc-300">
-							<div>Базовая ставка: <strong class="text-zinc-100">2 500 ₽ / час</strong></div>
-							<div>Серии: <strong class="text-white">от 5 до 1 000 шт.</strong></div>
-						</div>
+						<dl class="mt-6 space-y-2 border-t border-[var(--color-rule)] pt-4 text-xs">
+							<div class="flex justify-between">
+								<dt class="text-[var(--color-muted)]">Макс. диаметр над станиной:</dt>
+								<dd class="num font-normal text-[var(--color-ink)]">
+									⌀320<span class="u">&thinsp;мм</span>
+								</dd>
+							</div>
+							<div class="flex justify-between">
+								<dt class="text-[var(--color-muted)]">Макс. длина обработки:</dt>
+								<dd class="num font-normal text-[var(--color-ink)]">
+									750<span class="u">&thinsp;мм</span>
+								</dd>
+							</div>
+							<div class="flex justify-between">
+								<dt class="text-[var(--color-muted)]">Точность размеров:</dt>
+								<dd class="num font-normal text-[var(--color-ink)]">
+									IT7–IT8<span class="u">&thinsp;(до ±0.012 мм)</span>
+								</dd>
+							</div>
+							<div class="flex justify-between">
+								<dt class="text-[var(--color-muted)]">Базовая ставка нормо-часа:</dt>
+								<dd class="num font-normal text-[var(--color-ink)]">
+									2&thinsp;500<span class="u">&thinsp;₽/ч</span>
+								</dd>
+							</div>
+						</dl>
 					</div>
-					<div class="mt-6 border-t border-zinc-800 pt-4">
+					<div class="mt-6">
 						<a
 							href="/tokarnye-raboty-chpu/"
-							class="text-xs font-medium text-zinc-300 hover:text-white hover:underline"
+							class="text-xs text-[var(--color-ink-2)] hover:text-[var(--color-accent)]"
 						>
-							Параметры токарного участка
+							Параметры токарного участка &rarr;
 						</a>
 					</div>
 				</div>
 
-				<!-- Card 2: Milling -->
-				<div
-					class="flex flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 transition-colors hover:border-zinc-700"
-				>
+				<!-- Division 2: Milling -->
+				<div class="flex flex-col justify-between py-8 md:px-8">
 					<div>
-						<div class="font-mono text-xs text-zinc-400">02 / Фрезерная группа</div>
-						<h3 class="mt-2 text-lg font-bold text-white">Фрезерные работы ЧПУ (3 и 4 оси)</h3>
-						<p class="mt-2 text-xs leading-relaxed text-zinc-400">
-							Высокоскоростная обработка корпусных деталей, плит, приборных блоков и кронштейнов.
-							Рабочая зона 800×500×500 мм с поворотной 4-й осью.
+						<div class="text-xs text-[var(--color-muted)]">Участок 02</div>
+						<h3 class="mt-1 text-lg text-[var(--color-ink)]">Фрезерные работы ЧПУ (3 и 4 оси)</h3>
+						<p class="mt-3 text-xs leading-relaxed text-[var(--color-ink-2)]">
+							Прецизионная обработка корпусных деталей, приборных панелей, плит и сложных
+							пространственных поверхностей с непрерывным 4D-позиционированием.
 						</p>
-						<div class="mt-4 space-y-1 font-mono text-[11px] text-zinc-300">
-							<div>3 оси: <strong class="text-zinc-100">3 000 ₽ / час</strong></div>
-							<div>4 оси / 3D: <strong class="text-zinc-100">3 500 ₽ / час</strong></div>
-						</div>
+						<dl class="mt-6 space-y-2 border-t border-[var(--color-rule)] pt-4 text-xs">
+							<div class="flex justify-between">
+								<dt class="text-[var(--color-muted)]">Рабочее поле (X/Y/Z):</dt>
+								<dd class="num font-normal text-[var(--color-ink)]">
+									800 × 500 × 500<span class="u">&thinsp;мм</span>
+								</dd>
+							</div>
+							<div class="flex justify-between">
+								<dt class="text-[var(--color-muted)]">Координатно-поворотный стол:</dt>
+								<dd class="num font-normal text-[var(--color-ink)]">
+									⌀200<span class="u">&thinsp;мм (0.001°)</span>
+								</dd>
+							</div>
+							<div class="flex justify-between">
+								<dt class="text-[var(--color-muted)]">Позиционирование:</dt>
+								<dd class="num font-normal text-[var(--color-ink)]">
+									±0.005<span class="u">&thinsp;мм</span>
+								</dd>
+							</div>
+							<div class="flex justify-between">
+								<dt class="text-[var(--color-muted)]">Базовая ставка нормо-часа:</dt>
+								<dd class="num font-normal text-[var(--color-ink)]">
+									3&thinsp;000<span class="u">&thinsp;₽/ч</span>
+								</dd>
+							</div>
+						</dl>
 					</div>
-					<div class="mt-6 border-t border-zinc-800 pt-4">
+					<div class="mt-6">
 						<a
 							href="/frezernye-raboty-chpu/"
-							class="text-xs font-medium text-zinc-300 hover:text-white hover:underline"
+							class="text-xs text-[var(--color-ink-2)] hover:text-[var(--color-accent)]"
 						>
-							Параметры фрезерного участка
+							Параметры фрезерного участка &rarr;
 						</a>
 					</div>
 				</div>
 
-				<!-- Card 3: Finishing & Gears -->
-				<div
-					class="flex flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 transition-colors hover:border-zinc-700"
-				>
+				<!-- Division 3: Gear-cutting & Grinding -->
+				<div class="flex flex-col justify-between py-8 pl-0 md:pl-8">
 					<div>
-						<div class="font-mono text-xs text-zinc-400">03 / Финишная доводка</div>
-						<h3 class="mt-2 text-lg font-bold text-white">Зуборезка и шлифование</h3>
-						<p class="mt-2 text-xs leading-relaxed text-zinc-400">
-							Нарезка цилиндрических шестерен m1–m8, прямобочных и эвольвентных шлицев. Прецизионное
-							круглое и плоское шлифование до IT6 (Ra 0.4), закалка ТВЧ.
+						<div class="text-xs text-[var(--color-muted)]">Участок 03</div>
+						<h3 class="mt-1 text-lg text-[var(--color-ink)]">Зуборезка и шлифование</h3>
+						<p class="mt-3 text-xs leading-relaxed text-[var(--color-ink-2)]">
+							Финишная доводка зубчатых передач и прецизионное плоское и круглое шлифование для
+							достижения посадочных допусков шестого квалитета.
 						</p>
-						<div class="mt-4 space-y-1 font-mono text-[11px] text-zinc-300">
-							<div>Чистота поверхности: <strong class="text-emerald-400">Ra 0.4 мкм</strong></div>
-							<div>Твердость ТВЧ: <strong class="text-white">до 55 HRCэ</strong></div>
-						</div>
+						<dl class="mt-6 space-y-2 border-t border-[var(--color-rule)] pt-4 text-xs">
+							<div class="flex justify-between">
+								<dt class="text-[var(--color-muted)]">Нарезание зубьев шестерен:</dt>
+								<dd class="num font-normal text-[var(--color-ink)]">
+									до ⌀500<span class="u">&thinsp;мм (m1.0–m8.0)</span>
+								</dd>
+							</div>
+							<div class="flex justify-between">
+								<dt class="text-[var(--color-muted)]">Круглое шлифование в центрах:</dt>
+								<dd class="num font-normal text-[var(--color-ink)]">
+									⌀200 × 800<span class="u">&thinsp;мм</span>
+								</dd>
+							</div>
+							<div class="flex justify-between">
+								<dt class="text-[var(--color-muted)]">Финишная шероховатость:</dt>
+								<dd class="num font-normal text-[var(--color-ink)]">
+									Ra 0.2–0.4<span class="u">&thinsp;мкм (IT6)</span>
+								</dd>
+							</div>
+							<div class="flex justify-between">
+								<dt class="text-[var(--color-muted)]">Термообработка (кооперация):</dt>
+								<dd class="num font-normal text-[var(--color-ink)]">ТВЧ, объемная закалка</dd>
+							</div>
+						</dl>
 					</div>
-					<div class="mt-6 border-t border-zinc-800 pt-4">
+					<div class="mt-6">
 						<a
 							href="/zuboreznye-i-shlifovalnye-raboty/"
-							class="text-xs font-medium text-zinc-300 hover:text-white hover:underline"
+							class="text-xs text-[var(--color-ink-2)] hover:text-[var(--color-accent)]"
 						>
-							Параметры зуборезного участка
+							Параметры зуборезного участка &rarr;
 						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+
+	<!-- Interactive CNC CMM Inspection Twin & Layer Ledger (Vantage Theme) -->
+	<WorkpieceInspectionScan />
 
 	<!-- Interactive Cost Calculator Section -->
 	<section
 		id="calculator-section"
-		class="border-b border-zinc-800 bg-zinc-950 py-16"
+		class="border-b border-[var(--color-rule)] bg-[var(--color-paper)] py-16 sm:py-24"
 		aria-label="Калькулятор стоимости ЧПУ онлайн"
 	>
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -248,35 +316,43 @@
 		</div>
 	</section>
 
-	<!-- Regional Industrial Clusters Coverage -->
+	<!-- Regional Industrial Clusters Coverage (Structured with whitespace & hairlines) -->
 	<section
-		class="border-b border-zinc-800 bg-zinc-950 py-16"
+		class="border-b border-[var(--color-rule)] bg-[var(--color-paper)] py-16 sm:py-24"
 		aria-labelledby="regional-presence-heading"
 	>
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-			<h2 id="regional-presence-heading" class="text-2xl font-bold text-white sm:text-3xl">
+			<h2 id="regional-presence-heading" class="text-2xl text-[var(--color-ink)] sm:text-3xl">
 				Географический охват и логистика по Калининградской области
 			</h2>
-			<p class="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-400">
-				Цех расположен в пригороде Калининграда с оперативным выездом на Окружную дорогу, что
-				обеспечивает быструю доставку деталей ключевым региональным заказчикам:
+			<p class="lead mt-3 max-w-3xl text-sm leading-relaxed">
+				Цех расположен в пригороде Калининграда с оперативным выездом на Окружную дорогу для
+				доставки деталей ключевым региональным заказчикам
 			</p>
-			<div class="mt-8 grid grid-cols-1 gap-4 font-mono text-xs sm:grid-cols-2 lg:grid-cols-4">
-				<div class="rounded-lg border border-zinc-800 bg-zinc-900/60 p-4">
-					<div class="font-medium text-zinc-200">г. Калининград</div>
-					<div class="mt-1 text-zinc-400">Машиностроение, приборостроение, гидравлика, остовы</div>
+			<div
+				class="mt-10 grid grid-cols-1 gap-6 border-t border-[var(--color-rule)] pt-6 text-xs sm:grid-cols-2 lg:grid-cols-4"
+			>
+				<div class="border-b border-[var(--color-rule)] pb-4 lg:border-b-0">
+					<div class="font-normal text-[var(--color-ink)]">г. Калининград</div>
+					<div class="mt-1 text-[var(--color-muted)]">
+						Машиностроение, приборостроение, гидравлика, остовы
+					</div>
 				</div>
-				<div class="rounded-lg border border-zinc-800 bg-zinc-900/60 p-4">
-					<div class="font-medium text-zinc-200">г. Светлый</div>
-					<div class="mt-1 text-zinc-400">Судоремонт, гребные валы, втулки, забортная арматура</div>
+				<div class="border-b border-[var(--color-rule)] pb-4 lg:border-b-0">
+					<div class="font-normal text-[var(--color-ink)]">г. Светлый</div>
+					<div class="mt-1 text-[var(--color-muted)]">
+						Судоремонт, гребные валы, втулки, забортная арматура
+					</div>
 				</div>
-				<div class="rounded-lg border border-zinc-800 bg-zinc-900/60 p-4">
-					<div class="font-medium text-zinc-200">г. Балтийск</div>
-					<div class="mt-1 text-zinc-400">Портовая инфраструктура, шпильки, ремонтные муфты</div>
+				<div class="border-b border-[var(--color-rule)] pb-4 lg:border-b-0">
+					<div class="font-normal text-[var(--color-ink)]">г. Балтийск</div>
+					<div class="mt-1 text-[var(--color-muted)]">
+						Портовая инфраструктура, шпильки, ремонтные муфты
+					</div>
 				</div>
-				<div class="rounded-lg border border-zinc-800 bg-zinc-900/60 p-4">
-					<div class="font-medium text-zinc-200">Гурьевский район</div>
-					<div class="mt-1 text-zinc-400">
+				<div class="pb-4">
+					<div class="font-normal text-[var(--color-ink)]">Гурьевский район</div>
+					<div class="mt-1 text-[var(--color-muted)]">
 						Агропромышленный комплекс, спецтехника, пальцы, шестерни
 					</div>
 				</div>
@@ -284,53 +360,52 @@
 		</div>
 	</section>
 
-	<!-- Technical FAQ Section -->
-	<section class="border-b border-zinc-800 bg-zinc-950 py-16" aria-labelledby="faq-heading">
+	<!-- Technical FAQ Section (Ruled list without solid card boxes) -->
+	<section
+		class="border-b border-[var(--color-rule)] bg-[var(--color-paper)] py-16 sm:py-24"
+		aria-labelledby="faq-heading"
+	>
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 			<div class="max-w-3xl">
-				<h2 id="faq-heading" class="text-2xl font-bold text-white sm:text-3xl">
+				<h2 id="faq-heading" class="text-2xl text-[var(--color-ink)] sm:text-3xl">
 					Инженерные и организационные вопросы заказчиков
 				</h2>
 			</div>
 
-			<div class="mt-8 space-y-4">
+			<div class="mt-10 border-t border-[var(--color-rule)]">
 				{#each faqs as faq}
-					<div class="rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
-						<h3 class="text-base font-bold text-white">{faq.question}</h3>
-						<p class="mt-2 text-xs leading-relaxed text-zinc-400 sm:text-sm">{faq.answer}</p>
+					<div class="border-b border-[var(--color-rule)] py-6">
+						<h3 class="text-base text-[var(--color-ink)]">{faq.question}</h3>
+						<p class="mt-2 max-w-3xl text-xs leading-relaxed text-[var(--color-ink-2)] sm:text-sm">
+							{faq.answer}
+						</p>
 					</div>
 				{/each}
 			</div>
 		</div>
 	</section>
 
-	<!-- Contact CTA Anchor Target -->
-	<section id="order-form" class="bg-zinc-950 py-16 text-center">
-		<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-			<div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-8 md:p-12">
-				<h2 class="text-2xl font-bold text-white sm:text-3xl">
+	<!-- Contact CTA Anchor Target (Passive Contact, 152-FZ compliant) -->
+	<section id="order-form" class="bg-[var(--color-paper)] py-16 text-center sm:py-24">
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="border-t border-[var(--color-rule)] pt-12 pb-6">
+				<h2 class="text-2xl text-[var(--color-ink)] sm:text-3xl">
 					Готовы рассчитать точную смету по вашей конструкторской документации?
 				</h2>
-				<p class="mt-3 text-sm text-zinc-400">
+				<p class="lead mx-auto mt-4 max-w-2xl text-sm">
 					Направьте чертежи (PDF, DXF, DWG) или 3D-модели (STEP, IGES) на электронную почту главного
-					технолога:
+					технолога
 				</p>
-				<div class="mt-6 flex flex-wrap items-center justify-center gap-4">
-					<a
-						href="mailto:{siteConfig.contactEmail}"
-						class="rounded-md bg-zinc-100 px-4 py-2.5 font-medium text-zinc-950 shadow-sm transition-colors hover:bg-white"
-					>
+				<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+					<a href="mailto:{siteConfig.contactEmail}" class="btn btn--line">
 						{siteConfig.contactEmail}
 					</a>
-					<a
-						href="tel:{siteConfig.contactPhone}"
-						class="rounded-md border border-zinc-700 bg-zinc-900/60 px-4 py-2.5 font-mono font-medium text-zinc-200 transition-colors hover:bg-zinc-800"
-					>
+					<a href="tel:{siteConfig.contactPhone}" class="btn btn--line num">
 						{siteConfig.contactPhone}
 					</a>
 				</div>
-				<p class="mt-4 font-mono text-[11px] text-zinc-500">
-					Конфиденциальность гарантируется (NDA по запросу). Безналичный расчет с НДС 20% / УСН.
+				<p class="mt-6 text-xs text-[var(--color-muted)]">
+					Конфиденциальность гарантируется (NDA по запросу). Безналичный расчет с НДС 20%
 				</p>
 			</div>
 		</div>
