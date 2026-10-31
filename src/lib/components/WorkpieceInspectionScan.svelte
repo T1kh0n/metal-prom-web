@@ -343,7 +343,13 @@
 
 		let animId: number;
 		let isVisible = true;
-		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+		let prefersReducedMotion = mediaQuery.matches;
+
+		const onMqChange = (e: MediaQueryListEvent) => {
+			prefersReducedMotion = e.matches;
+		};
+		mediaQuery.addEventListener?.('change', onMqChange);
 
 		const ctx = canvasEl?.getContext('2d');
 		if (!ctx || !canvasEl || !containerEl) return;
@@ -386,26 +392,24 @@
 
 		function render(now: number) {
 			animId = requestAnimationFrame(render);
-			if (!isVisible || !ctx || !canvasEl || width === 0) return;
+			if ((!isVisible && !isDragging) || !ctx || !canvasEl || width === 0) return;
 
 			const delta = Math.min(now - lastTime, 100);
 			lastTime = now;
 
+			if (!isDragging && !prefersReducedMotion) {
+				// Gentle auto-rotation drift only when idle and reduced motion is NOT requested
+				targetYaw += (delta / 45000) * Math.PI * 2;
+				targetAxial += (delta / 30000) * Math.PI * 2;
+			}
+			// Smooth damping interpolation (runs for BOTH regular and reduced motion so manual rotation works on ALL devices!)
+			rotYaw += (targetYaw - rotYaw) * 0.22;
+			rotPitch += (targetPitch - rotPitch) * 0.22;
+			rotAxial += (targetAxial - rotAxial) * 0.22;
+
 			if (!prefersReducedMotion) {
-				if (!isDragging) {
-					// Gentle auto-rotation drift when idle (never jumps or resets)
-					targetYaw += (delta / 45000) * Math.PI * 2;
-					targetAxial += (delta / 30000) * Math.PI * 2;
-				}
-				// Smooth damping interpolation
-				rotYaw += (targetYaw - rotYaw) * 0.18;
-				rotPitch += (targetPitch - rotPitch) * 0.18;
-				rotAxial += (targetAxial - rotAxial) * 0.18;
 				sweepTime += delta;
 			} else {
-				rotYaw = -0.42;
-				rotPitch = 0.32;
-				rotAxial = 0.5;
 				sweepTime = 2500;
 			}
 
@@ -567,19 +571,92 @@
 
 		animId = requestAnimationFrame(render);
 
+		function onGlobalPointerMove(e: PointerEvent) {
+			if (!isDragging) return;
+			const dx = e.clientX - lastPointerX;
+			const dy = e.clientY - lastPointerY;
+			lastPointerX = e.clientX;
+			lastPointerY = e.clientY;
+
+			targetYaw += dx * 0.007;
+			targetPitch = Math.max(-0.85, Math.min(0.85, targetPitch - dy * 0.007));
+		}
+
+		function onGlobalPointerUp(e: PointerEvent) {
+			if (isDragging) {
+				isDragging = false;
+				try {
+					canvasEl?.releasePointerCapture(e.pointerId);
+				} catch {
+					// Ignore
+				}
+			}
+		}
+
+		window.addEventListener('pointermove', onGlobalPointerMove, { passive: true });
+		window.addEventListener('pointerup', onGlobalPointerUp, { passive: true });
+		window.addEventListener('pointercancel', onGlobalPointerUp, { passive: true });
+
+		// Touch gestures explicit handling with non-passive touchmove for mobile devices
+		function onTouchStart(e: TouchEvent) {
+			if (e.touches.length === 1) {
+				isDragging = true;
+				lastPointerX = e.touches[0].clientX;
+				lastPointerY = e.touches[0].clientY;
+			}
+		}
+
+		function onTouchMove(e: TouchEvent) {
+			if (!isDragging || e.touches.length !== 1) return;
+			if (e.cancelable) {
+				e.preventDefault(); // Stop mobile browsers from hijacking into page scroll
+			}
+			const touch = e.touches[0];
+			const dx = touch.clientX - lastPointerX;
+			const dy = touch.clientY - lastPointerY;
+			lastPointerX = touch.clientX;
+			lastPointerY = touch.clientY;
+
+			targetYaw += dx * 0.007;
+			targetPitch = Math.max(-0.85, Math.min(0.85, targetPitch - dy * 0.007));
+		}
+
+		function onTouchEnd() {
+			isDragging = false;
+		}
+
+		const targetNode = containerEl;
+		targetNode.addEventListener('touchstart', onTouchStart, { passive: true });
+		targetNode.addEventListener('touchmove', onTouchMove, { passive: false });
+		targetNode.addEventListener('touchend', onTouchEnd, { passive: true });
+		targetNode.addEventListener('touchcancel', onTouchEnd, { passive: true });
+
 		return () => {
 			cancelAnimationFrame(animId);
 			resizeObserver.disconnect();
 			observer.disconnect();
+			mediaQuery.removeEventListener?.('change', onMqChange);
+			window.removeEventListener('pointermove', onGlobalPointerMove);
+			window.removeEventListener('pointerup', onGlobalPointerUp);
+			window.removeEventListener('pointercancel', onGlobalPointerUp);
+			targetNode.removeEventListener('touchstart', onTouchStart);
+			targetNode.removeEventListener('touchmove', onTouchMove);
+			targetNode.removeEventListener('touchend', onTouchEnd);
+			targetNode.removeEventListener('touchcancel', onTouchEnd);
 		};
 	});
 
 	// Interactive 360-degree free orbit drag controls (no snap back)
 	function handlePointerDown(e: PointerEvent) {
+		if (e.button !== undefined && e.button !== 0) return;
 		isDragging = true;
 		lastPointerX = e.clientX;
 		lastPointerY = e.clientY;
-		(e.target as HTMLElement).setPointerCapture(e.pointerId);
+		try {
+			(e.currentTarget as HTMLElement)?.setPointerCapture?.(e.pointerId);
+		} catch {
+			// Window listeners will still catch pointermove and pointerup
+		}
 	}
 
 	function handlePointerMove(e: PointerEvent) {
@@ -599,13 +676,23 @@
 	function handlePointerUp(e: PointerEvent) {
 		if (isDragging) {
 			try {
-				(e.target as HTMLElement).releasePointerCapture(e.pointerId);
+				(e.currentTarget as HTMLElement)?.releasePointerCapture?.(e.pointerId);
 			} catch {
-				// Ignore if pointer capture was already released
+				// Ignore
 			}
 		}
 		isDragging = false;
-		// Model STAYS at current orientation, never snaps back
+	}
+
+	function rotateBy(deltaYaw: number, deltaPitch = 0) {
+		targetYaw += deltaYaw;
+		targetPitch = Math.max(-0.85, Math.min(0.85, targetPitch + deltaPitch));
+	}
+
+	function resetOrientation() {
+		targetYaw = -0.42;
+		targetPitch = 0.32;
+		targetAxial = 0.5;
 	}
 </script>
 
@@ -728,11 +815,12 @@
 						onmouseleave={() => (isHovered = false)}
 						role="region"
 						aria-label="3D интерактивная область инспекции детали"
+						style="touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none;"
 					>
 						<canvas
 							bind:this={canvasEl}
-							class="block h-full w-full cursor-grab active:cursor-grabbing"
-							style="-webkit-mask-image: radial-gradient(ellipse 65% 62% at 50% 50%, var(--color-ink) 65%, transparent); mask-image: radial-gradient(ellipse 65% 62% at 50% 50%, var(--color-ink) 65%, transparent);"
+							class="block h-full w-full cursor-grab active:cursor-grabbing touch-none select-none"
+							style="touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; -webkit-mask-image: radial-gradient(ellipse 65% 62% at 50% 50%, var(--color-ink) 65%, transparent); mask-image: radial-gradient(ellipse 65% 62% at 50% 50%, var(--color-ink) 65%, transparent);"
 						></canvas>
 
 						<!-- Measurement Callout A: Bearing Seat IT6 (Extends UP into upper clearance zone) -->
@@ -768,12 +856,42 @@
 						</div>
 					</div>
 
-					<!-- Technical Viewport Caption -->
+					<!-- Technical Viewport Caption & Quick Turntable Controls -->
 					<figcaption
-						class="flex flex-wrap items-center justify-between gap-1 border-t border-[var(--color-rule)] px-2 pt-3 text-[11px] text-[var(--color-muted)]"
+						class="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--color-rule)] px-2 pt-3 text-[11px] text-[var(--color-muted)]"
 					>
-						<span>Вал приводной ступенчатый · Вращение 360° (зажмите ЛКМ)</span>
-						<span class="num">КИМ Mitutoyo · Допуск IT6</span>
+						<span class="flex items-center gap-1.5">
+							<span>Вращение 360° · потяните мышью или пальцем</span>
+						</span>
+						<div class="flex items-center gap-1.5">
+							<button
+								type="button"
+								class="inline-flex cursor-pointer items-center justify-center rounded border border-[var(--color-rule-2)] bg-[var(--color-paper-2)]/60 px-2 py-0.5 font-mono text-[11px] text-[var(--color-ink-2)] transition-colors hover:bg-[var(--color-paper-3)] hover:text-[var(--color-ink)]"
+								onclick={() => rotateBy(-Math.PI / 4)}
+								aria-label="Повернуть деталь влево на 45 градусов"
+								title="Повернуть влево (-45°)"
+							>
+								⟲ -45°
+							</button>
+							<button
+								type="button"
+								class="inline-flex cursor-pointer items-center justify-center rounded border border-[var(--color-rule-2)] bg-[var(--color-paper-2)]/60 px-2 py-0.5 font-mono text-[11px] text-[var(--color-ink-2)] transition-colors hover:bg-[var(--color-paper-3)] hover:text-[var(--color-ink)]"
+								onclick={() => rotateBy(Math.PI / 4)}
+								aria-label="Повернуть деталь вправо на 45 градусов"
+								title="Повернуть вправо (+45°)"
+							>
+								⟳ +45°
+							</button>
+							<button
+								type="button"
+								class="inline-flex cursor-pointer items-center justify-center rounded border border-[var(--color-rule)] bg-[var(--color-paper-2)]/30 px-2 py-0.5 font-mono text-[11px] text-[var(--color-muted)] transition-colors hover:bg-[var(--color-paper-2)] hover:text-[var(--color-ink)]"
+								onclick={resetOrientation}
+								aria-label="Сбросить ракурс детали"
+								title="Исходный ракурс"
+							>
+								Сброс
+							</button>
+						</div>
 					</figcaption>
 				</figure>
 			</div>
@@ -884,11 +1002,15 @@
 	}
 
 	/* Vantage Measurement Callout Leaders & Plaques */
+	.callout,
+	.callout * {
+		pointer-events: none !important;
+	}
+
 	.callout {
 		position: absolute;
 		left: 0;
 		top: 0;
-		pointer-events: none;
 		will-change: transform;
 		transition: opacity var(--dur-short) var(--ease-out);
 	}
